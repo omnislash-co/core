@@ -1,6 +1,6 @@
 {
-    "name": "waterhole/waterhole",
-    "description": "Waterhole starter project",
+    "name": "omnislash-jrpg/core",
+    "description": "Omnislash web app",
     "type": "project",
     "keywords": [
         "forum"
