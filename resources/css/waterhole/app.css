@@ -1,0 +1,230 @@
+/*
+|--------------------------------------------------------------------------
+| App CSS
+|--------------------------------------------------------------------------
+|
+| Put any custom CSS in this file, and it will be loaded on every page,
+| following Waterhole's default CSS. To discover more variables and
+| classes you might like to override, read about Waterhole's design system:
+|
+| https://waterhole.dev/docs/design/overview
+|
+*/
+
+/* primary: '#00D1B2' */
+
+:root {
+    /* Main accent color */
+    --palette-accent-h: 171;
+    --palette-accent-s: 100%;
+    --palette-accent-l: 41%;
+    
+    --palette-success: var(--palette-accent);
+    --palette-success-contrast: var(--palette-accent-contrast);
+}
+
+[data-theme='light'] {
+    /* Interface colors in light mode */
+    --palette-bg-hsl: 250 38% 98%;
+    --palette-surface-hsl: 0 100% 100%;
+    --palette-text-hsl: 0 0% 0%;
+    --palette-muted-hsl: 171 25% 45%;
+}
+
+[data-theme='dark'] {
+    /* Interface colors in dark mode */
+    --palette-bg-hsl: 250 20% 8%;
+    --palette-surface-hsl: 229 20% 12%;
+    --palette-text-hsl: 250 20% 93%;
+    --palette-muted-hsl: 171 25% 45%;
+}
+
+/* MISC */
+.data-set {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    padding: var(--space-md);
+}
+
+.data-set-item {
+    align-items: flex-start;
+    color: var(--color-text);
+    font-size: var(--text-xs);
+    display: flex;
+    gap: var(--space-xs);
+    margin: 0;
+    text-align: left;
+    text-decoration: none!important;
+    width: 100%;
+}
+
+.data-set-item__key {
+    display: block;
+    font-weight: var(--weight-medium);
+}
+
+.data-set-item__value {
+    color: var(--color-muted);
+    display: block;
+    font-size: 90%;
+    margin-top: var(--space-xxs);
+}
+
+.footer {
+    margin-top: var(--space-gutter);
+    background-color: var(--palette-surface);
+}
+
+/* GAME PAGE */
+.game-icon {
+    max-width: 150px; 
+    max-height:150px;
+}
+
+@media (min-width: 40rem){
+    .game-icon {
+        max-width: 200px; 
+        max-height: 200px;
+    }
+}
+
+@media (min-width: 52rem){
+    .game-icon {
+        max-width: var(--sidebar-width); 
+        max-height: var(--sidebar-width);
+    }
+}
+
+/* CARDS */
+.game-cards {
+    --grid-min: 50ch;
+}
+
+.card__game-icon {
+    background-size: cover!important;
+    min-height: 150px;
+    min-width: 150px;
+    max-width: 150px;
+    transition: ease-in-out 150ms;
+    clip-path: polygon(0 0, 90% 0, 100% 100%, 0 100%);
+}
+
+.card:hover .card__game-icon {
+    transform: scale(1.03);
+    transition: ease-in-out 150ms;
+    opacity: 0.80;
+}
+
+.card__game-icon-a {
+    background-size: cover!important;
+    background-position: center;
+    min-height: 150px;
+    min-width: 150px;
+    max-width: 150px;
+    transition: ease-in-out 250ms;
+    clip-path: polygon(0 0, 90% 0, 100% 100%, 0 100%);
+}
+
+.card:hover .card__game-icon-a {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    min-width: 50px;
+    max-width: 50px;
+}
+
+.card__game-icon-b {
+    background-size: cover!important;
+    background-position: center;
+    min-height: 150px;
+    min-width: 50px;
+    max-width: 50px;
+    transition: ease-in-out 250ms;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+}
+
+.card:hover .card__game-icon-b {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 10% 100%);
+    min-width: 150px;
+    max-width: 150px;
+}
+
+.img-link {
+    display: block;
+    width: 100%;
+    transition: ease-in-out 150ms;
+}
+
+.img-link:hover {
+    transform: scale(1.03);
+    transition: ease-in-out 150ms;
+    opacity: 0.80;
+}
+
+/* FORMS */
+.search-bar-results {
+    position: absolute; 
+    background: var(--color-bg);
+    border-radius: var(--radius); 
+    margin-top: var(--control-height); 
+    box-shadow: var(--shadow-md);
+    display: block;
+    width: 100%;
+    z-index: var(--z-index-overlay);
+}
+
+
+/* HOME */
+.bg-character1 {
+    background-position: top center;
+    background-repeat: no-repeat;
+    background-image: url(/images/layout/sydney.png);
+    background-size: 50ch;
+    background-position-y: -5ch;
+}
+.bg-character2 {
+    background-position: top center;
+    background-repeat: no-repeat;
+    background-image: url(/images/layout/rosalinde.png);
+    background-size: 70ch;
+    background-position-y: -15ch;
+}
+.bg-character3 {
+    background-position: top center;
+    background-repeat: no-repeat;
+    background-image: url(/images/layout/vivi.png);
+    background-size: 41ch;
+    background-position-y: -8ch;
+}
+.bg-character4 {
+    background-position: top center;
+    background-repeat: no-repeat;
+    background-image: url(/images/layout/character4.png);
+    background-size: 30ch;
+    background-position-y: -4ch;
+}
+.bg-character5 {
+    background-position: top center;
+    background-repeat: no-repeat;
+    background-image: url(/images/layout/character5.png);
+    background-size: 33ch;
+    background-position-y: -3ch;
+}
+.bg-character6 {
+    background-position: top center;
+    background-repeat: no-repeat;
+    background-image: url(/images/layout/character6.png);
+    background-size: 45ch;
+    background-position-y: -10ch;
+}
+
+.hero__welcome {
+    flex-basis: 45ch; /* items will wrap at this width */
+}
+
+[data-theme='light'] .hero__welcome p {
+    text-shadow: 1px 1px 2px white;
+}
+
+[data-theme='dark'] .hero__welcome p {
+    text-shadow: 1px 1px 2px black;
+}
