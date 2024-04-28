@@ -184,16 +184,16 @@
 .bg-character2 {
     background-position: top center;
     background-repeat: no-repeat;
-    background-image: url(/images/layout/rosalinde.png);
-    background-size: 70ch;
-    background-position-y: -15ch;
+    background-image: url(/images/layout/vivi.png);
+    background-size: 41ch;
+    background-position-y: -8ch;
 }
 .bg-character3 {
     background-position: top center;
     background-repeat: no-repeat;
-    background-image: url(/images/layout/vivi.png);
-    background-size: 41ch;
-    background-position-y: -8ch;
+    background-image: url(/images/layout/rosalinde.png);
+    background-size: 70ch;
+    background-position-y: -15ch;
 }
 .bg-character4 {
     background-position: top center;

@@ -1,5 +1,5 @@
 <x-app-layout title="Home">
-    <section @class(['section', 'bg-character2' ])>
+    <section @class(['section', 'bg-character'.rand(1,2) ])>
         <div class="container stack gap-gutter">
 
             <section class="hero row gap-xl wrap">
@@ -58,7 +58,7 @@
                                     <span class="menu-item__description">{{ $game->developers->pluck('name')->implode(', ') }} | {{ $game->initial_release_year }}</span>
                                 </span>
                                 <ui-tooltip>
-                                    {{ $game->library_count }} {{ $game->library_count===1 ? 'user' : 'users' }}
+                                    {{ $game->library_count ? $game->library_count : '0' }} {{ Str::plural('user', $game->library_count) }}
                                 </ui-tooltip>
                             </a>
                         @endforeach
@@ -91,8 +91,9 @@
                             @endforeach
                         </div>
                     @else
-                        <div class="alert bg-warning-soft">
-                            No posts have been made.
+                        <div class="placeholder">
+                            @icon('tabler-messages', ['class' => 'placeholder__icon'])
+                            <h4>No Posts</h4>
                         </div>
                     @endif
                     @if (count($posts) == 3)
