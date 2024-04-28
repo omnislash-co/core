@@ -2,7 +2,7 @@
 
 <div class="card row p-md gap-md overlay-container">
     <div style="flex-basis: 64px;">
-        <img class="rounded" src="{{ url('/storage/games/icons/'.$review->game->icon) }}" style="width: 64px"/>
+        <img class="rounded" src="{{ Storage::url('games/icons/'.$review->game->icon) }}" style="width: 64px"/>
     </div>
     <div class="stack grow gap-xs text-xs">
         <span class="h5 color-accent ">{{ $review->game->title }}</span>

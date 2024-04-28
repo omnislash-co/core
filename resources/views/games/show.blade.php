@@ -5,7 +5,7 @@
             <nav class="sidebar">
                 <div class="stack grow gap-gutter">
                     <div class="stack gap-md">
-                        <img class="rounded game-icon" src="{{ url('storage/games/icons/'.$game->icon) }}">
+                        <img class="rounded game-icon" src="{{ Storage::url('games/icons/'.$game->icon) }}">
                         <h2 class="hide-lg-up">{{ $game->title }}</h2>
                         <div class="row gap-md">
                             @auth
@@ -59,15 +59,15 @@
                                 <div class="data-set-item">
                                     @icon('tabler-star')
                                     <span>
-                                        <span class="data-set-item__key">Ranked #{{ $game->score_rank }}</span>
+                                        <span class="data-set-item__key">Ranked {{ $game->score_rank ? '#'.$game->score_rank : '' }}</span>
                                         <span class="data-set-item__value">{{ $game->score ? 'Average user score of '.round($game->score).'%' : '-' }}</span>
                                     </span>
                                 </div>
                                 <div class="data-set-item">
                                     @icon('tabler-heart')
                                     <span>
-                                        <span class="data-set-item__key">Popularity #{{ $game->popularity_rank }}</span>
-                                        <span class="data-set-item__value">{{ $game->library_count }} {{ Str::plural('user', $game->library_count) }}</span>
+                                        <span class="data-set-item__key">Popularity {{ $game->popularity_rank ? '#'.$game->popularity_rank : '' }}</span>
+                                        <span class="data-set-item__value">{{ $game->library_count ? $game->library_count : 0 }} {{ Str::plural('user', $game->library_count) }}</span>
                                     </span>
                                 </div>
                                 <div class="data-set-item">
@@ -93,9 +93,13 @@
                             <span class="menu-item" role="menuitem">
                                 @icon('tabler-code')
                                 <span>
-                                    <span class="menu-item__title">Developer</span>
+                                    <span class="menu-item__title">Developers</span>
                                     <span class="menu-item__description">
-                                        {{ $game->developers->pluck('name')->implode(', ') }}
+                                        @if (count($game->developers) > 0)
+                                            {{ $game->developers->pluck('name')->implode(', ') }}
+                                        @else
+                                            -
+                                        @endif
                                     </span>
                                 </span>
                             </span>
@@ -111,7 +115,11 @@
                                 <span>
                                     <span class="menu-item__title">Genres</span>
                                     <span class="menu-item__description">
-                                        {{ $game->genres->pluck('acronym')->implode(', ') }}
+                                        @if (count($game->genres) > 0)
+                                            {{ $game->genres->pluck('acronym')->implode(', ') }}
+                                        @else
+                                            -
+                                        @endif
                                     </span>
                                 </span>
                             </span>
@@ -120,7 +128,11 @@
                             <span>
                                 <span class="menu-item__title">Platforms</span>
                                 <span class="menu-item__description">
-                                    {{ $game->platforms->pluck('acronym')->implode(', ') }}
+                                    @if (count($game->platforms) > 0)
+                                        {{ $game->platforms->pluck('acronym')->implode(', ') }}
+                                    @else
+                                        -
+                                    @endif
                                 </span>
                             </span>
                             </span>
@@ -135,15 +147,15 @@
                             <span class="menu-item" role="menuitem">
                                 @icon('tabler-star')
                                 <span>
-                                    <span class="menu-item__title">Ranked #{{ $game->score_rank }}</span>
+                                    <span class="menu-item__title">Ranked {{ $game->score_rank ? '#'.$game->score_rank : '' }}</span>
                                     <span class="menu-item__description">{{ $game->score ? 'Average user score of '.round($game->score).'%' : '-' }}</span>
                                 </span>
                             </span>
                             <span class="menu-item" role="menuitem">
                                 @icon('tabler-heart')
                                 <span>
-                                    <span class="menu-item__title">Popularity #{{ $game->popularity_rank }}</span>
-                                    <span class="menu-item__description">{{ $game->library_count }} {{ Str::plural('user', $game->library_count) }}</span>
+                                    <span class="menu-item__title">Popularity {{ $game->popularity_rank ? '#'.$game->popularity_rank : '' }}</span>
+                                    <span class="menu-item__description">{{ $game->library_count ? $game->library_count : 0 }} {{ Str::plural('user', $game->library_count) }}</span>
                                 </span>
                             </span>
                             <span class="menu-item" role="menuitem">

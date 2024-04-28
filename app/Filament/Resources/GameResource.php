@@ -47,7 +47,8 @@ class GameResource extends Resource
                     ->required()
                     ->image()
                     ->directory('games/icons')
-                    ->imagePreviewHeight('250'),
+                    ->imagePreviewHeight('250')
+                    ->disk('s3'),
             ]);
     }
 

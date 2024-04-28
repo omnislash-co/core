@@ -4,7 +4,7 @@
         <section class="with-sidebar">
             <nav class="sidebar sidebar--sticky">
                 <div class="stack grow gap-md">
-                    <img class="rounded game-icon" src="{{ url('/storage/games/icons/'.$review->game->icon) }}" alt="{{ $review->game->title }}">
+                    <img class="rounded game-icon" src="{{ Storage::url('games/icons/'.$review->game->icon) }}" alt="{{ $review->game->title }}">
                     <h2 class="hide-lg-up">
                         <a href="{{ route('games.show', $review->game->slug) }}">{{ $review->game->title }}</a> Review
                     </h2>

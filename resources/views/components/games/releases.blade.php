@@ -32,8 +32,9 @@
             @endif
         @endforeach
     @else
-        <div class="alert bg-warning-soft">
-            No releases found.
+        <div class="placeholder">
+            @icon('tabler-stack-2', ['class' => 'placeholder__icon'])
+            <h4>No Releases</h4>
         </div>
     @endif
 </div>

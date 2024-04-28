@@ -5,7 +5,7 @@
             @foreach ($favourites as $game)
                 <div class="rounded overflow-hidden" style="width: 125px; box-shadow: var(--shadow-sm)">
                     <a href="{{ route('games.show', $game->slug) }}">
-                        <img src="{{ url('/storage/games/icons/'.$game->icon) }}" class="img-link">
+                        <img src="{{ Storage::url('games/icons/'.$game->icon) }}" class="img-link">
                         <ui-tooltip>{{ $game->title }}</ui-tooltip>
                     </a>
                 </div>
