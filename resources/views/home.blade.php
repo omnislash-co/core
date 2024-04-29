@@ -1,5 +1,5 @@
 <x-app-layout title="Home">
-    <section @class(['section', 'bg-character'.rand(1,2) ])>
+    <section @class(['section', 'bg-character'.rand(1,3) ])>
         <div class="container stack gap-gutter">
 
             <section class="hero row gap-xl wrap">

@@ -113,7 +113,6 @@
 .card:hover .card__game-icon {
     transform: scale(1.03);
     transition: ease-in-out 150ms;
-    opacity: 0.80;
 }
 
 .card__game-icon-a {
@@ -157,7 +156,6 @@
 .img-link:hover {
     transform: scale(1.03);
     transition: ease-in-out 150ms;
-    opacity: 0.80;
 }
 
 /* FORMS */
