@@ -7,6 +7,7 @@ use Illuminate\Pagination\Paginator;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use \Livewire\Livewire;
 use Illuminate\Routing\Router;
+use Illuminate\Support\Facades\URL;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -23,6 +24,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        if($this->app->environment('production')) {
+            URL::forceScheme('https');
+        }
+        
         Livewire::forceAssetInjection();
 
         Paginator::defaultView('components.pagination');
