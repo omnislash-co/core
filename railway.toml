@@ -1,0 +1,7 @@
+# railway.toml
+
+[build.nixpacksPlan.phases.install]
+cmds = ["...", "composer install --optimize-autoloader --no-dev"]
+
+[build.nixpacksPlan.phases.build]
+cmds = ["...", "php artisan migrate --force", "php artisan optimize"]
