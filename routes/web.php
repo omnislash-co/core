@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\Event;
+use Illuminate\Foundation\Events\DiagnosingHealth;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\GameController;
 use App\Http\Controllers\ReviewController;
@@ -51,3 +54,10 @@ Route::get('community/users/{user:id}/library', [UserController::class, 'library
 Route::get('community/users/{user:id}/library/{playStatus:slug}', [UserController::class, 'library'])->withoutScopedBindings()->name('users.library');
 Route::get('community/users/{user:id}/reviews', [UserController::class, 'reviews'])->name('users.reviews');
 Route::get('community/users/{user:id}/recommendations', [UserController::class, 'recommendations'])->name('users.recommendations');
+
+// Health route
+Route::get('/up', function () {
+    Event::dispatch(new DiagnosingHealth);
+
+    return View::file(__DIR__.'/../vendor/laravel/framework/src/illuminate/foundation/resources/health-up.blade.php');
+});
