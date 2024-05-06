@@ -4,7 +4,7 @@
     <div class="card__game-icon" style="background-image: url('{{ Storage::url('games/icons/'.$game->icon) }}')"></div>
     <div class="stack grow gap-xs p-sm">
         <a href="{{ route('games.show', $game->slug) }}" class="h4 color-accent has-overlay">{{ $game->title }}</a>
-        <div>
+        <div class="row wrap gap-xxs">
             @foreach ($game->developers as $developer)
                 <span class="badge bg-emphasis">
                     {{ $developer->name }}
