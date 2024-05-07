@@ -31,7 +31,7 @@
                         <li>
                             <a href="{{ route('waterhole.home') }}">Community</a>
                         </li>
-                        <li><a href="{{ route('waterhole.page', 'community-guide') }}">Guidelines</a></li>
+                        {{-- <li><a href="{{ route('waterhole.page', 'community-guide') }}">Guidelines</a></li> --}}
                         <li>
                             <a href="https://github.com/omnislash-co">GitHub</a>
                         </li>
