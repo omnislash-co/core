@@ -1,27 +1,46 @@
 <x-app-layout title="Home">
-    <section @class(['section', 'bg-character'.rand(1,3) ])>
+    <section class="section">
         <div class="container stack gap-gutter">
 
-            <section class="hero row gap-xl wrap">
-                <div class="hero__welcome grow stack gap-sm">
-                    <h1 class="color-accent">Welcome to Omnislash!</h1>
-                    <p>Discover, track, review, recommend and discuss JRPG style video games.</p>
+            <section class="hero row gap-lg wrap justify-between">
+                <div class="hero__welcome stack grow gap-sm">
+                    <div class="oswald-stencil">
+                        <div class="text-xxl">Welcome to</div>
+                        <div class="color-accent" style="font-size: 4rem;">Omnislash!</div>
+                    </div>
+                    <div class="content">
+                        <blockquote>Discover, track, review, recommend and discuss JRPG video games.</blockquote>
+                    </div>
                 </div>
-            
-                <aside class="hero__statistics grow row gap-lg justify-center ">
-                    <div class="badge bg-accent text-xs">
-                        @icon('gameicon-shard-sword')
-                        {{ $gamesCount }} {{ Str::plural('Game', $gamesCount) }}
+
+                <div class="hero_icons row grow gap-md justify-center">
+                    <div class="hero__icon card" style="transform: rotate(4deg); margin-top: 10px; margin-right: 3px">
+                        <img height="115px" width="85px" src="{{ Storage::url('images/layout/hero-icon-1.png') }}">
                     </div>
-                    <div class="badge bg-accent text-xs">
-                        @icon('tabler-user')
-                        {{ $usersCount }} {{ Str::plural('User', $usersCount) }}
+                    <div class="hero__icon card" style="transform: rotate(2deg);">
+                        <img height="115px" width="85px" src="{{ Storage::url('images/layout/hero-icon-2.png') }}">
                     </div>
-                    <div class="badge bg-accent text-xs">
-                        @icon('tabler-message')
-                        {{ $postsCount }} {{ Str::plural('Post', $postsCount) }}
+                    <div class="hero__icon card" style="transform: rotate(-5deg); margin-top: 5px;">
+                        <img height="115px" width="85px" src="{{ Storage::url('images/layout/hero-icon-3.png') }}">
                     </div>
-                </aside>
+                </div>
+
+                <div class="hero__stats row grow justify-center">
+                    <div class="card bg-accent row gap-xl oswald-stencil" style="padding: var(--space-sm) var(--space-xl);">
+                        <div class="stack align-center">
+                            <div class="text-xl">{{ $gamesCount }} </div>
+                            <div class="text-md">{{ Str::plural('Game', $gamesCount) }}</div>
+                        </div>
+                        <div class="stack align-center">
+                            <div class="text-xl">{{ $usersCount }} </div>
+                            <div class="text-md">{{ Str::plural('User', $usersCount) }}</div>
+                        </div>
+                        <div class="stack align-center">
+                            <div class="text-xl">{{ $postsCount }} </div>
+                            <div class="text-md">{{ Str::plural('Post', $postsCount) }}</div>
+                        </div>
+                    </div>
+                </div>
             </section>
 
             <section class="stack gap-md">

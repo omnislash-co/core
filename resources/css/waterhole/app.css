@@ -13,6 +13,18 @@
 
 /* primary: '#00D1B2' */
 
+@font-face {
+    font-family: Oswald Stencil;
+    font-weight: normal;
+    src: url(/fonts/Oswald-Stencil.ttf);
+}
+
+/* @font-face {
+    font-family: Oswald;
+    font-weight: 400;
+    src: url(/fonts/Oswald-Regular.ttf);
+} */
+
 :root {
     /* Main accent color */
     --palette-accent-h: 171;
@@ -21,6 +33,9 @@
     
     --palette-success: var(--palette-accent);
     --palette-success-contrast: var(--palette-accent-contrast);
+
+    --font-oswald-stencil: "Oswald Stencil";
+    /* --font-oswald: "Oswald"; */
 }
 
 [data-theme='light'] {
@@ -40,6 +55,12 @@
 }
 
 /* MISC */
+.oswald-stencil {
+    font-family: var(--font-oswald-stencil); 
+    text-transform: uppercase;
+    line-height: var(--line-height-condensed);
+}
+
 .data-set {
     display: flex;
     flex-direction: column;
@@ -170,8 +191,17 @@
     z-index: var(--z-index-overlay);
 }
 
-
 /* HOME */
+.hero__welcome {
+    flex-basis: 35ch; /* items will wrap at this width */
+}
+
+.hero__icon {
+    height: 115px; 
+    width: 85px;
+    overflow: hidden;
+}
+
 .bg-character1 {
     background-position: top center;
     background-repeat: no-repeat;
@@ -192,37 +222,4 @@
     background-image: url(/images/layout/rosalinde.png);
     background-size: 70ch;
     background-position-y: -15ch;
-}
-.bg-character4 {
-    background-position: top center;
-    background-repeat: no-repeat;
-    background-image: url(/images/layout/character4.png);
-    background-size: 30ch;
-    background-position-y: -4ch;
-}
-.bg-character5 {
-    background-position: top center;
-    background-repeat: no-repeat;
-    background-image: url(/images/layout/character5.png);
-    background-size: 33ch;
-    background-position-y: -3ch;
-}
-.bg-character6 {
-    background-position: top center;
-    background-repeat: no-repeat;
-    background-image: url(/images/layout/character6.png);
-    background-size: 45ch;
-    background-position-y: -10ch;
-}
-
-.hero__welcome {
-    flex-basis: 45ch; /* items will wrap at this width */
-}
-
-[data-theme='light'] .hero__welcome p {
-    text-shadow: 1px 1px 2px white;
-}
-
-[data-theme='dark'] .hero__welcome p {
-    text-shadow: 1px 1px 2px black;
 }
