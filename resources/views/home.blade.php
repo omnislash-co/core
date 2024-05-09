@@ -13,14 +13,14 @@
                     </div>
                 </div>
 
-                <div class="hero_icons row grow gap-md justify-center">
-                    <div class="hero__icon card" style="transform: rotate(4deg); margin-top: 10px; margin-right: 3px">
+                <div class="hero__icons slide-in-icons row grow gap-md justify-center">
+                    <div class="card" style="transform: rotate(4deg); margin-top: 10px; margin-right: 3px">
                         <img height="125px" src="{{ Storage::url('images/layout/hero-icon-1.png') }}">
                     </div>
-                    <div class="hero__icon card" style="transform: rotate(2deg);">
+                    <div class="card" style="transform: rotate(2deg);">
                         <img height="125px" src="{{ Storage::url('images/layout/hero-icon-2.png') }}">
                     </div>
-                    <div class="hero__icon card" style="transform: rotate(-5deg); margin-top: 5px;">
+                    <div class="card" style="transform: rotate(-5deg); margin-top: 5px;">
                         <img height="125px" src="{{ Storage::url('images/layout/hero-icon-3.png') }}">
                     </div>
                 </div>
