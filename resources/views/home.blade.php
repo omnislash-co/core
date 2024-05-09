@@ -44,7 +44,7 @@
             </section>
 
             <section class="stack gap-md">
-                <h3>Trending</h3>
+                <h2>Trending</h2>
             
                 <div class="game-cards grid gap-sm">
                     @foreach ($trending as $game)
@@ -55,7 +55,7 @@
 
             @if (count($userActivities) > 0)
                 <section class="stack gap-md">
-                    <h3>Recent User Activity</h3>
+                    <h2>Recent User Activity</h2>
 
                     <div class="grid gap-md" style="--grid-min: 33ch">
                         @foreach ($userActivities as $activity)
@@ -66,42 +66,78 @@
             @endif
 
             <section class="row wrap align-start align-stretch gap-gutter">
-                <div class="stack gap-md grow" style="flex-basis: var(--sidebar-width)">
-                    <h3>Most Popular</h3>
+                <div class="stack gap-md grow" style="flex-basis: 35ch">
+                    <h2>Rankings</h2>
+                    
+                    <div class="card p-md stack gap-md" x-data="{ tab: 'popular' }">
+                        <nav aria-label="ranked-tabs">
+                            <ul class="tabs" role="list">
+                                <li>
+                                    <a href="javascript:void(0)" role="button" class="tab" :class="tab === 'popular' && 'is-active'" @click="tab = 'popular'">Most Popular</a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0)" role="button" class="tab" :class="tab === 'ranked' && 'is-active'" @click="tab = 'ranked'">Top Ranked</a>
+                                </li>
+                            </ul>
+                        </nav>
 
-                    <ui-menu class="card text-xs p-xs">
-                        @foreach ($popular as $game)
-                            <a class="menu-item" href="{{ route('games.show', $game->slug) }}">
-                                <span>
-                                    <span class="menu-item__title">{{ $game->popularity_rank }}. {{ $game->title }}</span>
-                                    <span class="menu-item__description">{{ $game->developers->pluck('name')->implode(', ') }} | {{ $game->initial_release_year }}</span>
-                                </span>
-                                <ui-tooltip>
-                                    {{ $game->library_count ? $game->library_count : '0' }} {{ Str::plural('user', $game->library_count) }}
-                                </ui-tooltip>
-                            </a>
-                        @endforeach
-                    </ui-menu>
-                </div>
-                <div class="stack gap-md grow" style="flex-basis: var(--sidebar-width)">
-                    <h3>Top Ranked</h3>
+                        <ui-menu 
+                            x-cloak
+                            x-show="tab === 'popular'"
+                            x-transition.in
+                            x-transition:enter.duration.500ms>
+                            @foreach ($popular as $game)
+                                <div class="row">
+                                    <div class="oswald-stencil color-accent p-xs text-center" style="width: 40px">
+                                        {{ $loop->iteration }}
+                                    </div>
+                                    <a class="menu-item text-xs" href="{{ route('games.show', $game->slug) }}">
+                                        <span>
+                                            <span class="menu-item__title">
+                                                {{ $game->title }}
+                                            </span>
+                                            <span class="menu-item__description">
+                                                {{ $game->developers->pluck('name')->implode(', ') }} | {{ $game->initial_release_year }}
+                                            </span>
+                                        </span>
+                                        <ui-tooltip>
+                                            {{ $game->library_count ? $game->library_count : '0' }} {{ Str::plural('user', $game->library_count) }}
+                                        </ui-tooltip>
+                                    </a>
+                                </div>
+                            @endforeach
+                        </ui-menu>
 
-                    <ui-menu class="card text-xs p-xs">
-                        @foreach ($topRanked as $game)
-                            <a class="menu-item" href="{{ route('games.show', $game->slug) }}">
-                                <span>
-                                    <span class="menu-item__title">{{ $game->score_rank }}. {{ $game->title }}</span>
-                                    <span class="menu-item__description">{{ $game->developers->pluck('name')->implode(', ') }} | {{ $game->initial_release_year }}</span>
-                                </span>
-                                <ui-tooltip>
-                                    {{ $game->score ? round($game->score).'%' : 'N/A' }}
-                                </ui-tooltip>
-                            </a>
-                        @endforeach
-                    </ui-menu>
+                        <ui-menu 
+                            x-cloak
+                            x-show="tab === 'ranked'"
+                            x-transition.in
+                            x-transition:enter.duration.500ms>
+                            @foreach ($topRanked as $game)
+                                <div class="row">
+                                    <div class="oswald-stencil color-accent p-xs text-center" style="width: 40px">
+                                        {{ $loop->iteration }}
+                                    </div>
+                                    <a class="menu-item text-xs" href="{{ route('games.show', $game->slug) }}">
+                                        <span>
+                                            <span class="menu-item__title">
+                                                {{ $game->title }}
+                                            </span>
+                                            <span class="menu-item__description">
+                                                {{ $game->developers->pluck('name')->implode(', ') }} | {{ $game->initial_release_year }}
+                                            </span>
+                                        </span>
+                                        <ui-tooltip>
+                                            {{ $game->score ? round($game->score).'%' : 'N/A' }}
+                                        </ui-tooltip>
+                                    </a>
+                                </div>
+                            @endforeach
+                        </ui-menu>
+                    </div>
                 </div>
-                <div class="stack gap-md grow" style="flex-basis: calc(3ch + 2 * var(--sidebar-width))">
-                    <h3>Recent Community Posts</h3>
+                <div class="stack gap-md grow" style="flex-basis: 60ch">
+                    <h2>Recent Community Posts</h2>
 
                     @if (count($posts) > 0)
                         <div class="card">
@@ -125,7 +161,7 @@
 
             @if (count($reviews) > 0)
                 <section class="stack gap-md">
-                    <h3>Recent Reviews</h3>
+                    <h2>Recent Reviews</h2>
 
                     <div class="game-cards grid gap-sm">
                         @foreach ($reviews as $review)
@@ -137,7 +173,7 @@
 
             @if (count($recommendations) > 0)
                 <section class="stack gap-md">
-                    <h3>Recent Recommendations</h3>
+                    <h2>Recent Recommendations</h2>
 
                     <div class="game-cards grid gap-sm">
                         @foreach ($recommendations as $recommendation)
