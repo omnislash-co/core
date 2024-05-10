@@ -14,8 +14,8 @@ class Create extends Component
     public ?Game $game;
     public RecommendationForm $form;
 
-    public function getGames() {
-        return Game::with('platforms')->where('title', 'like', ("%{$this->search}%"))->limit(7)->get(['id', 'title']);
+    public function getGames(String $search) {
+        return Game::with('platforms')->where('title', 'like', ("%{$search}%"))->limit(7)->get(['id', 'title']);
     }
 
     public function setPlayedGame(Game $game) {
@@ -57,10 +57,10 @@ class Create extends Component
         $playedGames = [];
 
         if (strlen($this->search)>=1) {
-            $games = $this->getGames();
+            $games = $this->getGames($this->search);
         }
         if (strlen($this->playedSearch)>=1) {
-            $playedGames = $this->getGames();
+            $playedGames = $this->getGames($this->playedSearch);
         }
         
         return view('livewire.recommendations.create', compact('games', 'playedGames'));
