@@ -46,7 +46,7 @@
             <section class="stack gap-md">
                 <h2>Trending</h2>
             
-                <div class="game-cards grid gap-sm">
+                <div class="game-cards grid gap-md">
                     @foreach ($trending as $game)
                         <x-cards.game :$game />
                     @endforeach
@@ -92,17 +92,19 @@
                                         {{ $loop->iteration }}
                                     </div>
                                     <a class="menu-item text-xs" href="{{ route('games.show', $game->slug) }}">
-                                        <span>
-                                            <span class="menu-item__title">
+                                        <div class="full-width">
+                                            <div class="menu-item__title">
                                                 {{ $game->title }}
-                                            </span>
-                                            <span class="menu-item__description">
-                                                {{ $game->developers->pluck('name')->implode(', ') }} | {{ $game->initial_release_year }}
-                                            </span>
-                                        </span>
-                                        <ui-tooltip>
-                                            {{ $game->library_count ? $game->library_count : '0' }} {{ Str::plural('user', $game->library_count) }}
-                                        </ui-tooltip>
+                                            </div>
+                                            <div class="menu-item__description row justify-between">
+                                                <div>
+                                                    {{ $game->developers->pluck('name')->implode(', ') }} | {{ $game->initial_release_year }}
+                                                </div>
+                                                <div>
+                                                    {{ $game->library_count ? $game->library_count : '0' }} {{ Str::plural('user', $game->library_count) }}
+                                                </div>
+                                            </div>
+                                        </div>
                                     </a>
                                 </div>
                             @endforeach
@@ -119,17 +121,19 @@
                                         {{ $loop->iteration }}
                                     </div>
                                     <a class="menu-item text-xs" href="{{ route('games.show', $game->slug) }}">
-                                        <span>
-                                            <span class="menu-item__title">
+                                        <div class="full-width">
+                                            <div class="menu-item__title">
                                                 {{ $game->title }}
-                                            </span>
-                                            <span class="menu-item__description">
-                                                {{ $game->developers->pluck('name')->implode(', ') }} | {{ $game->initial_release_year }}
-                                            </span>
-                                        </span>
-                                        <ui-tooltip>
-                                            {{ $game->score ? round($game->score).'%' : 'N/A' }}
-                                        </ui-tooltip>
+                                            </div>
+                                            <div class="menu-item__description row justify-between">
+                                                <div>
+                                                    {{ $game->developers->pluck('name')->implode(', ') }} | {{ $game->initial_release_year }}
+                                                </div>
+                                                <div>
+                                                    {{ $game->score ? round($game->score).'%' : 'N/A' }}
+                                                </div>
+                                            </div>
+                                        </div>
                                     </a>
                                 </div>
                             @endforeach
@@ -163,7 +167,7 @@
                 <section class="stack gap-md">
                     <h2>Recent Reviews</h2>
 
-                    <div class="game-cards grid gap-sm">
+                    <div class="game-cards grid gap-md">
                         @foreach ($reviews as $review)
                             <x-cards.review-game-img :$review />
                         @endforeach
@@ -175,7 +179,7 @@
                 <section class="stack gap-md">
                     <h2>Recent Recommendations</h2>
 
-                    <div class="game-cards grid gap-sm">
+                    <div class="game-cards grid gap-md">
                         @foreach ($recommendations as $recommendation)
                             <x-cards.recommendation :$recommendation />
                         @endforeach

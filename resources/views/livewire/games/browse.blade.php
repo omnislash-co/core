@@ -13,7 +13,7 @@
     </div>
 
     @if (count($this->games)>0)
-        <div class="game-cards grid gap-sm">
+        <div class="game-cards grid gap-md">
             @foreach ($this->games as $game)
                 <x-cards.game :$game />
             @endforeach

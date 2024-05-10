@@ -8,7 +8,7 @@
             </div>
 
             @if (count($reviews)>0)
-                <div class="game-cards grid gap-sm">
+                <div class="game-cards grid gap-md">
                     @foreach ($reviews as $review)
                         <x-cards.review-game-img :$review />
                     @endforeach

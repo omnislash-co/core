@@ -8,7 +8,7 @@
             </div>
 
             @if (count($recommendations)>0)
-                <div class="game-cards grid gap-sm">
+                <div class="game-cards grid gap-md">
                     @foreach ($recommendations as $recommendation)
                         <x-cards.recommendation :$recommendation />
                     @endforeach
