@@ -13,7 +13,7 @@ $scrollIntoViewJsSnippet = ($scrollTo !== false)
 <div>
     @if ($paginator->hasPages())
         <nav role="navigation" aria-label="Pagination Navigation">
-            <div class="row justify-between hide-md-up">
+            <div class="row justify-between hide-lg-up">
                 <span>
                     @if ($paginator->onFirstPage())
                         <button class="btn" disabled>
