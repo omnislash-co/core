@@ -64,8 +64,7 @@
 .data-set {
     display: flex;
     flex-direction: column;
-    gap: var(--space-sm);
-    padding: var(--space-md);
+    padding: var(--space-xs);
 }
 
 .data-set-item {
@@ -74,6 +73,7 @@
     font-size: var(--text-xs);
     display: flex;
     gap: var(--space-xs);
+    padding: var(--space-xs);
     margin: 0;
     text-align: left;
     text-decoration: none!important;
