@@ -101,6 +101,9 @@
 .game-icon {
     max-width: 150px; 
     max-height:150px;
+    background: var(--palette-surface);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
 }
 
 @media (min-width: 40rem){

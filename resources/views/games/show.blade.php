@@ -5,7 +5,7 @@
             <nav class="sidebar">
                 <div class="stack grow gap-gutter">
                     <div class="stack gap-md">
-                        <img class="card game-icon" src="{{ Storage::url('games/icons/'.$game->icon) }}">
+                        <img class="game-icon" src="{{ Storage::url('games/icons/'.$game->icon) }}">
                         <h2 class="hide-lg-up">{{ $game->title }}</h2>
                         <div class="row gap-md">
                             @auth
