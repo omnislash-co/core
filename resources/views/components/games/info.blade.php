@@ -9,9 +9,9 @@
                 @if (count($game->developers) > 0)
                     <div class="row wrap gap-xxs">
                         @foreach ($game->developers->sortBy('name') as $developer)
-                            <button class="btn btn--sm btn--outline">
+                            <a href="{{ route('games.index', ['developers[]' => $developer->id]) }}" class="btn btn--sm btn--outline">
                                 {{ $developer->name }}
-                            </button>
+                            </a>
                         @endforeach
                     </div>
                 @else
@@ -35,12 +35,12 @@
                 @if (count($game->genres) > 0)
                     <div class="row wrap gap-xxs">
                         @foreach ($game->genres->sortBy('acronym') as $genre)
-                            <button class="btn btn--sm btn--outline">
+                            <a href="{{ route('games.index', ['genres[]' => $genre->id]) }}" class="btn btn--sm btn--outline">
                                 {{ $genre->acronym }}
                                 <ui-tooltip>
                                     {{ $genre->name }}
                                 </ui-tooltip>
-                            </button>
+                            </a>
                         @endforeach
                     </div>
                 @else
@@ -57,12 +57,12 @@
                 @if (count($game->platforms) > 0)
                     <div class="row wrap gap-xxs">
                         @foreach ($game->platforms->sortBy('acronym') as $platform)
-                            <button class="btn btn--sm btn--outline">
+                            <a href="{{ route('games.index', ['platforms[]' => $platform->id]) }}" class="btn btn--sm btn--outline">
                                 {{ $platform->acronym }}
                                 <ui-tooltip>
                                     {{ $platform->name }}
                                 </ui-tooltip>
-                            </button>
+                            </a>
                         @endforeach
                     </div>
                 @else
