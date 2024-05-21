@@ -66,7 +66,7 @@
         <x-waterhole::spinner class="spinner--block"/>
     </div>
 
-    <div wire:loading.delay.remove>
+    <div wire:loading.delay.class="visually-hidden">
         @if (count($this->games)>0)
             <div class="game-cards grid gap-md">
                 @foreach ($this->games as $game)
