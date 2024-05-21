@@ -93,7 +93,6 @@
 }
 
 .footer {
-    margin-top: var(--space-gutter);
     background-color: var(--palette-surface);
 }
 
@@ -192,6 +191,14 @@
     display: block;
     width: 100%;
     z-index: var(--z-index-overlay);
+}
+
+.filters-menu {
+    position: absolute; 
+    margin-top: var(--space-xs); 
+    width: 100%;
+    max-width: 100%;
+    max-height: 30ch;
 }
 
 /* HOME */
