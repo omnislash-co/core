@@ -9,6 +9,6 @@
 
 Omnislash is a [Laravel](https://laravel.com)-powered platform that allows users to discover, track, review, recommend and discuss JRPG video games.
 
-## Important Links
+## Links
 
 - [Omnislash Website](https://omnislash.co)
