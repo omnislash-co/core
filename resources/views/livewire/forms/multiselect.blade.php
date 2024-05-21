@@ -6,7 +6,7 @@
         >
             <div class="input-container">
                 @icon('tabler-search', ['class' => 'no-pointer'])
-                <input role="button" type="text" name="search" 
+                <input type="text" name="search" 
                     wire:model.live.debounce="search" 
                     wire:focus="toggleOptions(true)" 
                     wire:blur="toggleOptions(false)">

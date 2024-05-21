@@ -3,27 +3,35 @@
 
         <div class="field">
             <label class="field__label">Game</label>
-            <div class="grow stack gap-xs" style="position: relative;">
+            <div class="grow stack gap-xs">
                 @if ($game)
-                    <div class="input-container">
-                        <div class="input">
+                    <div id="game">
+                        <div class="badge" style="padding-right: 0">
                             {{ $game->title }}
-                        </div>
-                        <span>
-                            <button class="btn btn--icon btn--sm btn--transparent" wire:click.prevent="unsetGame">
+                            <button class="btn btn--icon btn--transparent btn--sm" wire:click.prevent="unsetGame">
                                 @icon('tabler-x')
                             </button>
-                        </span>
+                        </div>
                     </div>
                 @else
-                    <input type="text" placeholder="Search for a game" wire:model.live.throttle="search">
-                @endif
-
-                @if (count($games) > 0)
-                    <div class="search-bar-results overflow-hidden">
-                        @foreach ($games as $game)
-                            <div class="nav-link" wire:click="setGame({{ $game }})">{{ $game->title }}</div>
-                        @endforeach
+                    <div id="search" style="position: relative;">
+                        <div class="input-container">
+                            @icon('tabler-search', ['class' => 'no-pointer'])
+                            <input type="text" name="search" 
+                                placeholder="Search for a game"
+                                wire:model.live.throttle="search"
+                                wire:focus="toggleOptions(true)" 
+                                wire:blur="toggleOptions(false)">
+                        </div>
+                        @if ($showOptions)
+                            <div class="menu filters-menu text-sm" wire:transition.in.origin.top>
+                                @forelse ($games as $game)
+                                    <div class="nav-link" wire:click="setGame({{ $game }})">{{ $game->title }}</div>
+                                @empty
+                                    <div class="p-xs">No games found.</div>
+                                @endforelse
+                            </div>
+                        @endif
                     </div>
                 @endif
                 <div class="text-xs color-danger">@error('form.gameId') {{ $message }} @enderror</div>

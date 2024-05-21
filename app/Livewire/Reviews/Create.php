@@ -9,26 +9,36 @@ use App\Game;
 class Create extends Component
 {
     public $search = '';
-    public Game $game;
+    public ?Game $game;
     public ReviewForm $form;
+    public $showOptions = false;
 
-    public function getGames() {
-        return Game::with('platforms')->where('title', 'like', ("%{$this->search}%"))->limit(7)->get(['id', 'title']);
+    public function getGames() 
+    {
+        return Game::with('platforms')->where('title', 'like', ("%{$this->search}%"))->limit(10)->get(['id', 'title']);
     }
 
-    public function setGame(Game $game) {
+    public function setGame(Game $game) 
+    {
+        $this->showOptions = false;
         $this->search = '';
         $this->game = $game;
         $this->form->platformId = null;
         $this->form->gameId = $game->id;
     }
 
-    public function unsetGame() {
+    public function unsetGame() 
+    {
         $this->form->platformId = null;
         $this->form->gameId = null;
         $this->game = null;
     }
- 
+
+    public function toggleOptions($status)
+    {
+        $this->showOptions = $status;
+    }
+
     public function save()
     {
         $this->form->validate();
