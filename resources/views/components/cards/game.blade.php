@@ -22,7 +22,7 @@
             @endforeach
         </div>
         <p class="content text-xs">
-            {{ Str::limit($game->description, 150, '...')  }}
+            {{ Str::limit($game->description, 140, '...')  }}
         </p>
     </div>
 </div>
