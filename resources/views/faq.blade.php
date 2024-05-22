@@ -14,7 +14,7 @@
 
                     <h4 class="color-accent">Which games are added?</h4>
                     <p>
-                        The primary focus is on JRPGs, role-playing games from Japan-based developers. Though games that are inspired by JRPGs and are very highly rated, such as <em>Chained Echoes</em>, may be added to the database (this is a very low priority).
+                        The primary focus is on JRPGs, role-playing games from Japan-based developers.
                     </p>
 
                     <h4 class="color-accent">How are games consolidated?</h4>
