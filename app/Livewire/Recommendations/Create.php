@@ -13,33 +13,52 @@ class Create extends Component
     public ?Game $playedGame;
     public ?Game $game;
     public RecommendationForm $form;
+    public $showPlayedOptions = false;
+    public $showOptions = false;
 
-    public function getGames(String $search) {
-        return Game::with('platforms')->where('title', 'like', ("%{$search}%"))->limit(7)->get(['id', 'title']);
+    public function getGames(String $search) 
+    {
+        return Game::with('platforms')->where('title', 'like', ("%{$search}%"))->limit(10)->get(['id', 'title']);
     }
 
-    public function setPlayedGame(Game $game) {
+    public function setPlayedGame(Game $game) 
+    {
+        $this->showPlayedOptions = false;
         $this->playedSearch = '';
         $this->playedGame = $game;
         $this->form->playedGameId = $game->id;
     }
 
-    public function unsetPlayedGame() {
+    public function unsetPlayedGame() 
+    {
         $this->form->playedGameId = null;
         $this->playedGame = null;
     }
 
-    public function setGame(Game $game) {
+    public function setGame(Game $game) 
+    {
+        $this->showOptions = false;
         $this->search = '';
         $this->game = $game;
         $this->form->platformId = null;
         $this->form->gameId = $game->id;
     }
 
-    public function unsetGame() {
+    public function unsetGame() 
+    {
         $this->form->platformId = null;
         $this->form->gameId = null;
         $this->game = null;
+    }
+
+    public function toggleOptions($status)
+    {
+        $this->showOptions = $status;
+    }
+
+    public function togglePlayedOptions($status)
+    {
+        $this->showPlayedOptions = $status;
     }
 
     public function save()

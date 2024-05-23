@@ -5,16 +5,18 @@
             <label class="field__label">Game</label>
             <div class="grow stack gap-xs">
                 @if ($game)
-                    <div id="game">
-                        <div class="badge" style="padding-right: 0">
+                    <div wire:key="{{ $game->id }}" class="input-container">
+                        <div class="input">
                             {{ $game->title }}
-                            <button class="btn btn--icon btn--transparent btn--sm" wire:click.prevent="unsetGame">
+                        </div>
+                        <span>
+                            <button class="btn btn--icon btn--sm bg-danger-soft" wire:click.prevent="unsetGame">
                                 @icon('tabler-x')
                             </button>
-                        </div>
+                        </span>
                     </div>
                 @else
-                    <div id="search" style="position: relative;">
+                    <div wire:key="{{ 0 }}" style="position: relative;">
                         <div class="input-container">
                             @icon('tabler-search', ['class' => 'no-pointer'])
                             <input type="text" name="search" 
@@ -26,9 +28,9 @@
                         @if ($showOptions)
                             <div class="menu filters-menu text-sm" wire:transition.in.origin.top>
                                 @forelse ($games as $game)
-                                    <div class="nav-link" wire:click="setGame({{ $game }})">{{ $game->title }}</div>
+                                    <div class="nav-link" wire:key="{{ $game->id }}" wire:click="setGame({{ $game }})">{{ $game->title }}</div>
                                 @empty
-                                    <div class="p-xs">No games found.</div>
+                                    <div class="p-xs" wire:key="{{ 0 }}">No games found.</div>
                                 @endforelse
                             </div>
                         @endif
@@ -41,14 +43,18 @@
         <div class="field">
             <label class="field__label">Platform</label>
             <div class="grow stack gap-xs">
-                <select wire:model="form.platformId" :disabled="{{ !$game}}">
-                    <option value="null">Select a platform</option>
-                    @if ($game)
+                @if ($game)
+                    <select wire:model="form.platformId" wire:key="{{ $game->id }}">
+                        <option value="null">Select a platform</option>
                         @foreach ($game->platforms as $platform)
-                            <option value="{{ $platform->id }}">{{ $platform->name }}</option>
+                            <option value="{{ $platform->id }}" wire:key="{{ $platform->id }}">{{ $platform->name }}</option>
                         @endforeach
-                    @endif
-                </select>
+                    </select>
+                @else
+                    <select wire:key="{{ 0 }}" disabled>
+                        <option>No game selected</option>
+                    </select>
+                @endif
                 <div class="text-xs color-danger">@error('form.platformId') {{ $message }} @enderror</div>
             </div>
         </div>
