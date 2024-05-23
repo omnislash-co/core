@@ -66,8 +66,8 @@
         <x-waterhole::spinner class="spinner--block"/>
     </div>
 
-    <div wire:loading.delay.class="visually-hidden">
-        @if (count($this->games)>0)
+    <div wire:loading.delay.class="visually-hidden" wire:key="{{ $this->games->count() }}">
+        @if ($this->games->count() > 0)
             <div class="game-cards grid gap-md">
                 @foreach ($this->games as $game)
                     <x-cards.game :$game wire:key="{{ $game->id }}" />
