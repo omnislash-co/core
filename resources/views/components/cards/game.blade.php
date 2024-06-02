@@ -1,6 +1,6 @@
 @props(['game'])
 
-<div class="card row align-start align-stretch overlay-container overflow-hidden">
+<div class="card row align-start align-stretch overlay-container overflow-hidden" style="max-height: 150px;">
     <div class="card__game-icon" style="background-image: url('{{ Storage::url('games/icons/'.$game->icon) }}')"></div>
     <div class="stack grow gap-xs p-sm">
         <a href="{{ route('games.show', $game->slug) }}" class="h4 color-accent has-overlay">{{ $game->title }}</a>
@@ -21,7 +21,7 @@
                 </span>
             @endforeach
         </div>
-        <p class="content text-xs">
+        <p class="content text-xs overflow-hidden">
             {{ Str::limit($game->description, 140, '...')  }}
         </p>
     </div>
