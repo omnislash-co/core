@@ -43,8 +43,12 @@
                         <li>
                             <a href="{{ route('faq') }}">FAQ</a>
                         </li>
-                        <li><a href="{{ route('terms') }}">Terms</a> &amp;
-                            <a href="{{ route('privacy') }}">Privacy</a></li>
+                        <li>
+                            <a href="{{ route('privacy') }}">Privacy</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('terms') }}">Terms</a>
+                        </li>
                     </ul>
                 </li>
             </ul>
