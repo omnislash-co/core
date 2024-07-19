@@ -35,9 +35,9 @@
     </div>
 
     @if (count($selected) > 0)
-        <div class="row wrap gap-xs">
+        <div class="row wrap gap-xs" wire:key="{{ count($selected) }}">
             @foreach ($selected as $id)
-                <div class="badge bg-warning-soft" style="padding-right: 0">
+                <div class="badge bg-warning-soft" style="padding-right: 0" :key="$id">
                     {{ $this->getOptionName($id) }}
                     <button class="btn btn--icon btn--transparent btn--sm" wire:click="remove({{ $id }})">
                         @icon('tabler-x')
