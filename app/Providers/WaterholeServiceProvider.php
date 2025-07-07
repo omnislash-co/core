@@ -32,7 +32,7 @@ class WaterholeServiceProvider extends Extend\ServiceProvider
         Extend\Header::remove('breadcrumb');
         Extend\Header::remove('search');
         Extend\Header::add('waterhole.header-search');
-        Extend\LayoutAfter::add('components.footer');
+        Extend\LayoutAfter::add('partials.footer');
 
         Extend\UserNav::add(
             fn(User $user) => new NavLink(
