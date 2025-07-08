@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6422b3ef8c2c766a0ee3f18bcfa8e59d",
+    "content-hash": "ef38789e871f6f1a69ab93d710246109",
     "packages": [
         {
             "name": "aws/aws-crt-php",
@@ -2535,6 +2535,74 @@
                 }
             ],
             "time": "2025-02-03T10:55:03+00:00"
+        },
+        {
+            "name": "hotwired-laravel/stimulus-laravel",
+            "version": "1.3.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/hotwired-laravel/stimulus-laravel.git",
+                "reference": "5808bf77481b3da8d8ab0f70b18d9b88011586fe"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/hotwired-laravel/stimulus-laravel/zipball/5808bf77481b3da8d8ab0f70b18d9b88011586fe",
+                "reference": "5808bf77481b3da8d8ab0f70b18d9b88011586fe",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/contracts": "^11.0|^12.0",
+                "php": "^8.2",
+                "spatie/laravel-package-tools": "^1.9.2"
+            },
+            "require-dev": {
+                "laravel/pint": "^1.21",
+                "nunomaduro/collision": "^8.1|^9.0",
+                "orchestra/testbench": "^9.1|^10.0",
+                "phpunit/phpunit": "^10.5|^11.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "aliases": {
+                        "StimulusLaravel": "HotwiredLaravel\\StimulusLaravel\\Facades\\StimulusLaravel"
+                    },
+                    "providers": [
+                        "HotwiredLaravel\\StimulusLaravel\\StimulusLaravelServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "HotwiredLaravel\\StimulusLaravel\\": "src",
+                    "HotwiredLaravel\\StimulusLaravel\\Database\\Factories\\": "database/factories"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Tony Messias",
+                    "email": "tonysm@hey.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Use Stimulus in your Laravel app",
+            "homepage": "https://github.com/hotwired-laravel/stimulus-laravel",
+            "keywords": [
+                "hotwire",
+                "hotwired",
+                "laravel",
+                "stimulus",
+                "stimulus-laravel"
+            ],
+            "support": {
+                "issues": "https://github.com/hotwired-laravel/stimulus-laravel/issues",
+                "source": "https://github.com/hotwired-laravel/stimulus-laravel/tree/1.3.1"
+            },
+            "time": "2025-05-08T00:36:03+00:00"
         },
         {
             "name": "hotwired-laravel/turbo-laravel",
@@ -9355,6 +9423,84 @@
                 "source": "https://github.com/tijsverkoyen/CssToInlineStyles/tree/v2.3.0"
             },
             "time": "2024-12-21T16:25:41+00:00"
+        },
+        {
+            "name": "tonysm/importmap-laravel",
+            "version": "2.4.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/tonysm/importmap-laravel.git",
+                "reference": "48bf7436764cf405ed3cd6f00427eb9240d63ee6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/tonysm/importmap-laravel/zipball/48bf7436764cf405ed3cd6f00427eb9240d63ee6",
+                "reference": "48bf7436764cf405ed3cd6f00427eb9240d63ee6",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/contracts": "^11.0|^12.0",
+                "illuminate/support": "^11.0|^12.0",
+                "php": "^8.2",
+                "spatie/laravel-package-tools": "^1.9"
+            },
+            "require-dev": {
+                "guzzlehttp/guzzle": "^7.4",
+                "laravel/pint": "^1.10",
+                "orchestra/testbench": "^9.0|^10.0",
+                "phpstan/extension-installer": "^1.1",
+                "phpstan/phpstan-deprecation-rules": "^1.0|^2.0",
+                "phpstan/phpstan-phpunit": "^1.0|^2.0",
+                "phpunit/phpunit": "^10.5|^11.5.3"
+            },
+            "bin": [
+                "bin/importmap"
+            ],
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "aliases": {
+                        "Importmap": "Tonysm\\ImportmapLaravel\\Facades\\Importmap"
+                    },
+                    "providers": [
+                        "Tonysm\\ImportmapLaravel\\ImportmapLaravelServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Tonysm\\ImportmapLaravel\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Tony Messias",
+                    "email": "tonysm@hey.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Use ESM with importmap to manage modern JavaScript in Laravel without transpiling or bundling.",
+            "homepage": "https://github.com/tonysm/importmap-laravel",
+            "keywords": [
+                "importmap-laravel",
+                "laravel",
+                "tonysm"
+            ],
+            "support": {
+                "issues": "https://github.com/tonysm/importmap-laravel/issues",
+                "source": "https://github.com/tonysm/importmap-laravel/tree/2.4.0"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/tonysm",
+                    "type": "github"
+                }
+            ],
+            "time": "2025-03-02T20:38:51+00:00"
         },
         {
             "name": "vlucas/phpdotenv",

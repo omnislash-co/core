@@ -69,23 +69,19 @@
                 <div class="stack gap-md grow" style="flex-basis: 35ch">
                     <h2>Rankings</h2>
                     
-                    <div class="card p-md stack gap-md" x-data="{ tab: 'popular' }">
+                    <div class="card p-md stack gap-md" data-controller="tabs" data-tabs-default-tab-value="popular" data-tabs-active-class="is-active" data-tabs-hidden-class="hidden">
                         <nav aria-label="ranked-tabs">
                             <ul class="tabs" role="list">
                                 <li>
-                                    <a href="javascript:void(0)" role="button" class="tab" :class="tab === 'popular' && 'is-active'" @click="tab = 'popular'">Most Popular</a>
+                                    <a href="javascript:void(0)" role="button" class="tab" id="popular" data-tabs-target="tab" data-action="tabs#select">Most Popular</a>
                                 </li>
                                 <li>
-                                    <a href="javascript:void(0)" role="button" class="tab" :class="tab === 'ranked' && 'is-active'" @click="tab = 'ranked'">Top Ranked</a>
+                                    <a href="javascript:void(0)" role="button" class="tab" id="ranked" data-tabs-target="tab" data-action="tabs#select">Top Ranked</a>
                                 </li>
                             </ul>
                         </nav>
 
-                        <ui-menu 
-                            x-cloak
-                            x-show="tab === 'popular'"
-                            x-transition.in
-                            x-transition:enter.duration.500ms>
+                        <ui-menu id="popular" data-tabs-target="panel">
                             @foreach ($popular as $game)
                                 <div class="row">
                                     <div class="oswald-stencil color-accent p-xs text-center" style="width: 40px">
@@ -110,11 +106,7 @@
                             @endforeach
                         </ui-menu>
 
-                        <ui-menu 
-                            x-cloak
-                            x-show="tab === 'ranked'"
-                            x-transition.in
-                            x-transition:enter.duration.500ms>
+                        <ui-menu id="ranked" data-tabs-target="panel" class="hidden">
                             @foreach ($topRanked as $game)
                                 <div class="row">
                                     <div class="oswald-stencil color-accent p-xs text-center" style="width: 40px">

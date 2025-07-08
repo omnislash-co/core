@@ -278,3 +278,7 @@
     background-size: 70ch;
     background-position-y: -15ch;
 }
+
+.hidden {
+    display: none;
+}
