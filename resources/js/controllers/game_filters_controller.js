@@ -3,21 +3,29 @@ import { Controller } from "@hotwired/stimulus"
 // Connects to data-controller="game-filters"
 export default class extends Controller {
     static classes = [ "hidden" ]
-    static targets = [ "panel", "button", "input", "loader", "results"]
+    static targets = [ "panel", "button", "loader", "results"]
 
     connect() {
+        this.checkParams()
     }
 
-    inputOnChange() {
-        let icon = this.buttonTargets.find(element => element.id === 'search-arrow')
-        this.inputTarget.value.length > 0 ? icon.classList.remove(this.hiddenClass) : icon.classList.add(this.hiddenClass)
+    checkParams() {
+        const url = new URL(window.location.href)
+        const params = new URLSearchParams(url.search)
+
+        if (params.has('filter[developers][]') ||
+            params.has('filter[genres][]') ||
+            params.has('filter[platforms][]')
+        ) {
+            this.panelTarget.classList.remove(this.hiddenClass)
+        }
     }
 
     toggle() {
         this.panelTarget.classList.toggle(this.hiddenClass)
     }
 
-    loading(event) {
+    loading() {
         this.loaderTarget.classList.remove(this.hiddenClass)
         this.resultsTarget.classList.add(this.hiddenClass)
     }
@@ -30,5 +38,6 @@ export default class extends Controller {
     submit() {
         let button = this.buttonTargets.find(element => element.id === 'apply-filters')
         button.click()
+        this.loading()
     }
 }

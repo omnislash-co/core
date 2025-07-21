@@ -15,10 +15,10 @@ export default class extends Controller {
     hideMenu() {
         setTimeout(() => {
             this.menuTarget.classList.add(this.hiddenClass)
-        }, "150")
+        }, "120")
     }
 
-    onChange(event) {
+    onChange() {
         this.dispatch("on-change")
     }
 

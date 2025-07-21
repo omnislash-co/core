@@ -3,11 +3,11 @@
     <div class="section container" 
         data-controller="game-filters" 
         data-game-filters-hidden-class="hidden" 
-        data-action="multi-select:on-change->game-filters#submit 
-        turbo:before-fetch-request->game-filters#loading 
-        turbo:frame-render->game-filters#loaded"
+        data-action="multi-select:on-change->game-filters#submit
+        turbo:frame-render->game-filters#loaded
+        turbo:frame-render->game-filters#checkParams"
         >
-        <turbo-frame id="games" data-turbo-action="advance" data-turbo-prefetch="false" class="stack gap-gutter">
+        <turbo-frame id="games" data-turbo-action="advance" class="stack gap-gutter">
             <h2>Games</h2>
 
             <form action="{{ route('games.index') }}" method="GET">
@@ -15,9 +15,9 @@
                     <div class="row gap-sm">
                         <div class="input-container grow">
                             @icon('tabler-search', ['class' => 'no-pointer'])
-                            <input type="text" name="filter[title]" value="{{ request('filter.title') }}" placeholder="Search" data-game-filters-target="input" data-action="input->game-filters#inputOnChange">
+                            <input type="text" name="filter[title]" value="{{ request('filter.title') }}" placeholder="Search">
                             <span>
-                                <button class="btn btn--icon btn--sm btn--transparent hidden" type="submit" id="search-arrow" data-game-filters-target="button">
+                                <button class="btn btn--icon btn--sm btn--transparent" type="submit">
                                     @icon('tabler-arrow-right')
                                 </button>
                             </span>
