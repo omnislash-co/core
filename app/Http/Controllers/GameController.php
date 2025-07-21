@@ -40,8 +40,6 @@ class GameController extends Controller
         $platforms = Platform::orderBy('name')->get(['id', 'name']);
 
         return view('games.index', compact('games', 'developers', 'genres', 'platforms'));
-
-        // filter[title]=square
     }
 
     /**
@@ -88,7 +86,7 @@ class GameController extends Controller
     }
 
     /**
-     * Display game reviews.
+     * Display game recommendations.
      */
     public function recommendations(Game $game)
     {

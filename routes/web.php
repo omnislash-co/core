@@ -6,8 +6,6 @@ use Illuminate\Support\Facades\Event;
 use Illuminate\Foundation\Events\DiagnosingHealth;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\GameController;
-use App\Http\Controllers\GameReviewsController;
-use App\Http\Controllers\GameReleasesController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\RecommendationController;
 use App\Http\Controllers\UserController;
