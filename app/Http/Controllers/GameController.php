@@ -4,9 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\View\View;
 use App\Game;
-use App\Library;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Support\Facades\DB;
+use App\Developer;
+use App\Genre;
+use App\Platform;
+use Spatie\QueryBuilder\QueryBuilder;
+use Spatie\QueryBuilder\AllowedFilter;
+use Spatie\QueryBuilder\AllowedSort;
 
 class GameController extends Controller
 {
@@ -15,7 +18,30 @@ class GameController extends Controller
      */
     public function index(): View
     {
-        return view('games.index');
+        $games = QueryBuilder::for(Game::class)
+            ->with(['developers', 'genres'])
+            ->allowedFilters([
+                AllowedFilter::partial('title'),
+                AllowedFilter::exact('developers', 'developers.name'),
+                AllowedFilter::exact('platforms', 'platforms.name'),
+                AllowedFilter::exact('genres', 'genres.name'),
+            ])
+            ->defaultSort('-created_at')
+            ->allowedSorts([
+                AllowedSort::field('created', 'created_at'),
+                AllowedSort::field('popular', 'popularity_rank'),
+                AllowedSort::field('score', 'score_rank'),
+            ])
+            ->paginate(8)
+            ->appends(request()->query());
+
+        $developers = Developer::orderBy('name')->get(['id', 'name']);
+        $genres = Genre::orderBy('name')->get(['id', 'name']);
+        $platforms = Platform::orderBy('name')->get(['id', 'name']);
+
+        return view('games.index', compact('games', 'developers', 'genres', 'platforms'));
+
+        // filter[title]=square
     }
 
     /**
@@ -23,12 +49,7 @@ class GameController extends Controller
      */
     public function show(Game $game): View
     {
-        $game->loadCount(['reviews', 'recommendations', 'releases'])->load([
-            'developers',
-            'genres',
-            'platforms' => fn ($query) => $query->with([
-                'releases' => fn ($q) => $q->with('region')->where('game_id', $game->id)
-            ])->get(),
+        $game->load([
             'reviews' => function ($query) {
                 $query->with('user')->orderBy('created_at', 'desc')->limit(2);
             },
@@ -43,58 +64,36 @@ class GameController extends Controller
 
         $game->visit();
 
-        $user_library_count = 0;
-        if (Auth()->user())
-        {
-            $user_library_count = Library::where([
-                'game_id' => $game->id,
-                'user_id' => Auth()->user()->id,
-            ])->count();
-        }
-
-        return view('games.show', compact('game', 'user_library_count'));
+        return view('games.overview', compact('game'));
     }
 
     /**
-     * Update game rankings.
+     * Display game releases.
      */
-    public static function updateRankings()
+    public function releases(Game $game)
     {
-        //Update score for all games
-        Game::chunk(100, function ($games) {
-            foreach ($games as $game) {
-                $filtered = $game->libraries()->whereNotNull('score');
-                $score = ($filtered->count() > 0 ? number_format(($filtered->avg('score') / 10) * 100, 0) : null);
+        $game->getReleasesGroupedByPlatform();
 
-                $game->update(['score' => $score]);
-            }
-        });
+        return view('games.releases', compact('game'));        
+    }
 
-        //Update library_count for all games
-        Game::withCount(['libraries' => function (Builder $query) {
-                $query->select(DB::raw('count(distinct(user_id))'));
-            }])->chunk(100, function ($games) {
-            foreach ($games as $game) {
-                $game->update(['library_count' => $game->libraries_count]);
-            }
-        });
+    /**
+     * Display game reviews.
+     */
+    public function reviews(Game $game)
+    {
+        $reviews = $game->reviews()->orderBy('created_at', 'desc')->paginate(8);
 
-        //Update score_rank for all games
-        $scoreRank = 0;
-        Game::orderBy('score', 'desc')->chunk(100, function ($games) use (&$scoreRank) {
-            foreach ($games as $game) {
-                $scoreRank++;
-                $game->update(['score_rank' => $scoreRank]);
-            }
-        });
+        return view('games.reviews', compact('game', 'reviews'));        
+    }
 
-        //Update popularity_rank for all games
-        $popularityRank = 0;
-        Game::orderBy('library_count', 'desc')->chunk(100, function ($games) use (&$popularityRank) {
-            foreach ($games as $game) {
-                $popularityRank++;
-                $game->update(['popularity_rank' => $popularityRank]);
-            }
-        });
+    /**
+     * Display game reviews.
+     */
+    public function recommendations(Game $game)
+    {
+        $recommendations = $game->recommendations()->orderBy('created_at', 'desc')->paginate(8);
+
+        return view('games.recommendations', compact('game', 'recommendations'));        
     }
 }

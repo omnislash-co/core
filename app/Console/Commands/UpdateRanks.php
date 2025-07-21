@@ -3,7 +3,7 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
-use App\Http\Controllers\GameController;
+use App\Game;
 
 class UpdateRanks extends Command
 {
@@ -26,6 +26,6 @@ class UpdateRanks extends Command
      */
     public function handle()
     {
-        GameController::updateRankings();
+        Game::updateRankings();
     }
 }

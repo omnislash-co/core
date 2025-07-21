@@ -1,6 +1,6 @@
 @if ($paginator->hasPages())
     <nav role="navigation" aria-label="{{ __('Pagination Navigation') }}">
-        <div class="row justify-between hide-md-up">
+        <div class="row justify-between hide-lg-up">
             @if ($paginator->onFirstPage())
                 <button class="btn" disabled>
                     {!! __('pagination.previous') !!}

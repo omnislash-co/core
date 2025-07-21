@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Event;
 use Illuminate\Foundation\Events\DiagnosingHealth;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\GameController;
+use App\Http\Controllers\GameReviewsController;
+use App\Http\Controllers\GameReleasesController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\RecommendationController;
 use App\Http\Controllers\UserController;
@@ -30,10 +32,11 @@ Route::get('/privacy', function () { return view('privacy'); })->name('privacy')
 // Games
 Route::get('/games', [GameController::class, 'index'])->name('games.index');
 Route::get('/games/{game:slug}', [GameController::class, 'show'])->name('games.show');
-Route::get('/games/{game:slug}/reviews', [GameController::class, 'show'])->name('games.reviews');
-Route::get('/games/{game:slug}/recommendations', [GameController::class, 'show'])->name('games.recommendations');
-Route::get('/games/{game:slug}/releases', [GameController::class, 'show'])->name('games.releases');
+Route::get('/games/{game:slug}/reviews', [GameController::class, 'reviews'])->name('games.reviews');
+Route::get('/games/{game:slug}/recommendations', [GameController::class, 'recommendations'])->name('games.recommendations');
+Route::get('/games/{game:slug}/releases', [GameController::class, 'releases'])->name('games.releases');
 
+// Game Library
 Route::get('games/{game:slug}/library', fn(Game $game) => view('games.library', compact('game')))
     ->middleware('auth')
     ->name('games.library');

@@ -1,3 +1,5 @@
+@props(['game'])
+
 <x-app-layout title="{{ $game->title }}">
 
     <div class="section container stack gap-gutter">
@@ -9,8 +11,8 @@
                         <h2 class="hide-lg-up">{{ $game->title }}</h2>
                         <div class="row gap-md">
                             @auth
-                                <a href="{{ route('games.library', $game->slug) }}" class="btn bg-accent btn--narrow" data-turbo-frame="modal">
-                                    {{ $user_library_count > 0 ? 'Edit' : 'Add to' }} Library
+                                <a href="{{ route('games.library', $game->slug) }}" class="btn bg-accent btn--narrow">
+                                    {{ $game->hasUserPlayed() ? 'Edit' : 'Add to' }} Library
                                 </a>
                             @endauth
                             @guest
@@ -67,15 +69,8 @@
                     </nav>
                 </div>
 
-                @if (Route::is('games.show'))
-                    <x-games.overview :$game />
-                @elseif (Route::is('games.reviews'))
-                    <livewire:games.reviews :$game />
-                @elseif (Route::is('games.recommendations'))
-                    <livewire:games.recommendations :$game />
-                @elseif (Route::is('games.releases'))
-                    <x-games.releases :$game />
-                @endif
+                {{ $slot }}
+
             </div>
         </section>
     </div>
