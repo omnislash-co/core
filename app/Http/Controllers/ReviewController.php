@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Review;
+use App\Game;
+use App\Platform;
+use App\Http\Requests\StoreReviewRequest;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -33,17 +36,25 @@ class ReviewController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create(): View
+    public function create(Request $request): View
     {
-        return view('reviews.create');
+        $games = Game::orderBy('title')->get(['id', 'title']);
+        $platforms = [];
+
+        if (old('game', request('game'))) {
+            $platforms = Game::find(old('game', request('game')))->platforms()->orderBy('name')->get(['id', 'name']);
+        }
+
+        return view('reviews.create', compact('games', 'platforms'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreReviewRequest $request)
     {
-        //
+        $validated = $request->validated();
+
     }
 
     /**

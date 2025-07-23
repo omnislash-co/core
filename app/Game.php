@@ -98,11 +98,11 @@ class Game extends Model implements CanVisit
     {
         $hasUserPlayed = false;
 
-        if (Auth()->user())
+        if (auth()->check())
         {
             $hasUserPlayed = Library::where([
                 'game_id' => $this->id,
-                'user_id' => Auth()->user()->id,
+                'user_id' => auth()->user()->id,
             ])->count() > 0 ? true : false;
         }
 
