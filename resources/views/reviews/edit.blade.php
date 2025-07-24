@@ -42,12 +42,11 @@
 
                         <div class="row gap-sm">
                             <button class="btn btn--wide bg-accent" type="submit">
-                                {{-- wire:loading.attr="disabled" --}}
                                 Update
                             </button>
-                            <button class="btn btn--wide" type="button">
+                            <a class="btn btn--wide" href="{{ route('reviews.show', $review) }}">
                                 Cancel
-                            </button>
+                            </a>
                         </div>
                     </div>
 

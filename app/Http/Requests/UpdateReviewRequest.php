@@ -11,7 +11,7 @@ class UpdateReviewRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return auth()->check() && auth()->user()->id == $this->review->user_id;
+        return auth()->check() && auth()->user()->id === $this->review->user_id;
     }
 
     /**
