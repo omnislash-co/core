@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Review;
 use App\Game;
-use App\Platform;
 use App\Http\Requests\StoreReviewRequest;
+use App\Http\Requests\UpdateReviewRequest;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -55,6 +55,18 @@ class ReviewController extends Controller
     {
         $validated = $request->validated();
 
+        $review = Review::create([
+            'user_id' => auth()->user()->id,
+            'game_id' => $validated['game'],
+            'platform_id' => $validated['platform'],
+            'summary' => $validated['summary'],
+            'body' => $validated['body'],
+            'score' => $validated['score']
+        ]);
+
+        return redirect()->action(
+            [ReviewController::class, 'show'], [$review]
+        );
     }
 
     /**
@@ -82,9 +94,19 @@ class ReviewController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateReviewRequest $request, Review $review)
     {
-        //
+        $validated = $request->validated();
+
+        $review->update([
+            'summary' => $validated['summary'],
+            'body' => $validated['body'],
+            'score' => $validated['score']
+        ]);
+
+        return redirect()->action(
+            [ReviewController::class, 'show'], [$review]
+        );
     }
 
     /**

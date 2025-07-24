@@ -38,12 +38,12 @@ Route::get('games/{game:slug}/library', fn(Game $game) => view('games.library', 
 
 // Reviews
 Route::resource('reviews', ReviewController::class)->only([
-    'index', 'show', 'create', 'store', 'edit'
+    'index', 'show', 'create', 'store', 'edit', 'update'
 ]);
 
 // Recommendations
 Route::resource('recommendations', RecommendationController::class)->only([
-    'index', 'show', 'create', 'store', 'edit'
+    'index', 'show', 'create', 'store', 'edit', 'update'
 ]);
 
 // Users

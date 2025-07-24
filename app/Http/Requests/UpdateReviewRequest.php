@@ -3,16 +3,15 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
-class StoreReviewRequest extends FormRequest
+class UpdateReviewRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return auth()->check();
+        return auth()->check() && auth()->user()->id == $this->review->user_id;
     }
 
     /**
@@ -23,14 +22,6 @@ class StoreReviewRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'game' => 'required',
-            'platform' => [
-                'required',
-                'numeric',
-                Rule::unique('reviews', 'platform_id')
-                    ->where('game_id', request()->game)
-                    ->where('user_id', auth()->user()->id)
-            ],
             'body' => 'required|min:500',
             'summary' => 'required|min:50|max:255',
             'score' => 'required|numeric|between:0,100'
@@ -46,19 +37,6 @@ class StoreReviewRequest extends FormRequest
     {
         return [
             'body' => 'review',
-        ];
-    }
-
-    /**
-     * Get the error messages for the defined validation rules.
-     *
-     * @return array<string, string>
-     */
-    public function messages(): array
-    {
-        return [
-            'platform.unique' => 'A review already exists for this platform.',
-            'platform.numeric' => 'The :attribute field is required.',
         ];
     }
 }
