@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class StoreReviewRequest extends FormRequest
+class StoreRecommendationRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,17 +23,17 @@ class StoreReviewRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'game' => 'required|numeric',
-            'platform' => [
+            'played' => 'required|numeric',
+            'game' => [
                 'required',
-                'numeric',
-                Rule::unique('reviews', 'platform_id')
-                    ->where('game_id', request()->game)
+                'numeric'
+,               'different:played',
+                Rule::unique('recommendations', 'game_id')
+                    ->where('played_game_id', request()->played)
                     ->where('user_id', auth()->user()->id)
             ],
-            'body' => 'required|min:500',
-            'summary' => 'required|min:50|max:255',
-            'score' => 'required|numeric|between:0,100'
+            'platform' => 'required|numeric',
+            'body' => 'required|min:500'
         ];
     }
 
@@ -45,7 +45,8 @@ class StoreReviewRequest extends FormRequest
     public function attributes(): array
     {
         return [
-            'body' => 'review',
+            'played' => 'game',
+            'body' => 'recommendation'
         ];
     }
 
@@ -57,8 +58,9 @@ class StoreReviewRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'platform.unique' => 'A review already exists for this platform.',
-            'platform.numeric' => 'The :attribute field is required.',
+            'game.different' => 'The games must be different.',
+            'game.unique' => 'A recommendation already exists for this game.',
+            'platform.numeric' => 'The :attribute field is required.'
         ];
     }
 }

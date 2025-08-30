@@ -4,6 +4,10 @@ import { Controller } from "@hotwired/stimulus"
 export default class extends Controller {
     static classes = [ "hidden" ]
     static targets = [ "input", "menu", "item", "anchor", "select", "loader", "results" ]
+    static values = {
+        hasResults: { type: Boolean, default: true },
+        searchParam: { type: String, default: "game" }
+    }
 
     connect() {
         if (this.selectTarget.selectedIndex > 0) {
@@ -56,7 +60,8 @@ export default class extends Controller {
 
     encode({ target: { id } }) {
         let anchor = this.anchorTarget
-        anchor.search = new URLSearchParams({ 'game': id })
+        
+        anchor.search = new URLSearchParams({ [this.searchParamValue]: id })
         anchor.click()
         this.loading()
     }
@@ -80,8 +85,11 @@ export default class extends Controller {
         search.classList.remove(this.hiddenClass)
 
         this.selectTarget.selectedIndex = 0
-        this.anchorTarget.search = ''
-        this.anchorTarget.click()
-        this.loading()
+
+        if (this.hasResultsValue) {
+            this.anchorTarget.search = ''
+            this.anchorTarget.click()
+            this.loading()
+        }
     }
 }

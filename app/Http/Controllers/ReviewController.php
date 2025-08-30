@@ -88,7 +88,9 @@ class ReviewController extends Controller
         }
 
         $review->load(['game', 'platform']);
-        return view('reviews.edit', compact('review'));
+        $platforms = Game::find($review->game->id)->platforms()->orderBy('name')->get(['id', 'name']);
+
+        return view('reviews.edit', compact('review', 'platforms'));
     }
 
     /**
@@ -99,6 +101,7 @@ class ReviewController extends Controller
         $validated = $request->validated();
 
         $review->update([
+            'platform_id' => $validated['platform'],
             'summary' => $validated['summary'],
             'body' => $validated['body'],
             'score' => $validated['score']

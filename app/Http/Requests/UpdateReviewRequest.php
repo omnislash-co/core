@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateReviewRequest extends FormRequest
 {
@@ -22,6 +23,13 @@ class UpdateReviewRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'platform' => [
+                'required',
+                'numeric',
+                Rule::unique('reviews', 'platform_id')
+                    ->where('game_id', $this->review->game->id)
+                    ->where('user_id', auth()->user()->id)->ignore($this->review)
+            ],
             'body' => 'required|min:500',
             'summary' => 'required|min:50|max:255',
             'score' => 'required|numeric|between:0,100'
@@ -37,6 +45,18 @@ class UpdateReviewRequest extends FormRequest
     {
         return [
             'body' => 'review',
+        ];
+    }
+
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array<string, string>
+     */
+    public function messages(): array
+    {
+        return [
+            'platform.unique' => 'A review already exists for this platform.',
         ];
     }
 }

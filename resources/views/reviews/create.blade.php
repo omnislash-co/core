@@ -17,6 +17,12 @@
                         <div class="field">
                             <label class="field__label">Game</label>
                             <div class="grow stack gap-xs">
+                                <select class="hidden" name="game" data-game-select-target="select">
+                                    <option value="">Select a game</option>
+                                    @foreach ($games as $game)
+                                        <option value="{{ $game->id }}" @if ($game->id == old('game',request('game'))) selected @endif>{{ $game->title }}</option>
+                                    @endforeach
+                                </select>
                                 <div class="input-container hidden" data-game-select-target="input" id="read-only">
                                     <div class="input"></div>
                                     <span>
@@ -39,12 +45,6 @@
                                         @endforelse
                                     </div>
                                 </div>
-                                <select class="hidden" name="game" data-game-select-target="select">
-                                    <option value="">Select a game</option>
-                                    @foreach ($games as $game)
-                                        <option value="{{ $game->id }}" @if ($game->id == old('game')) selected @endif>{{ $game->title }}</option>
-                                    @endforeach
-                                </select>
                                 <div class="text-xs color-danger">@error('game') {{ $message }} @enderror</div>
                             </div>
                             <a href="{{ route('reviews.create') }}" data-turbo-frame="platforms" data-game-select-target="anchor" class="hidden">FETCH</a>
@@ -59,7 +59,7 @@
                                     <select name="platform">
                                         <option value="">Select a platform</option>
                                         @foreach ($platforms as $platform)
-                                            <option value="{{ $platform->id }}" @if ($platform->id == old('platform')) selected @endif>{{ $platform->name }}</option>
+                                            <option value="{{ $platform->id }}" @if ($platform->id == old('platform',request('platform'))) selected @endif>{{ $platform->name }}</option>
                                         @endforeach
                                     </select>
                                 @else
