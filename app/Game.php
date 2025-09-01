@@ -9,6 +9,9 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Overtrue\LaravelFavorite\Traits\Favoriteable;
 use Coderflex\Laravisit\Concerns\HasVisits;
 use Coderflex\Laravisit\Concerns\CanVisit;
+use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\DB;
 
 class Game extends Model implements CanVisit
 {
@@ -86,5 +89,112 @@ class Game extends Model implements CanVisit
     public function libraries()
     {
         return $this->hasMany(Library::class);
+    }
+
+    /**
+     * Determine if user has a library entry for this game.
+     */
+    public function hasUserPlayed(): bool
+    {
+        $hasUserPlayed = false;
+
+        if (auth()->check())
+        {
+            $hasUserPlayed = Library::where([
+                'game_id' => $this->id,
+                'user_id' => auth()->user()->id,
+            ])->count() > 0 ? true : false;
+        }
+
+        return (bool) $hasUserPlayed;
+    }
+
+    /**
+     * Determine if user has favorited this game. 
+     * Note: Built-in Overtrue\LaravelFavorite methods don't work because auth()->user() returns a Waterhole User object
+     */
+    public function hasUserFavorited(): bool
+    {
+        $hasUserFavorited = false;
+
+        if (auth()->check())
+        {
+            $hasUserFavorited = User::find(auth()->user()->id)->hasFavorited($this);
+        }
+
+        return (bool) $hasUserFavorited;
+    }
+
+    public function getReleasesGroupedByPlatform()
+    {
+        return $this->load([
+            'platforms' => fn ($query) => $query->with([
+                'releases' => fn ($q) => $q->with('region')->where('game_id', $this->id)
+            ])->get(),
+        ]);
+    } 
+
+    protected function reviewsCount(): Attribute
+    {
+        return Attribute::make(
+            get: fn() => $this->reviews()->count(),
+        )->shouldCache();
+    }
+    
+    protected function recommendationsCount(): Attribute
+    {
+        return Attribute::make(
+            get: fn() => $this->recommendations()->count(),
+        )->shouldCache();
+    }
+
+    protected function releasesCount(): Attribute
+    {
+        return Attribute::make(
+            get: fn() => $this->releases()->count(),
+        )->shouldCache();
+    }
+
+    /**
+     * Update game rankings.
+     */
+    public static function updateRankings()
+    {
+        //Update score for all games
+        Game::chunk(100, function ($games) {
+            foreach ($games as $game) {
+                $filtered = $game->libraries()->whereNotNull('score');
+                $score = ($filtered->count() > 0 ? number_format(($filtered->avg('score') / 10) * 100, 0) : null);
+
+                $game->update(['score' => $score]);
+            }
+        });
+
+        //Update library_count for all games
+        Game::withCount(['libraries' => function (Builder $query) {
+                $query->select(DB::raw('count(distinct(user_id))'));
+            }])->chunk(100, function ($games) {
+            foreach ($games as $game) {
+                $game->update(['library_count' => $game->libraries_count]);
+            }
+        });
+
+        //Update score_rank for all games
+        $scoreRank = 0;
+        Game::orderBy('score', 'desc')->chunk(100, function ($games) use (&$scoreRank) {
+            foreach ($games as $game) {
+                $scoreRank++;
+                $game->update(['score_rank' => $scoreRank]);
+            }
+        });
+
+        //Update popularity_rank for all games
+        $popularityRank = 0;
+        Game::orderBy('library_count', 'desc')->chunk(100, function ($games) use (&$popularityRank) {
+            foreach ($games as $game) {
+                $popularityRank++;
+                $game->update(['popularity_rank' => $popularityRank]);
+            }
+        });
     }
 }

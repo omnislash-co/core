@@ -5,7 +5,6 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Database\Eloquent\Relations\Relation;
-use \Livewire\Livewire;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\URL;
 
@@ -28,8 +27,6 @@ class AppServiceProvider extends ServiceProvider
             URL::forceScheme('https');
         }
         
-        Livewire::forceAssetInjection();
-
         Paginator::defaultView('components.pagination');
         Paginator::defaultSimpleView('components.simple-pagination');
 

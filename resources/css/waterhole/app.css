@@ -202,6 +202,24 @@
 }
 
 /* HOME */
+.home-cover {
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 200px;
+    background-position: 50% 35%;
+}
+
+.wave-container {
+    width: 100%;
+    height: 2vw;
+    margin-top: -1.9vw;
+    overflow: hidden;
+}
+
+.wave {
+    fill: var(--color-bg);
+}
+
 .hero__welcome {
     flex-basis: 35ch; /* items will wrap at this width */
 }
@@ -242,7 +260,7 @@
 
     @keyframes slide-in-icons {
         0% {
-            transform:translateY(-200%)
+            transform:translateY(-225%)
         }
     }
 
@@ -278,3 +296,15 @@
     background-size: 70ch;
     background-position-y: -15ch;
 }
+
+.hidden {
+    display: none;
+}
+
+/* .header {
+    position: initial !important;
+}
+
+.sidebar--sticky {
+    top: 0 !important;
+} */
