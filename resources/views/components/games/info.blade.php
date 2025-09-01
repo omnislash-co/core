@@ -9,7 +9,7 @@
                 @if (count($game->developers) > 0)
                     <div class="row wrap gap-xxs">
                         @foreach ($game->developers->sortBy('name') as $developer)
-                            <a href="{{ route('games.index', ['developers[]' => $developer->id]) }}" class="btn btn--sm btn--outline">
+                            <a href="{{ route('games.index', ['filter[developers][]' => $developer->name]) }}" class="btn btn--sm btn--outline">
                                 {{ $developer->name }}
                             </a>
                         @endforeach
@@ -35,7 +35,7 @@
                 @if (count($game->genres) > 0)
                     <div class="row wrap gap-xxs">
                         @foreach ($game->genres->sortBy('acronym') as $genre)
-                            <a href="{{ route('games.index', ['genres[]' => $genre->id]) }}" class="btn btn--sm btn--outline">
+                            <a href="{{ route('games.index', ['filter[genres][]' => $genre->name]) }}" class="btn btn--sm btn--outline">
                                 {{ $genre->acronym }}
                                 <ui-tooltip>
                                     {{ $genre->name }}
@@ -57,7 +57,7 @@
                 @if (count($game->platforms) > 0)
                     <div class="row wrap gap-xxs">
                         @foreach ($game->platforms->sortBy('acronym') as $platform)
-                            <a href="{{ route('games.index', ['platforms[]' => $platform->id]) }}" class="btn btn--sm btn--outline">
+                            <a href="{{ route('games.index', ['filter[platforms][]' => $platform->name]) }}" class="btn btn--sm btn--outline">
                                 {{ $platform->acronym }}
                                 <ui-tooltip>
                                     {{ $platform->name }}

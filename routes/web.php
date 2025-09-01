@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\GameController;
+use App\Http\Controllers\LibraryController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\RecommendationController;
 use App\Http\Controllers\UserController;
@@ -32,10 +33,10 @@ Route::get('/games/{game:slug}/recommendations', [GameController::class, 'recomm
 Route::get('/games/{game:slug}/releases', [GameController::class, 'releases'])->name('games.releases');
 Route::post('/games/{game:slug}/toggle-favorite', [GameController::class, 'toggleFavorite'])->name('games.toggleFavorite');
 
-// Game Library
-Route::get('games/{game:slug}/library', fn(Game $game) => view('games.library', compact('game')))
-    ->middleware('auth')
-    ->name('games.library');
+// Library
+Route::resource('games/{game:slug}/library', LibraryController::class)->only([
+    'index', 'create', 'store', 'edit', 'update', 'destroy'
+]);
 
 // Reviews
 Route::resource('reviews', ReviewController::class)->only([

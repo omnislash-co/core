@@ -11,7 +11,7 @@
                         <h2 class="hide-lg-up">{{ $game->title }}</h2>
                         <div class="row gap-md">
                             @auth
-                                <a href="{{ route('games.library', $game->slug) }}" class="btn bg-accent btn--narrow">
+                                <a href="{{ route('library.index', $game->slug) }}" data-turbo-frame="modal" class="btn bg-accent btn--narrow">
                                     {{ $game->hasUserPlayed() ? 'Edit' : 'Add to' }} Library
                                 </a>
                                 <x-games.favorite :$game />
