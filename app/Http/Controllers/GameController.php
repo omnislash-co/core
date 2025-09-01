@@ -7,6 +7,7 @@ use App\Game;
 use App\Developer;
 use App\Genre;
 use App\Platform;
+use App\User;
 use Spatie\QueryBuilder\QueryBuilder;
 use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\AllowedSort;
@@ -93,5 +94,21 @@ class GameController extends Controller
         $recommendations = $game->recommendations()->orderBy('created_at', 'desc')->paginate(8);
 
         return view('games.recommendations', compact('game', 'recommendations'));        
+    }
+
+    /**
+     * Toggle user favorite.
+     */
+    public function toggleFavorite(Game $game)
+    {
+        if (auth()->check()) {
+            $user = User::find(auth()->user()->id);
+            $user->toggleFavorite($game);
+            $message = $game->hasBeenFavoritedBy($user) ? "Added to favorites" : "Removed from favorites";
+
+            return redirect()->back()->with('success', $message);
+        } else {
+            return redirect()->route('waterhole.login');
+        }        
     }
 }

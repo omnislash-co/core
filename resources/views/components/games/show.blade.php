@@ -14,13 +14,16 @@
                                 <a href="{{ route('games.library', $game->slug) }}" class="btn bg-accent btn--narrow">
                                     {{ $game->hasUserPlayed() ? 'Edit' : 'Add to' }} Library
                                 </a>
+                                <x-games.favorite :$game />
                             @endauth
                             @guest
                                 <a href="{{ route('waterhole.login') }}" class="btn bg-accent btn--narrow">
                                     Add to Library
                                 </a>
+                                <a href="{{ route('waterhole.login') }}" class="btn bg-danger btn--narrow">
+                                    @icon('tabler-heart')    
+                                </a>
                             @endguest
-                            <livewire:games.favourite :$game />
                         </div>
 
                         {{-- MOBILE ONLY --}}
@@ -31,7 +34,7 @@
                             </div>
                         </details>
                         <details class="card hide-lg-up" style="margin-bottom: var(--space-sm)">
-                            <summary class="card__header">Stats</summary>
+                            <summary class="card__header">Statistics</summary>
                             <div class="card__body p-xs">
                                 <x-games.stats :$game />
                             </div>
@@ -47,7 +50,7 @@
 
                     {{-- DESKTOP ONLY --}}
                     <div class="stack gap-md hide-md-down">
-                        <h3>Stats</h3>
+                        <h3>Statistics</h3>
                         <div class="card">
                             <x-games.stats :$game />
                         </div>

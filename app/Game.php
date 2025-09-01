@@ -109,6 +109,22 @@ class Game extends Model implements CanVisit
         return (bool) $hasUserPlayed;
     }
 
+    /**
+     * Determine if user has favorited this game. 
+     * Note: Built-in Overtrue\LaravelFavorite methods don't work because auth()->user() returns a Waterhole User object
+     */
+    public function hasUserFavorited(): bool
+    {
+        $hasUserFavorited = false;
+
+        if (auth()->check())
+        {
+            $hasUserFavorited = User::find(auth()->user()->id)->hasFavorited($this);
+        }
+
+        return (bool) $hasUserFavorited;
+    }
+
     public function getReleasesGroupedByPlatform()
     {
         return $this->load([

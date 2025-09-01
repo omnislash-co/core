@@ -30,6 +30,7 @@ Route::get('/games/{game:slug}', [GameController::class, 'show'])->name('games.s
 Route::get('/games/{game:slug}/reviews', [GameController::class, 'reviews'])->name('games.reviews');
 Route::get('/games/{game:slug}/recommendations', [GameController::class, 'recommendations'])->name('games.recommendations');
 Route::get('/games/{game:slug}/releases', [GameController::class, 'releases'])->name('games.releases');
+Route::post('/games/{game:slug}/toggle-favorite', [GameController::class, 'toggleFavorite'])->name('games.toggleFavorite');
 
 // Game Library
 Route::get('games/{game:slug}/library', fn(Game $game) => view('games.library', compact('game')))

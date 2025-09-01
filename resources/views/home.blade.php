@@ -116,7 +116,7 @@
                                                 <div>
                                                     {{ $game->developers->pluck('name')->implode(', ') }} | {{ $game->initial_release_year }}
                                                 </div>
-                                                <div>
+                                                <div class="weight-medium">
                                                     {{ $game->library_count ? $game->library_count : '0' }} {{ Str::plural('user', $game->library_count) }}
                                                 </div>
                                             </div>
@@ -141,7 +141,7 @@
                                                 <div>
                                                     {{ $game->developers->pluck('name')->implode(', ') }} | {{ $game->initial_release_year }}
                                                 </div>
-                                                <div>
+                                                <div class="weight-medium">
                                                     {{ $game->score ? round($game->score).'%' : 'N/A' }}
                                                 </div>
                                             </div>
