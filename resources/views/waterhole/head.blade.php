@@ -11,3 +11,4 @@
 |
 --}}
 <x-importmap::tags />
+<meta name="turbo-prefetch" content="false">
