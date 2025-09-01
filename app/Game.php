@@ -23,7 +23,7 @@ class Game extends Model implements CanVisit
      * @var array<int, string>
      */
     protected $fillable = [
-        'title', 'slug', 'description', 'icon', 'initial_release_year', 'score', 'library_count', 'score_rank', 'popularity_rank'
+        'title', 'slug', 'description', 'icon', 'cover', 'initial_release_year', 'score', 'library_count', 'score_rank', 'popularity_rank'
     ];
 
     /**
