@@ -76,7 +76,8 @@ class ReleaseResource extends Resource
                 TextColumn::make('region.name')
                     ->searchable(),
                 TextColumn::make('dateType.name')
-                    ->searchable(),
+                    ->searchable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('date')
                     ->date()
                     ->sortable(),
