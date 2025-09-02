@@ -19,6 +19,6 @@ yarn-error.log
 /.idea
 /.vscode
 .DS_Store
-/public/js
+# /public/js
 /public/dist
 *importmap-manifest.json
