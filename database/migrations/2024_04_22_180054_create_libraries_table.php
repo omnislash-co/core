@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('libraries', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->nullable()->constrained()->cascadeOnUpdate()->nullOnDelete();
-            $table->foreignId('game_id')->constrained()->cascadeOnUpdate();
+            $table->foreignId('game_id')->constrained()->cascadeOnUpdate()->cascadeOnDelete();
             $table->foreignId('platform_id')->constrained()->cascadeOnUpdate();
             $table->foreignId('play_status_id')->constrained()->cascadeOnUpdate();
             $table->tinyInteger('score')->unsigned()->nullable();

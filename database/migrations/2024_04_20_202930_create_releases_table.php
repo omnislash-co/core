@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('releases', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('game_id')->constrained()->cascadeOnUpdate();
+            $table->foreignId('game_id')->constrained()->cascadeOnUpdate()->cascadeOnDelete();
             $table->foreignId('platform_id')->constrained()->cascadeOnUpdate();
             $table->foreignId('region_id')->constrained()->cascadeOnUpdate();
             $table->foreignId('date_type_id')->constrained()->cascadeOnUpdate();
