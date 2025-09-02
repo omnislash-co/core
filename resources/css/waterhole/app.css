@@ -105,6 +105,13 @@
     box-shadow: var(--shadow-sm);
 }
 
+.game-cover {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 200px;
+}
+
 @media (min-width: 40rem){
     .game-icon {
         max-width: 200px; 
