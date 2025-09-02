@@ -34,9 +34,11 @@ class DateTypeResource extends Resource
         return $schema
             ->components([
                 TextInput::make('name')
-                    ->required(),
+                    ->required()
+                    ->unique(ignoreRecord: true),
                 TextInput::make('format')
-                    ->required(),
+                    ->required()
+                    ->unique(ignoreRecord: true),
             ]);
     }
 

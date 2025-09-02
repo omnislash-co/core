@@ -34,6 +34,7 @@ class PlatformResource extends Resource
                     ->required()
                     ->unique(ignoreRecord: true),
                 TextInput::make('acronym')
+                    ->unique(ignoreRecord: true)
             ]);
     }
 

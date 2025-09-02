@@ -2,9 +2,13 @@
 
 <x-app-layout title="{{ $game->title }}">
 
+    @if ($game->cover)
+        <div class="game-cover" style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url({{ Storage::url('games/covers/'.$game->cover) }});">
+        </div>
+    @endif
     <div class="section container stack gap-gutter">
         <section class="with-sidebar">
-            <nav class="sidebar">
+            <nav class="sidebar" @style(['margin-top: -150px' => $game->cover])>
                 <div class="stack grow gap-gutter">
                     <div class="stack gap-md">
                         <img class="game-icon" src="{{ Storage::url('games/icons/'.$game->icon) }}">

@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('slug')->unique();
             $table->text('description');
             $table->string('icon');
-            $table->string('cover');
+            $table->string('cover')->nullable();
             $table->year('initial_release_year');
             $table->decimal('score', 5, 2)->unsigned()->nullable();
             $table->integer('library_count')->unsigned()->nullable();
