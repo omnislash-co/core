@@ -27,7 +27,8 @@ class GenresRelationManager extends RelationManager
                 TextInput::make('name')
                     ->required()
                     ->unique(ignoreRecord: true),
-                TextInput::make('acronym'),
+                TextInput::make('acronym')
+                    ->unique(ignoreRecord: true),
             ]);
     }
 
