@@ -12,9 +12,18 @@
                         Omnislash is a platform that allows users to discover, track, review, recommend and discuss JRPG video games.
                     </p>
 
-                    <h4 class="color-accent">Which games are added?</h4>
+                    <h4 class="color-accent">What's a JRPG?</h4>
                     <p>
-                        The primary focus is on JRPGs, role-playing games from Japan-based developers.
+                        JRPG stands for "Japanese Role-Playing Game", which are traditionally developed in Japan. 
+                    </p>
+
+                    <h4 class="color-accent">Are all RPGs made in Japan JRPGs?</h4>
+                    <p>
+                        Not all, as there are RPGs made in Japan such as Dark Souls, Dragon's Dogma, that are generally not considered JRPGs. 
+                        Similarly, there are games made outside of Japan that many would classify as JRPGs, such as Chained Echoes.
+                    </p>
+                    <p>
+                        It's best to view JRPGs as a genre that likely has a foundation in Japanese culture alongside the typical traits of the genre; turn-based combat, character leveling/customization, fantasy elements.
                     </p>
 
                     <h4 class="color-accent">How are games consolidated?</h4>
