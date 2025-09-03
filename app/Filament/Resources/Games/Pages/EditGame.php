@@ -20,7 +20,10 @@ class EditGame extends EditRecord
     protected function mutateFormDataBeforeFill(array $data): array
     {
         $data['icon'] = 'games/icons/'.$data['icon'];
-        $data['cover'] = 'games/covers/'.$data['cover'];
+
+        if (!is_null($data['cover'])) {
+            $data['cover'] = 'games/covers/'.$data['cover'];
+        }
      
         return $data;
     }
