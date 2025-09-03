@@ -23,6 +23,9 @@ class GameObserver
         if ($game->isDirty('icon')) {
             Storage::disk('public')->delete('games/icons/'.$game->getOriginal('icon'));
         }
+        if ($game->isDirty('cover')) {
+            Storage::disk('public')->delete('games/covers/'.$game->getOriginal('cover'));
+        }
     }
 
     public function saved(Game $game): void
@@ -37,6 +40,9 @@ class GameObserver
     {
         if (! is_null($game->icon)) {
             Storage::disk('public')->delete('games/icons/'.$game->icon);
+        }
+        if (! is_null($game->cover)) {
+            Storage::disk('public')->delete('games/covers/'.$game->cover);
         }
     }
 

@@ -31,7 +31,10 @@ class EditGame extends EditRecord
     protected function mutateFormDataBeforeSave(array $data): array
     {
         $data['icon'] = basename($data['icon']);
-        $data['cover'] = basename($data['cover']);
+
+        if (!is_null($data['cover'])) {
+            $data['cover'] = basename($data['cover']);
+        }
      
         return $data;
     }
