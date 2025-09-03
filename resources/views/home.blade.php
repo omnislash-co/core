@@ -1,5 +1,5 @@
 <x-app-layout title="Home">
-    <div class="home-cover" style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url({{ Storage::url('images/layout/cover.png') }});">
+    <div class="game-cover" style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url({{ Storage::url('images/layout/cover.png') }});">
     </div>
 
     <div class="wave-container">

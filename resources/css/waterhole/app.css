@@ -209,13 +209,6 @@
 }
 
 /* HOME */
-.home-cover {
-    background-size: cover;
-    background-repeat: no-repeat;
-    height: 200px;
-    background-position: 50% 35%;
-}
-
 .wave-container {
     width: 100%;
     height: 2vw;
