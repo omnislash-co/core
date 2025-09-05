@@ -4,7 +4,7 @@
     <div class="data-set-item">
         @icon('tabler-star')
         <span>
-            <span class="data-set-item__key">Ranked {{ $game->score_rank ? '#'.$game->score_rank : '' }}</span>
+            <span class="data-set-item__key">Score Rank {{ $game->score_rank ? '#'.$game->score_rank : '' }}</span>
             <span class="data-set-item__value">{{ $game->score ? 'Average user score of '.round($game->score).'%' : '-' }}</span>
         </span>
     </div>
