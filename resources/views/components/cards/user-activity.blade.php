@@ -6,7 +6,7 @@
     </div>
     <div class="stack grow gap-sm">
         <div class="text-xs">
-            {{ $activity->playStatus->name }}: <a href="{{ route('games.show', $activity->game->slug) }}" class="weight-medium">{{ $activity->game->title }}</a>
+            {{ $activity->playStatus->name }}: <a href="{{ route('games.show', $activity->game->slug) }}" class="weight-medium">{{ $activity->game->title }}</a> ({{ $activity->platform->acronym }})
         </div>
         <div>
             <a href="{{ $activity->user->url }}" class="badge bg-accent">{{ $activity->user->name }}</a>

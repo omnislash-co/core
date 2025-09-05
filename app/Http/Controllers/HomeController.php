@@ -34,7 +34,8 @@ class HomeController extends Controller
         $userActivities = Library::with([
             'user',
             'game',
-            'playStatus'
+            'playStatus',
+            'platform'
         ])->orderBy('created_at', 'desc')->limit(3)->get();
 
         $popular = Game::with([
@@ -55,6 +56,7 @@ class HomeController extends Controller
         $reviews = Review::with([
             'user',
             'game',
+            'platform'
         ])->orderBy('created_at', 'desc')->limit(2)->get();
 
         $recommendations = Recommendation::with([
