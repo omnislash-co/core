@@ -40,7 +40,7 @@ class Game extends Model implements CanVisit
      */
     public function developers(): BelongsToMany
     {
-        return $this->belongsToMany(Developer::class);
+        return $this->belongsToMany(Developer::class)->orderBy('name');
     }
 
     /**
@@ -48,7 +48,7 @@ class Game extends Model implements CanVisit
      */
     public function genres(): BelongsToMany
     {
-        return $this->belongsToMany(Genre::class);
+        return $this->belongsToMany(Genre::class)->orderBy('name');
     }
 
     /**
@@ -56,7 +56,7 @@ class Game extends Model implements CanVisit
      */
     public function platforms(): BelongsToMany
     {
-        return $this->belongsToMany(Platform::class);
+        return $this->belongsToMany(Platform::class)->orderBy('name');
     }
 
     /**

@@ -8,7 +8,7 @@
             <span class="data-set-item__value">
                 @if (count($game->developers) > 0)
                     <div class="row wrap gap-xxs">
-                        @foreach ($game->developers->sortBy('name') as $developer)
+                        @foreach ($game->developers as $developer)
                             <a href="{{ route('games.index', ['filter[developers][]' => $developer->name]) }}" class="btn btn--sm btn--outline">
                                 {{ $developer->name }}
                             </a>

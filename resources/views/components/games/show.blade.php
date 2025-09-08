@@ -3,7 +3,7 @@
 <x-app-layout title="{{ $game->title }}">
 
     @if ($game->cover)
-        <div class="game-cover" style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url({{ Storage::url('games/covers/'.$game->cover) }});">
+        <div class="game-cover" style="box-shadow: var(--shadow-sm); background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url({{ Storage::url('games/covers/'.$game->cover) }});">
         </div>
     @endif
     <div class="section container stack gap-gutter">
