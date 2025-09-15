@@ -23,7 +23,7 @@
                         Similarly, there are games made outside of Japan that many would classify as JRPGs, such as Chained Echoes.
                     </p>
                     <p>
-                        It's best to view JRPGs as a genre that likely has a foundation in Japanese culture alongside the typical traits of the genre; turn-based combat, character leveling/customization, fantasy elements.
+                        It's best to view JRPGs as games that likely have a foundation in Japanese culture alongside the typical traits; turn-based combat (ex. Dragon Quest), action combat (ex. Kingdom Hearts, Nier: Automata), character leveling/customization, fantasy elements.
                     </p>
 
                     <h4 class="color-accent">How are games consolidated?</h4>
