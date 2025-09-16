@@ -12,7 +12,7 @@
                 </div>
 
                 © 
-                Omnislash 2024
+                Omnislash {{ now()->year }}
             </div>
 
             <ul role="list" class="row wrap gap-lg align-start" style="flex-basis: 50ch">
