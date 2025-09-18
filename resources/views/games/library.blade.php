@@ -11,9 +11,15 @@
                         </a>
                     </div>
                 </div>
-                <div class="dialog__body">
+                <div class="dialog__body"
+                    data-controller="loader"
+                    data-loader-hidden-class="hidden" 
+                    data-action="turbo:before-fetch-request->loader#show turbo:frame-render->loader#hide"
+                    >
 
-                    <turbo-frame id="library">
+                    <x-waterhole::spinner class="spinner--block hidden" data-loader-target="spinner"/>
+
+                    <turbo-frame id="library" data-loader-target="content">
                         <div class="stack gap-lg">
                             @if (count($libraries) > 0)
                                 <div class="table-container full-width">
