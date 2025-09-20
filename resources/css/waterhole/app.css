@@ -308,3 +308,21 @@
 .sidebar--sticky {
     top: 0 !important;
 } */
+
+/* USER PROFILE */
+.tooltip-container {
+  position: relative;
+}
+
+.tooltip-content {
+  visibility: hidden;
+  width: 150px;
+  position: absolute;
+  z-index: 1;
+  left: -185px;
+  top: -50px;
+}
+
+.tooltip-container:hover .tooltip-content {
+  visibility: visible;
+}

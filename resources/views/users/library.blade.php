@@ -2,7 +2,7 @@
 
     @if (count($entries) > 0)
         <div class="card p-sm">
-            <div class="table-container full-width" tabindex="0">
+            <div class="table-container full-width overflow-visible" tabindex="0">
                 <table class="table">
                     <thead>
                         <tr>
@@ -15,7 +15,12 @@
                     <tbody>
                         @foreach ($entries->sortBy('game.title') as $entry)
                             <tr>
-                                <td><a href="{{ route('games.show', $entry->game->slug) }}">{{ $entry->game->title }}</a></td>
+                                <td>
+                                    <span class="tooltip-container">
+                                        <img class="tooltip-content game-icon" src="{{ Storage::url('games/icons/'.$entry->game->icon) }}">
+                                        <a href="{{ route('games.show', $entry->game->slug) }}">{{ $entry->game->title }}</a>
+                                    </span>
+                                </td>
                                 <td>{{ $entry->platform->name }}</td>
                                 <td>{{ $entry->score ? $entry->score : '-' }}</td>
                                 <td>{{ $entry->hours ? $entry->hours : '-' }}</td>
