@@ -49,6 +49,7 @@ Route::resource('recommendations', RecommendationController::class)->only([
 ]);
 
 // Users
+Route::get('community/users/{user:id}', [UserController::class, 'libraryIndex'])->name('waterhole.users.show');
 Route::get('community/users/{user:id}/favourites', [UserController::class, 'favourites'])->name('users.favourites');
 Route::get('community/users/{user:id}/library', [UserController::class, 'libraryIndex'])->name('users.libraryIndex');
 Route::get('community/users/{user:id}/library/{playStatus:slug}', [UserController::class, 'library'])->withoutScopedBindings()->name('users.library');
