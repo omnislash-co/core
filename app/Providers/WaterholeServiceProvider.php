@@ -36,17 +36,6 @@ class WaterholeServiceProvider extends Extend\ServiceProvider
 
         Extend\UserNav::add(
             fn(User $user) => new NavLink(
-                label: 'Favourites',
-                icon: 'tabler-heart',
-                badge: \App\User::withCount('favorites')->find($user->id)->favorites_count,
-                href: route('users.favourites', compact('user')),
-                active: request()->routeIs('users.favourites'),
-            ),
-            -1,
-            'favourites');
-
-        Extend\UserNav::add(
-            fn(User $user) => new NavLink(
                 label: 'Library',
                 icon: 'tabler-device-gamepad',
                 badge: \App\User::withCount('libraries')->find($user->id)->libraries_count,
@@ -55,6 +44,17 @@ class WaterholeServiceProvider extends Extend\ServiceProvider
             ),
             -1,
             'library');
+
+        Extend\UserNav::add(
+            fn(User $user) => new NavLink(
+                label: 'Favourites',
+                icon: 'tabler-heart',
+                badge: \App\User::withCount('favorites')->find($user->id)->favorites_count,
+                href: route('users.favourites', compact('user')),
+                active: request()->routeIs('users.favourites'),
+            ),
+            -1,
+            'favourites');
 
         Extend\UserNav::add(
             fn(User $user) => new NavLink(
