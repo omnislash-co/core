@@ -66,7 +66,7 @@
                 <button class="btn btn--wide bg-accent" type="submit">
                     Add
                 </button>
-                <a href="{{ route('library.index', $game->slug) }}" data-turbo-frame="library" class="btn btn--wide">
+                <a href="{{ route('library.index', $game->slug) }}" class="btn btn--wide">
                     Cancel
                 </a>
             </div>

@@ -311,18 +311,83 @@
 
 /* USER PROFILE */
 .tooltip-container {
-  position: relative;
+    position: relative;
 }
 
-.tooltip-content {
-  visibility: hidden;
-  width: 150px;
-  position: absolute;
-  z-index: 1;
-  left: -185px;
-  top: -50px;
+.tooltip-icon {
+    visibility: hidden;
+    width: 150px;
+    position: absolute;
+    z-index: 1;
+    left: -175px;
+    top: -50px;
 }
 
-.tooltip-container:hover .tooltip-content {
-  visibility: visible;
+.tooltip-edit {
+    visibility: hidden;
+    height:20px;
+}
+
+.tooltip-container:hover .tooltip-icon, .tooltip-container:hover .tooltip-edit {
+    visibility: visible;
+}
+
+.library-list {
+    font-size: var(--text-xs);
+}
+
+.library-list > div:not(:last-child) {
+    border-bottom: 1px solid var(--color-fill);
+}
+
+.library-header > .title {
+    flex: 8;
+    padding: var(--space-sm);
+    font-weight: var(--weight-bold);
+}
+
+.library-header > .platform {
+    flex: 3;
+    padding: var(--space-sm);
+    font-weight: var(--weight-bold);
+}
+
+.library-header > .score {
+    flex: 1;
+    padding: var(--space-sm);
+    font-weight: var(--weight-bold);
+    text-align: center;
+}
+
+.library-header > .hours {
+    flex: 1;
+    padding: var(--space-sm);
+    font-weight: var(--weight-bold);
+    text-align: center;
+}
+
+.library-entry:hover {
+    background-color: var(--color-fill);
+}
+
+.library-entry > .title {
+    flex: 8;
+    padding: var(--space-sm);
+}
+
+.library-entry > .platform {
+    flex: 3;
+    padding: var(--space-sm);
+}
+
+.library-entry > .score {
+    flex: 1;
+    padding: var(--space-sm);
+    text-align: center;
+}
+
+.library-entry > .hours {
+    flex: 1;
+    padding: var(--space-sm);
+    text-align: center;
 }
