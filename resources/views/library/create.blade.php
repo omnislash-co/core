@@ -1,4 +1,4 @@
-<turbo-frame id="library">
+<x-modals.library :$game>
 
     <form action="{{ route('library.store', $game->slug) }}" method="POST">
         @csrf
@@ -74,4 +74,4 @@
         </div>
     </form>
 
-</turbo-frame>
+</x-modals.library>
