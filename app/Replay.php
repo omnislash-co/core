@@ -25,7 +25,6 @@ class Replay extends Model
         'pivot'
     ];
 
-
     /**
      * The library entry this belongs to.
      *
