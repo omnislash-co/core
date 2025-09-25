@@ -6,6 +6,7 @@ use App\Http\Controllers\GameController;
 use App\Http\Controllers\LibraryController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\RecommendationController;
+use App\Http\Controllers\ReplayController;
 use App\Http\Controllers\UserController;
 use App\Game;
 
@@ -36,6 +37,11 @@ Route::post('/games/{game:slug}/toggle-favorite', [GameController::class, 'toggl
 // Library
 Route::resource('games/{game:slug}/library', LibraryController::class)->only([
     'index', 'create', 'store', 'edit', 'update', 'destroy'
+]);
+
+// Replay
+Route::resource('games/{game:slug}/library/{library:id}/replay', ReplayController::class)->only([
+    'create', 'store', 'edit', 'update', 'destroy'
 ]);
 
 // Reviews

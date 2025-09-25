@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Library extends Model
 {
@@ -16,7 +17,7 @@ class Library extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'user_id', 'game_id', 'platform_id', 'play_status_id', 'score', 'hours', 'notes'
+        'user_id', 'game_id', 'platform_id', 'play_status_id', 'score', 'hours', 'hours_optional', 'hours_complete', 'notes', 'started_on', 'finished_on'
     ];
 
     /**
@@ -62,5 +63,13 @@ class Library extends Model
     public function playStatus(): BelongsTo
     {
       return $this->belongsTo(PlayStatus::class);
+    }
+
+    /**
+     * The replays for this library entry.
+     */
+    public function replays(): HasMany
+    {
+        return $this->hasMany(Replay::class);
     }
 }

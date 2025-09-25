@@ -26,7 +26,8 @@ class LibraryController extends Controller
     {
         $libraries = Library::with([
             'platform',
-            'playStatus'
+            'playStatus',
+            'replays'
         ])->where([
                 ['game_id', '=', $game->id ],
                 ['user_id', '=', auth()->user()->id ]

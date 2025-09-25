@@ -339,3 +339,7 @@
 .list-entry:hover {
     background-color: var(--color-fill);
 }
+
+.replay-list > div:not(:first-child):not(:last-child) {
+    border-top: 1px solid var(--color-fill);
+}
