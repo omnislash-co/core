@@ -19,6 +19,7 @@
                     <div class="subtitle">Games</div>
                     <ul role="list" class="stack gap-sm">
                         <li><a href="{{ route('games.index') }}">Browse Games</a></li>
+                        <li><a href="{{ route('series.index') }}">Series</a></li>
                         <li><a href="{{ route('reviews.index') }}">Reviews</a></li>
                         <li><a href="{{ route('recommendations.index') }}">Recommendations</a></li>
                     </ul>

@@ -32,6 +32,10 @@
                     @icon('tabler-books')
                     Browse Games
                 </a>
+                <a class="menu-item" role="menuitem" href="{{ route('series.index') }}">
+                    @icon('tabler-folder')
+                    Series
+                </a>
                 <a class="menu-item" role="menuitem" href="{{ route('reviews.index') }}">
                     @icon('tabler-note')
                     Reviews

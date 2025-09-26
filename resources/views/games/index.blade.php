@@ -73,7 +73,7 @@
                     @if ($games->count() > 0)
                         <div class="game-cards grid gap-md">
                             @foreach ($games as $game)
-                                <x-cards.game :$game wire:key="{{ $game->id }}" />
+                                <x-cards.game :$game />
                             @endforeach
                         </div>
                         <div style="margin-top: var(--space-md)">

@@ -7,6 +7,7 @@ use App\Http\Controllers\LibraryController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\RecommendationController;
 use App\Http\Controllers\ReplayController;
+use App\Http\Controllers\SeriesController;
 use App\Http\Controllers\UserController;
 use App\Game;
 
@@ -52,6 +53,11 @@ Route::resource('reviews', ReviewController::class)->only([
 // Recommendations
 Route::resource('recommendations', RecommendationController::class)->only([
     'index', 'show', 'create', 'store', 'edit', 'update'
+]);
+
+// Series
+Route::resource('series', SeriesController::class)->only([
+    'index', 'show'
 ]);
 
 // Users

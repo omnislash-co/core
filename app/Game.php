@@ -92,6 +92,14 @@ class Game extends Model implements CanVisit
     }
 
     /**
+     * The series for this game.
+     */
+    public function series(): BelongsToMany
+    {
+        return $this->belongsToMany(Series::class)->orderBy('name');
+    }
+
+    /**
      * Determine if user has a library entry for this game.
      */
     public function hasUserPlayed(): bool
