@@ -15,7 +15,8 @@ export default class extends Controller {
 
         if (params.has('filter[developers][]') ||
             params.has('filter[genres][]') ||
-            params.has('filter[platforms][]')
+            params.has('filter[platforms][]') ||
+            params.has('filter[series][]')
         ) {
             this.panelTarget.classList.remove(this.hiddenClass)
         }

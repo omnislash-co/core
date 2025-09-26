@@ -60,6 +60,7 @@
                             <x-forms.multi-select label="Developers" :options="$developers"/>
                             <x-forms.multi-select label="Genres" :options="$genres"/>
                             <x-forms.multi-select label="Platforms" :options="$platforms"/>
+                            <x-forms.multi-select label="Series" :options="$series"/>
                         </div>
                     </div>
 

@@ -7,6 +7,7 @@ use App\Game;
 use App\Developer;
 use App\Genre;
 use App\Platform;
+use App\Series;
 use App\User;
 use Spatie\QueryBuilder\QueryBuilder;
 use Spatie\QueryBuilder\AllowedFilter;
@@ -26,6 +27,7 @@ class GameController extends Controller
                 AllowedFilter::exact('developers', 'developers.name'),
                 AllowedFilter::exact('platforms', 'platforms.name'),
                 AllowedFilter::exact('genres', 'genres.name'),
+                AllowedFilter::exact('series', 'series.name'),
             ])
             ->defaultSort('-created_at')
             ->allowedSorts([
@@ -39,8 +41,9 @@ class GameController extends Controller
         $developers = Developer::orderBy('name')->get(['id', 'name']);
         $genres = Genre::orderBy('name')->get(['id', 'name']);
         $platforms = Platform::orderBy('name')->get(['id', 'name']);
+        $series = Series::orderBy('name')->get(['id', 'name']);
 
-        return view('games.index', compact('games', 'developers', 'genres', 'platforms'));
+        return view('games.index', compact('games', 'developers', 'genres', 'platforms', 'series'));
     }
 
     /**
@@ -48,10 +51,11 @@ class GameController extends Controller
      */
     public function show(Game $game): View
     {
-        $game->with([
+        $game->loadCount('series')->with([
             'developers',
             'platforms',
             'genres',
+            'series',
             'reviews' => function ($query) {
                 $query->with('user')->orderBy('created_at', 'desc')->limit(2);
             },

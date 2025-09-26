@@ -11,9 +11,11 @@ class SeriesController extends Controller
      */
     public function index()
     {
-        $series = Series::withCount(['games'])->orderBy('name', 'asc')->paginate(20);
+        $series = Series::withCount(['games'])->orderBy('name', 'asc')->get();
 
-        return view('series.index', compact('series'));
+        $seriesByGamesCount = Series::withCount(['games'])->orderBy('games_count', 'desc')->limit(4)->get();
+
+        return view('series.index', compact('series', 'seriesByGamesCount'));
     }
 
     /**
@@ -24,7 +26,7 @@ class SeriesController extends Controller
         $games = $series->games()->with([
             'developers',
             'genres'
-        ])->orderBy('title', 'asc')->paginate(8);
+        ])->orderBy('title', 'asc')->paginate(20);
 
         return view('series.show', compact('series', 'games'));
     }

@@ -10,6 +10,23 @@
         </blockquote>
     </div>
 
+    @if ($game->series_count > 0)
+        <div class="stack gap-md">
+            <h3>Relations</h3>
+            @if ($game->series_count > 0)
+                <div class="alert bg-fill">
+                    <span class="alert__icon">@icon('tabler-square-rounded-arrow-right')</span>
+                    <p>
+                        Series: 
+                        @foreach ($game->series as $series)
+                            <a href="{{ route('games.index', ['filter[series][]' => $series->name]) }}" class="weight-bold">{{ $series->name }}</a>@if (!$loop->last), @endif
+                        @endforeach
+                    </p>
+                </div>
+            @endif    
+        </div>
+    @endif
+
     <div class="stack gap-md">
         <h3>Recent Reviews</h3>
         @if ($game->reviews_count > 0)
