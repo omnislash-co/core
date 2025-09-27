@@ -32,6 +32,18 @@
                                         Main: {{ $entry->hours.'hrs' }}
                                     </span>
                                 @endif
+                                @if ($entry->hours_optional)
+                                    <span class="badge hide-lg-up">
+                                        @icon('tabler-clock')
+                                        +Optional: {{ $entry->hours_optional.'hrs' }}
+                                    </span>
+                                @endif
+                                @if ($entry->hours_complete)
+                                    <span class="badge hide-lg-up">
+                                        @icon('tabler-clock')
+                                        100%: {{ $entry->hours_complete.'hrs' }}
+                                    </span>
+                                @endif
                                 @if ($entry->notes)
                                     <span class="badge">
                                         @icon('tabler-notes')
@@ -49,7 +61,7 @@
                             @if ($entry->playStatus->name == 'Completed')
                                 <button class="btn bg-accent" data-action="element#toggle">
                                     @icon('tabler-repeat')
-                                    {{ $entry->replays->count() }}
+                                    {{ $entry->replays_count }}
                                 </button>
                             @endif
                             <a href="{{ route('library.edit', ['game' => $game->slug, 'library' => $entry->id]) }}" class="btn">@icon('tabler-edit')</a>

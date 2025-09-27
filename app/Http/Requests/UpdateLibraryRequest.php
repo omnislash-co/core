@@ -33,6 +33,8 @@ class UpdateLibraryRequest extends FormRequest
             'playStatus' => 'required|numeric',
             'score' => 'nullable|numeric|between:0,10',
             'hours' => 'nullable|numeric|min:0',
+            'hours_optional' => 'nullable|numeric|min:0',
+            'hours_complete' => 'nullable|numeric|min:0',
             'notes' => 'max:255'
         ];
     }
@@ -46,6 +48,9 @@ class UpdateLibraryRequest extends FormRequest
     {
         return [
             'playStatus' => 'play status',
+            'hours' => 'main',
+            'hours_optional' => 'optional',
+            'hours_complete' => 'completionist',
         ];
     }
 

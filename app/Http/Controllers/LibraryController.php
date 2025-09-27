@@ -28,7 +28,7 @@ class LibraryController extends Controller
             'platform',
             'playStatus',
             'replays'
-        ])->where([
+        ])->withCount(['replays'])->where([
                 ['game_id', '=', $game->id ],
                 ['user_id', '=', auth()->user()->id ]
             ])->get();
@@ -62,6 +62,8 @@ class LibraryController extends Controller
             'play_status_id' => $validated['playStatus'],
             'score' => $validated['score'],
             'hours' => $validated['hours'],
+            'hours_optional' => $validated['hours_optional'],
+            'hours_complete' => $validated['hours_complete'],
             'notes' => $validated['notes']
         ]);
 
@@ -104,6 +106,8 @@ class LibraryController extends Controller
             'play_status_id' => $validated['playStatus'],
             'score' => $validated['score'],
             'hours' => $validated['hours'],
+            'hours_optional' => $validated['hours_optional'],
+            'hours_complete' => $validated['hours_complete'],
             'notes' => $validated['notes']
         ]);
 

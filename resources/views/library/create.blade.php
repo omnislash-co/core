@@ -46,10 +46,26 @@
                 </div>
         
                 <div class="field">
-                    <label class="field__label">Hours Played</label>
+                    <label class="field__label">Main Story (hrs)</label>
                     <div class="grow stack gap-xs">
                         <input type="number" min="0" name="hours" value="{{ old('hours') }}" />
                         <div class="text-xs color-danger">@error('hours') {{ $message }} @enderror</div>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label class="field__label">Main + Optional (hrs)</label>
+                    <div class="grow stack gap-xs">
+                        <input type="number" min="0" name="hours_optional" value="{{ old('hours_optional') }}" />
+                        <div class="text-xs color-danger">@error('hours_optional') {{ $message }} @enderror</div>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label class="field__label">Completionist (hrs)</label>
+                    <div class="grow stack gap-xs">
+                        <input type="number" min="0" name="hours_complete" value="{{ old('hours_complete') }}" />
+                        <div class="text-xs color-danger">@error('hours_complete') {{ $message }} @enderror</div>
                     </div>
                 </div>
             </div>
