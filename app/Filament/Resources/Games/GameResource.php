@@ -40,6 +40,7 @@ class GameResource extends Resource
             RelationManagers\DevelopersRelationManager::class,
             RelationManagers\GenresRelationManager::class,
             RelationManagers\PlatformsRelationManager::class,
+            RelationManagers\GamesRelationManager::class,
         ];
     }
 

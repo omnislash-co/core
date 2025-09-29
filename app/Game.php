@@ -100,6 +100,26 @@ class Game extends Model implements CanVisit
     }
 
     /**
+     * The parent games for this game.
+     */
+    public function parents(): BelongsToMany
+    {
+        return $this->belongsToMany(Game::class, 'game_relations', 'child_game_id', 'parent_game_id')
+            ->withPivot(['relation_type_id'])
+            ->using(GameRelations::class);
+    }
+
+    /**
+     * The child games for this game.
+     */
+    public function children(): BelongsToMany
+    {
+        return $this->belongsToMany(Game::class, 'game_relations', 'parent_game_id', 'child_game_id')
+            ->withPivot(['relation_type_id'])
+            ->using(GameRelations::class);
+    }
+
+    /**
      * Determine if user has a library entry for this game.
      */
     public function hasUserPlayed(): bool
@@ -160,6 +180,27 @@ class Game extends Model implements CanVisit
     {
         return Attribute::make(
             get: fn() => $this->releases()->count(),
+        )->shouldCache();
+    }
+
+    protected function seriesCount(): Attribute
+    {
+        return Attribute::make(
+            get: fn() => $this->series()->count(),
+        )->shouldCache();
+    }
+
+    protected function childrenCount(): Attribute
+    {
+        return Attribute::make(
+            get: fn() => $this->children()->count(),
+        )->shouldCache();
+    }
+
+    protected function parentsCount(): Attribute
+    {
+        return Attribute::make(
+            get: fn() => $this->parents()->count(),
         )->shouldCache();
     }
 

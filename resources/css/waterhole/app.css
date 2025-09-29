@@ -177,6 +177,19 @@
     max-width: 150px;
 }
 
+.card__game-relation-icon {
+    background-size: cover!important;
+    min-height: 100px;
+    min-width: 100px;
+    max-width: 100px;
+    transition: ease-in-out 150ms;
+}
+
+.card:hover .card__game-relation-icon {
+    transform: scale(1.03);
+    transition: ease-in-out 150ms;
+}
+
 .img-link {
     display: block;
     width: 100%;

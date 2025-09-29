@@ -22,7 +22,7 @@ class Replay extends Model
      * @var array<int, string>
      */
     protected $hidden = [
-        'pivot'
+        'pivot', 'created_at', 'updated_at'
     ];
 
     /**

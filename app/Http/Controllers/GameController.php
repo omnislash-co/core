@@ -51,11 +51,13 @@ class GameController extends Controller
      */
     public function show(Game $game): View
     {
-        $game->loadCount('series')->with([
+        $game->with([
             'developers',
             'platforms',
             'genres',
             'series',
+            'children',
+            'parents',
             'reviews' => function ($query) {
                 $query->with('user')->orderBy('created_at', 'desc')->limit(2);
             },
