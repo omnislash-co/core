@@ -25,48 +25,50 @@
                 </div>
             @endif
 
-            <div class="grid gap-sm" style="--grid-min: 35ch;">
-                @foreach ($game->parents as $parent)
-                    <div class="card row align-start align-stretch overlay-container overflow-hidden" style="max-height: 100px;">
-                        <div class="card__game-relation-icon" style="background-image: url('{{ Storage::url('games/icons/'.$parent->icon) }}')"></div>
-                        <div class="stack grow gap-xs p-sm">
-                            <div class="stack grow gap-xs">
-                                <a href="{{ route('games.show', $parent->slug) }}" class="h6 has-overlay">{{ $parent->title }}</a>
-                                <div class="row wrap gap-xxs">
-                                    <span class="badge">
-                                        @icon('tabler-calendar')
-                                        {{ $parent->initial_release_year }}
-                                    </span>
-                                    <span class="badge bg-warning-soft">
-                                        @icon('tabler-link')
-                                        {{ $parent->pivot->relationType->inverse_name }}
-                                    </span>
+            @if ($game->parents_count > 0 || $game->children_count > 0)
+                <div class="grid gap-sm" style="--grid-min: 35ch;">
+                    @foreach ($game->parents as $parent)
+                        <div class="card row align-start align-stretch overlay-container overflow-hidden" style="max-height: 100px;">
+                            <div class="card__game-relation-icon" style="background-image: url('{{ Storage::url('games/icons/'.$parent->icon) }}')"></div>
+                            <div class="stack grow gap-xs p-sm">
+                                <div class="stack grow gap-xs">
+                                    <a href="{{ route('games.show', $parent->slug) }}" class="h6 has-overlay">{{ $parent->title }}</a>
+                                    <div class="row wrap gap-xxs">
+                                        <span class="badge">
+                                            @icon('tabler-calendar')
+                                            {{ $parent->initial_release_year }}
+                                        </span>
+                                        <span class="badge bg-warning-soft">
+                                            @icon('tabler-link')
+                                            {{ $parent->pivot->relationType->inverse_name }}
+                                        </span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                @endforeach
-                @foreach ($game->children as $child)
-                    <div class="card row align-start align-stretch overlay-container overflow-hidden" style="max-height: 100px;">
-                        <div class="card__game-relation-icon" style="background-image: url('{{ Storage::url('games/icons/'.$child->icon) }}')"></div>
-                        <div class="stack grow gap-xs p-sm">
-                            <div class="stack grow gap-xs">
-                                <a href="{{ route('games.show', $child->slug) }}" class="h6 has-overlay">{{ $child->title }}</a>
-                                <div class="row wrap gap-xxs">
-                                    <span class="badge">
-                                        @icon('tabler-calendar')
-                                        {{ $child->initial_release_year }}
-                                    </span>
-                                    <span class="badge bg-warning-soft">
-                                        @icon('tabler-link')
-                                        {{ $child->pivot->relationType->name }}
-                                    </span>
+                    @endforeach
+                    @foreach ($game->children as $child)
+                        <div class="card row align-start align-stretch overlay-container overflow-hidden" style="max-height: 100px;">
+                            <div class="card__game-relation-icon" style="background-image: url('{{ Storage::url('games/icons/'.$child->icon) }}')"></div>
+                            <div class="stack grow gap-xs p-sm">
+                                <div class="stack grow gap-xs">
+                                    <a href="{{ route('games.show', $child->slug) }}" class="h6 has-overlay">{{ $child->title }}</a>
+                                    <div class="row wrap gap-xxs">
+                                        <span class="badge">
+                                            @icon('tabler-calendar')
+                                            {{ $child->initial_release_year }}
+                                        </span>
+                                        <span class="badge bg-warning-soft">
+                                            @icon('tabler-link')
+                                            {{ $child->pivot->relationType->name }}
+                                        </span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                @endforeach
-            </div>
+                    @endforeach
+                </div>
+            @endif
         </div>
     @endif
 
