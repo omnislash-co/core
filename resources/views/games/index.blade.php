@@ -4,10 +4,9 @@
         data-controller="game-filters" 
         data-game-filters-hidden-class="hidden" 
         data-action="multi-select:on-change->game-filters#submit
-        turbo:frame-render->game-filters#loaded
         turbo:frame-render->game-filters#checkParams"
         >
-        <turbo-frame id="games" data-turbo-action="advance" class="stack gap-gutter">
+        <div class="stack gap-gutter">
             <h2>Games</h2>
 
             <form action="{{ route('games.index') }}" method="GET">
@@ -69,26 +68,22 @@
             </form>
 
             <div class="stack gap-gutter">
-                <x-waterhole::spinner class="spinner--block hidden" data-game-filters-target="loader"/>
-                <div data-game-filters-target="results">
-                    @if ($games->count() > 0)
-                        <div class="game-cards grid gap-md">
-                            @foreach ($games as $game)
-                                <x-cards.game :$game />
-                            @endforeach
-                        </div>
-                        <div style="margin-top: var(--space-md)">
-                            {{ $games->links() }}
-                        </div>
-                    @else
-                        <div class="alert bg-warning-soft">
-                            No games found.
-                        </div>
-                    @endif
-                </div>
-                
+                @if ($games->count() > 0)
+                    <div class="game-cards grid gap-md">
+                        @foreach ($games as $game)
+                            <x-cards.game :$game />
+                        @endforeach
+                    </div>
+                    <div style="margin-top: var(--space-md)">
+                        {{ $games->links() }}
+                    </div>
+                @else
+                    <div class="alert bg-warning-soft">
+                        No games found.
+                    </div>
+                @endif                
             </div>
-        </turbo-frame>
+        </div>
     </div>
 
 </x-app-layout>

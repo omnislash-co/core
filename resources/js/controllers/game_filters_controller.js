@@ -3,7 +3,7 @@ import { Controller } from "@hotwired/stimulus"
 // Connects to data-controller="game-filters"
 export default class extends Controller {
     static classes = [ "hidden" ]
-    static targets = [ "panel", "button", "loader", "results"]
+    static targets = [ "panel", "button"]
 
     connect() {
         this.checkParams()
@@ -13,10 +13,10 @@ export default class extends Controller {
         const url = new URL(window.location.href)
         const params = new URLSearchParams(url.search)
 
-        if (params.has('filter[developers][]') ||
-            params.has('filter[genres][]') ||
-            params.has('filter[platforms][]') ||
-            params.has('filter[series][]')
+        if (params.has('filter[developers][]') || params.has('filter[developers][0]') || 
+            params.has('filter[genres][]') || params.has('filter[genres][0]') ||
+            params.has('filter[platforms][]') || params.has('filter[platforms][0]') ||
+            params.has('filter[series][]') || params.has('filter[series][0]')
         ) {
             this.panelTarget.classList.remove(this.hiddenClass)
         }
@@ -26,19 +26,8 @@ export default class extends Controller {
         this.panelTarget.classList.toggle(this.hiddenClass)
     }
 
-    loading() {
-        this.loaderTarget.classList.remove(this.hiddenClass)
-        this.resultsTarget.classList.add(this.hiddenClass)
-    }
-
-    loaded() {
-        this.loaderTarget.classList.add(this.hiddenClass)
-        this.resultsTarget.classList.remove(this.hiddenClass)
-    }
-
     submit() {
         let button = this.buttonTargets.find(element => element.id === 'apply-filters')
         button.click()
-        this.loading()
     }
 }

@@ -49,7 +49,7 @@
             @foreach (request()->filter[strtolower($label)] as $item)
                 <div class="badge bg-warning-soft" style="padding-right: 0">
                     {{ $item }}
-                    <button class="btn btn--icon btn--transparent btn--sm" data-action="multi-select#remove">
+                    <button class="btn btn--icon btn--transparent btn--sm" type="button" data-action="multi-select#remove">
                         @icon('tabler-x')
                     </button>
                 </div>
