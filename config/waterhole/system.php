@@ -28,6 +28,25 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Search Engine
+    |--------------------------------------------------------------------------
+    |
+    | The search engine used for forum search. Set to null to disable search
+    | entirely (routes and UI will be hidden). The default is determined from
+    | the database driver.
+    |
+    */
+
+    'search_engine' => env(
+        'WATERHOLE_SEARCH_ENGINE',
+        match (env('DB_CONNECTION')) {
+            'mysql', 'mariadb', 'pgsql' => 'full_text',
+            default => null,
+        },
+    ),
+
+    /*
+    |--------------------------------------------------------------------------
     | Route Domain
     |--------------------------------------------------------------------------
     |
@@ -40,6 +59,18 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Assets Storage Disk
+    |--------------------------------------------------------------------------
+    |
+    | The filesystem disk used for compiled Waterhole assets. This should be a
+    | publicly accessible disk.
+    |
+    */
+
+    'assets_disk' => env('WATERHOLE_ASSETS_DISK', 'public'),
+
+    /*
+    |--------------------------------------------------------------------------
     | Laravel Echo Configuration
     |--------------------------------------------------------------------------
     |
@@ -48,11 +79,25 @@ return [
     |
     */
 
-    'echo_config' => [
-        'broadcaster' => env('BROADCAST_DRIVER') === 'pusher' ? 'pusher' : null,
-        'key' => env('PUSHER_APP_KEY'),
-        'cluster' => env('PUSHER_APP_CLUSTER', 'mt1'),
-    ],
+    'echo_config' => match (env('BROADCAST_DRIVER')) {
+        'pusher' => [
+            'broadcaster' => 'pusher',
+            'key' => env('PUSHER_APP_KEY'),
+            'cluster' => env('PUSHER_APP_CLUSTER', 'mt1'),
+        ],
+        'reverb' => [
+            'broadcaster' => 'reverb',
+            'key' => env('REVERB_APP_KEY'),
+            'wsHost' => env('REVERB_HOST'),
+            'wsPort' => env('REVERB_PORT', 80),
+            'wssPort' => env('REVERB_PORT', 443),
+            'forceTLS' => env('REVERB_SCHEME', 'https') === 'https',
+            'enabledTransports' => ['ws', 'wss'],
+        ],
+        default => [
+            'broadcaster' => null,
+        ],
+    },
 
     /*
     |--------------------------------------------------------------------------

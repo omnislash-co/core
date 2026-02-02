@@ -46,7 +46,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Post Layouts
+    | Post Layout
     |--------------------------------------------------------------------------
     |
     | Here you can specify which post layout is used on the forum index. This
@@ -71,6 +71,19 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Edit Time Limit
+    |--------------------------------------------------------------------------
+    |
+    | The number of minutes after creation that a post or comment can be edited
+    | by its author. Set to null for no limit, or 0 to never allow editing.
+    | Moderators are always allowed.
+    |
+    */
+
+    'edit_time_limit' => null,
+
+    /*
+    |--------------------------------------------------------------------------
     | Rate Limits
     |--------------------------------------------------------------------------
     |
@@ -81,4 +94,16 @@ return [
 
     'create_per_minute' => 3,
     'search_per_minute' => 10,
+
+    /*
+    |--------------------------------------------------------------------------
+    | Report Reasons
+    |--------------------------------------------------------------------------
+    |
+    | Keys are stored in the database. Labels come from Fluent translations
+    | like `waterhole::forum.report-reason-<key>-label`.
+    |
+    */
+
+    'report_reasons' => ['off-topic', 'inappropriate', 'spam', 'other'],
 ];

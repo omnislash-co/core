@@ -18,7 +18,7 @@
         "overtrue/laravel-favorite": "^5.2",
         "spatie/laravel-query-builder": "^6.3",
         "tonysm/importmap-laravel": "^2.4",
-        "waterhole/core": "^0.5"
+        "waterhole/core": "^0.6"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.13",
