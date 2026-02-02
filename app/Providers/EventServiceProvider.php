@@ -4,10 +4,17 @@ namespace App\Providers;
 
 use App\Game;
 use App\Observers\GameObserver;
+use Illuminate\Auth\Events\Registered;
+use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Support\ServiceProvider;
 
 class EventServiceProvider extends ServiceProvider
 {
+
+    protected $listen = [
+        Registered::class => [SendEmailVerificationNotification::class],
+    ];
+
     /**
      * Register services.
      */
