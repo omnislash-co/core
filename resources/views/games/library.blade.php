@@ -6,9 +6,9 @@
                 <div class="row">
                     <div class="p-sm weight-bold" style="flex: 1">Platform</div>
                     <div class="p-sm weight-bold text-center hide-md-down" style="flex: 0.5">Score</div>
-                    <div class="p-sm weight-bold text-center hide-md-down" style="flex: 0.5">Main Story (hrs)</div>
-                    <div class="p-sm weight-bold text-center hide-md-down" style="flex: 0.5">Main + Optional (hrs)</div>
-                    <div class="p-sm weight-bold text-center hide-md-down" style="flex: 0.5">100% (hrs)</div>
+                    <div class="p-sm weight-bold text-center hide-md-down" style="flex: 0.5">Main Story</div>
+                    <div class="p-sm weight-bold text-center hide-md-down" style="flex: 0.5">Main + Optional</div>
+                    <div class="p-sm weight-bold text-center hide-md-down" style="flex: 0.5">100%</div>
                     <div class="p-sm weight-bold hide-md-down" style="flex: 1.5"></div>
                 </div>
                 @foreach ($libraries as $entry)
@@ -29,19 +29,19 @@
                                 @if ($entry->hours)
                                     <span class="badge hide-lg-up">
                                         @icon('tabler-clock')
-                                        Main: {{ $entry->hours.'hrs' }}
+                                        Main: {{ $entry->hours.'h' }}
                                     </span>
                                 @endif
                                 @if ($entry->hours_optional)
                                     <span class="badge hide-lg-up">
                                         @icon('tabler-clock')
-                                        +Optional: {{ $entry->hours_optional.'hrs' }}
+                                        +Optional: {{ $entry->hours_optional.'h' }}
                                     </span>
                                 @endif
                                 @if ($entry->hours_complete)
                                     <span class="badge hide-lg-up">
                                         @icon('tabler-clock')
-                                        100%: {{ $entry->hours_complete.'hrs' }}
+                                        100%: {{ $entry->hours_complete.'h' }}
                                     </span>
                                 @endif
                                 @if ($entry->notes)
@@ -54,9 +54,9 @@
                             </div>
                         </div>
                         <div class="p-sm text-center hide-md-down" style="flex: 0.5">{{ $entry->score ? $entry->score : '-' }}</div>
-                        <div class="p-sm text-center hide-md-down" style="flex: 0.5">{{ $entry->hours ? $entry->hours : '-' }}</div>
-                        <div class="p-sm text-center hide-md-down" style="flex: 0.5">{{ $entry->hours_optional ? $entry->hours_optional : '-' }}</div>                        
-                        <div class="p-sm text-center hide-md-down" style="flex: 0.5">{{ $entry->hours_complete ? $entry->hours_complete : '-' }}</div>
+                        <div class="p-sm text-center hide-md-down" style="flex: 0.5">{{ $entry->hours ? $entry->hours.'h' : '-' }}</div>
+                        <div class="p-sm text-center hide-md-down" style="flex: 0.5">{{ $entry->hours_optional ? $entry->hours_optional.'h' : '-' }}</div>                        
+                        <div class="p-sm text-center hide-md-down" style="flex: 0.5">{{ $entry->hours_complete ? $entry->hours_complete.'h' : '-' }}</div>
                         <div class="p-sm row wrap gap-xxs justify-end" style="flex: 1.5">
                             @if ($entry->playStatus->name == 'Completed')
                                 <button class="btn bg-accent" data-action="element#toggle">
