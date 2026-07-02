@@ -41,7 +41,7 @@
                         <img height="125px" src="{{ Storage::url('images/layout/hero-icon-vivi.png') }}">
                     </div>
                     <div class="card" style="transform: rotate(-5deg); margin-top: 5px;">
-                        <img height="125px" src="{{ Storage::url('images/layout/hero-icon-rosalinde.png') }}">
+                        <img height="125px" src="{{ Storage::url('images/layout/hero-icon-sydney.png') }}">
                     </div>
                 </div>
 
