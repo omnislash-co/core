@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\View\View;
 use App\User;
 use App\Game;
+use App\Library;
 use App\PlayStatus;
+use Spatie\QueryBuilder\QueryBuilder;
+use Spatie\QueryBuilder\AllowedSort;
 
 class UserController extends Controller
 {
@@ -32,11 +35,27 @@ class UserController extends Controller
      */
     public function library(User $user, PlayStatus $playStatus): View
     {
-        $entries = $user->libraries()->with([
-            'game', 
-            'playStatus', 
-            'platform'
-        ])->where('play_status_id', $playStatus->id)->get();
+        $entries = QueryBuilder::for(Library::class)
+            ->select('libraries.*', 'games.title', 'platforms.name', 'platforms.acronym')
+                ->join('games', 'libraries.game_id', 'games.id')
+                ->join('platforms', 'libraries.platform_id', 'platforms.id')
+            ->with(['game', 'platform'])
+            ->defaultSort('games.title')
+            ->allowedSorts([
+                AllowedSort::field('title', 'games.title'),
+                AllowedSort::field('platform', 'platforms.name'),
+                AllowedSort::field('score', 'score'),
+                AllowedSort::field('hours', 'hours'),
+                // AllowedSort::field('hours_optional', 'hours_optional'),
+                // AllowedSort::field('hours_complete', 'hours_complete'),
+            ])
+            ->where([
+                'user_id' => $user->id,
+                'play_status_id' => $playStatus->id,
+            ])
+            ->paginate(50)
+            ->appends(request()->query());
+
         return view('users.library', compact('user', 'entries'));
     }
 
