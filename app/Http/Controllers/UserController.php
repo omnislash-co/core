@@ -45,9 +45,9 @@ class UserController extends Controller
                 AllowedSort::field('title', 'games.title'),
                 AllowedSort::field('platform', 'platforms.name'),
                 AllowedSort::field('score', 'score'),
-                AllowedSort::field('hours', 'hours'),
-                // AllowedSort::field('hours_optional', 'hours_optional'),
-                // AllowedSort::field('hours_complete', 'hours_complete'),
+                AllowedSort::field('main', 'hours'),
+                AllowedSort::field('sides', 'hours_optional'),
+                AllowedSort::field('complete', 'hours_complete'),
             ])
             ->where([
                 'user_id' => $user->id,

@@ -323,6 +323,10 @@
 } */
 
 /* USER PROFILE */
+.user-profile {
+    max-width: 80rem;
+}
+
 .tooltip-container {
     position: relative;
 }
