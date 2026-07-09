@@ -31,8 +31,13 @@ class WaterholeServiceProvider extends Extend\ServiceProvider
         |
         */     
 
-        $this->extend(function (Extend\Assets\Stylesheet $stylesheet) {
-            $stylesheet->add(resource_path('css/waterhole/app.css'));
+        $this->extend(function (Extend\Assets\Stylesheet $stylesheets) {
+            $stylesheets->add(resource_path('css/slimselect.css'));
+            $stylesheets->add(resource_path('css/waterhole/app.css'));
+        });
+
+        $this->extend(function (Extend\Assets\Script $scripts) {
+            $scripts->add(resource_path('js/slimselect.js'));
         });
 
         $this->extend(function (Extend\Ui\DocumentHead $documentHead) {
