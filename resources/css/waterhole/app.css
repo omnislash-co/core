@@ -36,6 +36,27 @@
 
     --font-oswald-stencil: "Oswald Stencil";
     /* --font-oswald: "Oswald"; */
+
+    /* SlimSelectjs */
+    /* Colors */
+    --ss-primary-color: var(--color-accent);
+    --ss-bg-color: var(--color-bg);
+    --ss-font-color: var(--color-text);
+    --ss-placeholder-color: var(--color-muted);
+    --ss-border-color: var(--color-stroke);
+    --ss-focus-color: var(--color-accent);
+    /* Heights */
+    --ss-main-height: var(--control-height);
+    --ss-content-height: 300px;
+    --ss-search-height: var(--ss-main-height);
+    --ss-option-height: 2.25em; /* default: var(--ss-main-height) */
+    /* Misc */
+    --ss-border-radius: var(--control-radius);
+    --ss-animation-timing: 0.1s;
+}
+
+.ss-search, .ss-option {
+    font-size: var(--text-xs);
 }
 
 [data-theme='light'] {
