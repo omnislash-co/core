@@ -3,8 +3,7 @@
     <div class="section container" 
         data-controller="game-filters" 
         data-game-filters-hidden-class="hidden" 
-        data-action="multi-select:on-change->game-filters#submit
-        turbo:frame-render->game-filters#checkParams"
+        data-action="slim-select:after-change->game-filters#submit turbo:frame-render->game-filters#checkParams"
         >
         <div class="stack gap-gutter">
             <h2>Games</h2>
@@ -54,13 +53,15 @@
                         </ui-popup>
                     </div>
 
-                    <div class="alert hidden" data-game-filters-target="panel">
-                        <div class="grid gap-sm full-width" style="--grid-min: 33ch;">
-                            <x-forms.multi-select label="Developers" :options="$developers"/>
-                            <x-forms.multi-select label="Genres" :options="$genres"/>
-                            <x-forms.multi-select label="Platforms" :options="$platforms"/>
-                            <x-forms.multi-select label="Series" :options="$series"/>
-                        </div>
+                    <div class="content hidden" data-game-filters-target="panel">
+                        <blockquote>
+                            <div class="grid gap-sm full-width" style="--grid-min: 25ch;">
+                                <x-forms.slim-select label="Developers" :options="$developers"/>
+                                <x-forms.slim-select label="Genres" :options="$genres"/>
+                                <x-forms.slim-select label="Platforms" :options="$platforms"/>
+                                <x-forms.slim-select label="Series" :options="$series"/>
+                            </div>                    
+                        </blockquote>
                     </div>
 
                     <button hidden id="apply-filters" type="submit" data-game-filters-target="button">Apply Filters</button>
