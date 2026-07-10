@@ -40,7 +40,7 @@
     /* SlimSelectjs */
     /* Colors */
     --ss-primary-color: var(--color-accent);
-    --ss-bg-color: var(--color-bg);
+    --ss-bg-color: var(--palette-surface);
     --ss-font-color: var(--color-text);
     --ss-placeholder-color: var(--color-muted);
     --ss-border-color: var(--color-stroke);

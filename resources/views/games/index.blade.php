@@ -56,10 +56,10 @@
                     <div class="content hidden" data-game-filters-target="panel">
                         <blockquote>
                             <div class="grid gap-sm full-width" style="--grid-min: 25ch;">
-                                <x-forms.slim-select label="Developers" :options="$developers"/>
-                                <x-forms.slim-select label="Genres" :options="$genres"/>
-                                <x-forms.slim-select label="Platforms" :options="$platforms"/>
-                                <x-forms.slim-select label="Series" :options="$series"/>
+                                <x-forms.slim-select-filters label="Developers" :options="$developers"/>
+                                <x-forms.slim-select-filters label="Genres" :options="$genres"/>
+                                <x-forms.slim-select-filters label="Platforms" :options="$platforms"/>
+                                <x-forms.slim-select-filters label="Series" :options="$series"/>
                             </div>                    
                         </blockquote>
                     </div>

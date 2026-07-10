@@ -1,25 +1,20 @@
-@props([
-    'label', 
-    'options', 
-    'placeholder' => 'Select '.strtolower($label),
-    'valueKey' => 'name',
-    'contentKey' => 'name'
-])
+@props(['label', 'options', 'placeholder' => 'Select '.strtolower($label)])
 
 <div class="stack gap-sm">
 	<label for="slim-select-{{ strtolower($label) }}" class="field__label">
 		{{ $label }}
 	</label>
     <select 
+    	multiple
     	id="slim-select-{{ strtolower($label) }}" 
-    	name="{{ strtolower($label) }}"  
+    	name="filter[{{ strtolower($label) }}][]"  
     	data-controller="slim-select" 
     	data-slim-select-placeholder-value="{{ $placeholder }}">
         @foreach ($options as $option)
             <option
-            	value="{{ $option[$valueKey] }}" 
-                @selected($option[$valueKey] == old(strtolower($label),request(strtolower($label))))>
-                {{ $option[$contentKey] }}
+            	value="{{ $option->name }}" 
+                @selected(request()->has('filter.'.strtolower($label)) ? in_array($option->name, request()->filter[strtolower($label)]) : "")>
+                {{ $option->name }}
             </option>
         @endforeach
     </select>
