@@ -6,100 +6,59 @@
                 <h1 class="h3" id="dialog-title">Create a Recommendation</h1>
             </header>
             <div class="dialog__body">
-                <form action="{{ route('recommendations.store') }}" method="POST">
+                <form action="{{ route('recommendations.store') }}" method="POST" data-turbo="false">
                     @csrf
                     <div class="stack gap-lg stacked-fields">
 
                         <div class="divider color-accent">If you liked</div>
 
-                        <div class="field" 
-                            data-controller="game-select" 
-                            data-game-select-has-results-value="false"
-                            data-game-select-hidden-class="hidden">
-
-                            <label class="field__label">Game</label>
-                            <div class="grow stack gap-xs">
-                                <select class="hidden" name="played" data-game-select-target="select">
-                                    <option value="">Select a game</option>
-                                    @foreach ($games as $game)
-                                        <option value="{{ $game->id }}" @if ($game->id == old('played', request('played'))) selected @endif>{{ $game->title }}</option>
-                                    @endforeach
-                                </select>
-                                <div class="input-container hidden" data-game-select-target="input" id="read-only">
-                                    <div class="input"></div>
-                                    <span>
-                                        <button class="btn btn--icon btn--sm bg-danger-soft" type="button" data-action="click->game-select#unset">
-                                            @icon('tabler-x')
-                                        </button>
-                                    </span>
-                                </div>
-                                <div style="position: relative;" data-game-select-target="input" id="search">
-                                    <div class="input-container grow">
-                                        @icon('tabler-search', ['class' => 'no-pointer'])
-                                        <input type="text" name="search" placeholder="Search for a game"
-                                            data-action="focus->game-select#showMenu blur->game-select#hideMenu input->game-select#search">
-                                    </div>
-                                    <div class="menu filters-menu text-sm hidden" data-game-select-target="menu">
-                                        @forelse ($games as $item)
-                                            <div class="nav-link" data-game-select-target="item" data-action="click->game-select#set" id="{{ $item->id }}">{{ $item->title }}</div>
-                                        @empty
-                                            <div class="p-xs">No games found.</div>
-                                        @endforelse
-                                    </div>
-                                </div>
-                                <div class="text-xs color-danger">@error('played') {{ $message }} @enderror</div>
-                            </div>
-                            <a href="{{ route('recommendations.create') }}" data-game-select-target="anchor" class="hidden">FETCH</a>
-                        </div>
+                        <x-forms.slim-select 
+                            label="Game"
+                            name="played"
+                            :options="$games"
+                            value-key="id"
+                            content-key="title"
+                        />
 
                         <div class="divider color-accent">you may also like</div>
 
                         <div class="stack gap-lg stacked-fields"
-                            data-controller="game-select" 
+                            data-controller="search-params loader element"
+
+                            data-search-params-param-key-value="game"
+                            data-search-params-element-id-value="slim-select-game"
+                            data-loader-hidden-class="hidden"
+
+                            data-action="turbo:frame-render->loader#hide 
+                            slim-select:after-change->search-params#addFromElement
+                            search-params:added->loader#show
+                            search-params:added->element#click"
+
                             data-game-select-hidden-class="hidden"
                             data-action="turbo:frame-render->game-select#loaded">
 
-                            <div class="field">
-                                <label class="field__label">Game</label>
-                                <div class="grow stack gap-xs">
-                                    <select class="hidden" name="game" data-game-select-target="select">
-                                        <option value="">Select a game</option>
-                                        @foreach ($games as $game)
-                                            <option value="{{ $game->id }}" @if ($game->id == old('game',request('game'))) selected @endif>{{ $game->title }}</option>
-                                        @endforeach
-                                    </select>
-                                    <div class="input-container hidden" data-game-select-target="input" id="read-only">
-                                        <div class="input"></div>
-                                        <span>
-                                            <button class="btn btn--icon btn--sm bg-danger-soft" type="button" data-action="click->game-select#unset">
-                                                @icon('tabler-x')
-                                            </button>
-                                        </span>
-                                    </div>
-                                    <div style="position: relative;" data-game-select-target="input" id="search">
-                                        <div class="input-container grow">
-                                            @icon('tabler-search', ['class' => 'no-pointer'])
-                                            <input type="text" name="search" placeholder="Search for a game"
-                                                data-action="focus->game-select#showMenu blur->game-select#hideMenu input->game-select#search">
-                                        </div>
-                                        <div class="menu filters-menu text-sm hidden" data-game-select-target="menu">
-                                            @forelse ($games as $item)
-                                                <div class="nav-link" data-game-select-target="item" data-action="click->game-select#prep" id="{{ $item->id }}">{{ $item->title }}</div>
-                                            @empty
-                                                <div class="p-xs">No games found.</div>
-                                            @endforelse
-                                        </div>
-                                    </div>
-                                    <div class="text-xs color-danger">@error('game') {{ $message }} @enderror</div>
-                                </div>
-                                <a href="{{ route('reviews.create') }}" data-turbo-frame="platforms" data-game-select-target="anchor" class="hidden">FETCH</a>
-                            </div>
+                            <x-forms.slim-select 
+                                label="Game"
+                                name="game"
+                                :options="$games"
+                                value-key="id"
+                                content-key="title"
+                            />
 
-                            <turbo-frame id="platforms" data-turbo-prefetch="false" class="field">
+                            <a href="{{ route('recommendations.create') }}" 
+                                class="hidden" 
+                                data-turbo-frame="platforms" 
+                                data-search-params-target="anchor" 
+                                data-element-target="element" 
+                                data-turbo="true">
+                                Fetch Platforms
+                            </a>
+
+                            <turbo-frame id="platforms" class="field">
                                 <label class="field__label">Platform</label>
-                                <x-waterhole::spinner class="spinner--block hidden" data-game-select-target="loader"/>
+                                <x-waterhole::spinner class="spinner--block hidden" data-loader-target="spinner"/>
 
-                                <div class="grow stack gap-xs" data-game-select-target="results">
+                                <div class="grow stack gap-xs" data-loader-target="content">
                                     @if ($platforms)
                                         <select name="platform">
                                             <option value="">Select a platform</option>

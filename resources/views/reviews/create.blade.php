@@ -21,7 +21,13 @@
                         search-params:added->loader#show
                         search-params:added->element#click">
 
-                        <x-forms.slim-select label="Game" :options="$games" value-key="id" content-key="title" />
+                        <x-forms.slim-select 
+                            label="Game"
+                            name="game"
+                            :options="$games"
+                            value-key="id"
+                            content-key="title" 
+                        />
 
                         <a href="{{ route('reviews.create') }}" 
                             class="hidden" 
