@@ -2,7 +2,6 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="game-filters"
 export default class extends Controller {
-    static classes = [ "hidden" ]
     static targets = [ "button"]
 
     connect() {
@@ -21,7 +20,7 @@ export default class extends Controller {
             this.dispatch("has-filters")
         }
     }
-    
+
     submit() {
         let button = this.buttonTargets.find(element => element.id === 'apply-filters')
         button.click()
