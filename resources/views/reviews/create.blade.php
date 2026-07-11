@@ -10,7 +10,7 @@
                 <form action="{{ route('reviews.store') }}" method="POST" data-turbo="false">
                     @csrf
                     <div class="stack gap-lg stacked-fields" 
-                        data-controller="search-params loader element"
+                        data-controller="element loader search-params"
                         
                         data-search-params-param-key-value="game"
                         data-search-params-element-id-value="slim-select-game"
