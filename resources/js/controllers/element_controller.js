@@ -12,4 +12,12 @@ export default class extends Controller {
     toggle() {
         this.elementTarget.classList.toggle(this.hiddenClass)
     }
+
+    show() {
+        this.elementTarget.classList.remove(this.hiddenClass)
+    }
+
+    hide() {
+        this.elementTarget.classList.add(this.hiddenClass)
+    }
 }

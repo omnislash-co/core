@@ -1,9 +1,11 @@
 <x-app-layout title="Games">
     
     <div class="section container" 
-        data-controller="game-filters" 
-        data-game-filters-hidden-class="hidden" 
-        data-action="slim-select:after-change->game-filters#submit turbo:frame-render->game-filters#checkParams"
+        data-controller="element game-filters" 
+        data-element-hidden-class="hidden" 
+        data-action="slim-select:after-change->game-filters#submit 
+            turbo:frame-render->game-filters#checkParams 
+            game-filters:has-filters->element#show"
         >
         <div class="stack gap-gutter">
             <h2>Games</h2>
@@ -21,7 +23,7 @@
                             </span>
                         </div>
 
-                        <button class="btn btn--narrow bg-accent" type="button" data-action="game-filters#toggle">
+                        <button class="btn btn--narrow bg-accent" type="button" data-action="element#toggle">
                             @icon('tabler-filter')
                             <span class="hide-md-down">
                                 Filters
@@ -53,7 +55,7 @@
                         </ui-popup>
                     </div>
 
-                    <div class="content hidden" data-game-filters-target="panel">
+                    <div class="content hidden" data-element-target="element">
                         <blockquote>
                             <div class="grid gap-sm full-width" style="--grid-min: 25ch;">
                                 <x-forms.slim-select-filters label="Developers" :options="$developers"/>

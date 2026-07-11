@@ -3,7 +3,7 @@ import { Controller } from "@hotwired/stimulus"
 // Connects to data-controller="game-filters"
 export default class extends Controller {
     static classes = [ "hidden" ]
-    static targets = [ "panel", "button"]
+    static targets = [ "button"]
 
     connect() {
         this.checkParams()
@@ -18,14 +18,10 @@ export default class extends Controller {
             params.has('filter[platforms][]') || params.has('filter[platforms][0]') ||
             params.has('filter[series][]') || params.has('filter[series][0]')
         ) {
-            this.panelTarget.classList.remove(this.hiddenClass)
+            this.dispatch("has-filters")
         }
     }
-
-    toggle() {
-        this.panelTarget.classList.toggle(this.hiddenClass)
-    }
-
+    
     submit() {
         let button = this.buttonTargets.find(element => element.id === 'apply-filters')
         button.click()
