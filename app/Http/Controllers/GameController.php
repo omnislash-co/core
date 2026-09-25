@@ -22,19 +22,19 @@ class GameController extends Controller
     {
         $games = QueryBuilder::for(Game::class)
             ->with(['developers', 'genres'])
-            ->allowedFilters([
+            ->allowedFilters(
                 AllowedFilter::partial('title'),
                 AllowedFilter::exact('developers', 'developers.name'),
                 AllowedFilter::exact('platforms', 'platforms.name'),
                 AllowedFilter::exact('genres', 'genres.name'),
                 AllowedFilter::exact('series', 'series.name'),
-            ])
+            )
             ->defaultSort('-created_at')
-            ->allowedSorts([
+            ->allowedSorts(
                 AllowedSort::field('created', 'created_at'),
                 AllowedSort::field('popular', 'popularity_rank'),
                 AllowedSort::field('score', 'score_rank'),
-            ])
+            )
             ->paginate(8)
             ->appends(request()->query());
 

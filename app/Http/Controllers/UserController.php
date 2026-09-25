@@ -41,14 +41,14 @@ class UserController extends Controller
                 ->join('platforms', 'libraries.platform_id', 'platforms.id')
             ->with(['game', 'platform'])
             ->defaultSort('games.title')
-            ->allowedSorts([
+            ->allowedSorts(
                 AllowedSort::field('title', 'games.title'),
                 AllowedSort::field('platform', 'platforms.name'),
                 AllowedSort::field('score', 'score'),
                 AllowedSort::field('main', 'hours'),
                 AllowedSort::field('sides', 'hours_optional'),
                 AllowedSort::field('complete', 'hours_complete'),
-            ])
+            )
             ->where([
                 'user_id' => $user->id,
                 'play_status_id' => $playStatus->id,
