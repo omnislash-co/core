@@ -22,7 +22,7 @@
                 <thead>
                     <tr>
                         <th>
-                            @if (request('sort') == 'title' || request('sort') == ('' || null))
+                            @if (request('sort') == 'title')
                                 <button class="btn btn--transparent" name="sort" value="-title" type="submit">
                                     Title
                                     @icon('tabler-sort-ascending')
@@ -40,7 +40,7 @@
                             @endif
                         </th>
                         <th style="text-align: center;">
-                            @if (request('sort') == 'platform,title')
+                            @if (request('sort') == 'platform,title' || request('sort') == ('' || null))
                                 <button class="btn btn--transparent" name="sort" value="-platform,title" type="submit">
                                     Platform
                                     @icon('tabler-sort-ascending')
@@ -75,70 +75,16 @@
                                 </button>
                             @endif
                         </th>
-                        <th style="text-align: right;">
-                            @if (request('sort') == 'main,-title')
-                                <button class="btn btn--transparent" name="sort" value="-main,title" type="submit">
-                                    Main Story
-                                    @icon('tabler-sort-ascending')
-                                </button>
-                            @elseif (request('sort') == '-main,title')
-                                <button class="btn btn--transparent" name="sort" value="main,-title" type="submit">
-                                    Main Story
-                                    @icon('tabler-sort-descending')
-                                </button>
-                            @else
-                                <button class="btn btn--transparent" name="sort" value="-main,title" type="submit">
-                                    Main Story
-                                    @icon('tabler-arrows-sort')
-                                </button>
-                            @endif
-                        </th>
-                        <th style="text-align: right;">
-                            @if (request('sort') == 'sides,-title')
-                                <button class="btn btn--transparent" name="sort" value="-sides,title" type="submit">
-                                    Main + Sides
-                                    @icon('tabler-sort-ascending')
-                                </button>
-                            @elseif (request('sort') == '-sides,title')
-                                <button class="btn btn--transparent" name="sort" value="sides,-title" type="submit">
-                                    Main + Sides
-                                    @icon('tabler-sort-descending')
-                                </button>
-                            @else
-                                <button class="btn btn--transparent" name="sort" value="-sides,title" type="submit">
-                                    Main + Sides
-                                    @icon('tabler-arrows-sort')
-                                </button>
-                            @endif
-                        </th>
-                        <th style="text-align: right;">
-                            @if (request('sort') == 'complete,-title')
-                                <button class="btn btn--transparent" name="sort" value="-complete,title" type="submit">
-                                    100%
-                                    @icon('tabler-sort-ascending')
-                                </button>
-                            @elseif (request('sort') == '-complete,title')
-                                <button class="btn btn--transparent" name="sort" value="complete,-title" type="submit">
-                                    100%
-                                    @icon('tabler-sort-descending')
-                                </button>
-                            @else
-                                <button class="btn btn--transparent" name="sort" value="-complete,title" type="submit">
-                                    100%
-                                    @icon('tabler-arrows-sort')
-                                </button>
-                            @endif
-                        </th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($entries as $entry)
                         @if ( 
-                            ( request('sort') == ('platform,title') || request('sort') == ('-platform,title') )
+                            ( request('sort') == ('' || null) || request('sort') == ('platform,title') || request('sort') == ('-platform,title') )
                             && ($loop->index == 0 || $entries[$loop->index-1]->platform->name != $entry->platform->name)
                             )
                             <tr>
-                                <td colspan="6" class="bg-warning-soft">
+                                <td colspan="3" class="bg-warning-soft">
                                     {{ $entry->platform->name }}
                                 </td>
                             </tr>
@@ -163,15 +109,6 @@
                             </td>
                             <td style="text-align: right; padding-right: var(--space-lg);">
                                 {{ $entry->score ? $entry->score : '-' }}
-                            </td>
-                            <td style="text-align: right; padding-right: var(--space-lg);">
-                                {{ $entry->hours ? $entry->hours.'h' : '-' }}
-                            </td>
-                            <td style="text-align: right; padding-right: var(--space-lg);">
-                                {{ $entry->hours_optional ? $entry->hours_optional.'h' : '-' }}
-                            </td>
-                            <td style="text-align: right; padding-right: var(--space-lg);">
-                                {{ $entry->hours_complete ? $entry->hours_complete.'h' : '-' }}
                             </td>
                         </tr>
                     @endforeach
