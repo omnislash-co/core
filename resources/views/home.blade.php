@@ -1,4 +1,4 @@
-<x-app-layout title="Home">
+<x-layout title="Home">
     <div class="game-cover" style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url({{ Storage::url('images/layout/cover.png') }});">
     </div>
 
@@ -33,7 +33,7 @@
                     </div>
                 </div>
 
-                <div class="hero__icons slide-in-icons row grow gap-md justify-center">
+                <div class="hero__icons row grow gap-md justify-center">
                     <div class="card" style="transform: rotate(4deg); margin-top: 10px; margin-right: 3px">
                         <img height="125px" src="{{ Storage::url('images/layout/hero-icon-dq8.png') }}">
                     </div>
@@ -104,7 +104,7 @@
                         <ui-menu id="popular" data-tabs-target="panel">
                             @foreach ($popular as $game)
                                 <div class="row">
-                                    <div class="oswald-stencil color-accent p-xs text-center" style="width: 40px">
+                                    <div class="font-altima color-accent p-xs text-center" style="font-size: 25px; width: 40px">
                                         {{ $loop->iteration }}
                                     </div>
                                     <a class="menu-item text-xs" href="{{ route('games.show', $game->slug) }}">
@@ -129,7 +129,7 @@
                         <ui-menu id="ranked" data-tabs-target="panel" class="hidden">
                             @foreach ($topRanked as $game)
                                 <div class="row">
-                                    <div class="oswald-stencil color-accent p-xs text-center" style="width: 40px">
+                                    <div class="font-altima color-accent p-xs text-center" style="font-size: 25px; width: 40px">
                                         {{ $loop->iteration }}
                                     </div>
                                     <a class="menu-item text-xs" href="{{ route('games.show', $game->slug) }}">
@@ -202,4 +202,4 @@
         </div>
     </section>
 
-</x-app-layout>
+</x-layout>

@@ -1,4 +1,4 @@
-<x-app-layout title="Games">
+<x-layout title="Games">
     
     <div class="section container" 
         data-controller="element game-filters" 
@@ -89,4 +89,4 @@
         </div>
     </div>
 
-</x-app-layout>
+</x-layout>

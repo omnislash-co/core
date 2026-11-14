@@ -20,4 +20,4 @@ yarn-error.log
 /.vscode
 .DS_Store
 /public/dist
-*importmap-manifest.json
+/public/fonts-manifest.dev.json

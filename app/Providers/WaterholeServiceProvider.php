@@ -3,16 +3,9 @@
 namespace App\Providers;
 
 use Waterhole\Extend;
-use Illuminate\Support\Facades\Route;
 use Waterhole\View\Components\NavLink;
 use Waterhole\View\Components\NavHeading;
 use Waterhole\Models\User;
-
-use Waterhole\View\Components\HeaderGuest;
-use Waterhole\View\Components\HeaderModeration;
-use Waterhole\View\Components\HeaderNotifications;
-use Waterhole\View\Components\HeaderUser;
-use Waterhole\View\Components\ThemeSelector;
 
 class WaterholeServiceProvider extends Extend\ServiceProvider
 {
@@ -31,39 +24,14 @@ class WaterholeServiceProvider extends Extend\ServiceProvider
         |
         */     
 
-        $this->extend(function (Extend\Assets\Stylesheet $stylesheets) {
-            $stylesheets->add(resource_path('css/slimselect.css'));
-            $stylesheets->add(resource_path('css/waterhole/app.css'));
-        });
-
-        $this->extend(function (Extend\Assets\Script $scripts) {
-            $scripts->add(resource_path('js/slimselect.js'));
-        });
-
         $this->extend(function (Extend\Ui\DocumentHead $documentHead) {
             $documentHead->add('waterhole.head');
         });
 
         $this->extend(function (Extend\Ui\Layout $layout) {
+            $layout->before->add('partials.forum-header', position: -10);
             $layout->header->replace('title', 'waterhole.title');
-            $layout->header->remove('breadcrumb');
-            $layout->header->remove('search');
-
-            $layout->header->remove('theme');
-            $layout->header->remove('moderation');
-            $layout->header->remove('notifications');
-            $layout->header->remove('guest');
-            $layout->header->remove('user');
-
-            $layout->header->add('waterhole.header-search');
-            $layout->header->add(ThemeSelector::class, 'theme');
-            $layout->header->add(HeaderModeration::class, 'moderation');
-            $layout->header->add(HeaderNotifications::class, 'notifications');
-            $layout->header->add(HeaderGuest::class, 'guest');
-            $layout->header->add(HeaderUser::class, 'user');
-
-
-            $layout->after->add('partials.footer');
+            $layout->after->add('partials.footer', position: +10);
         });
 
         $this->extend(function (Extend\Ui\UserNav $userNav) {

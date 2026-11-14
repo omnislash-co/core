@@ -1,4 +1,4 @@
-<x-app-layout title="Recommendations">
+<x-layout title="Recommendations">
     
     <div class="section container">
         <section class="stack gap-gutter">
@@ -24,4 +24,4 @@
         </section>
     </div>
 
-</x-app-layout>
+</x-layout>

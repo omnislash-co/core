@@ -1,4 +1,4 @@
-<x-app-layout title="{{ $series->name }} Series">
+<x-layout title="{{ $series->name }} Series">
 
     <div class="section container">
         <section class="stack gap-gutter">
@@ -57,4 +57,4 @@
         </section>
     </div>
 
-</x-app-layout>
+</x-layout>

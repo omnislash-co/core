@@ -1,8 +1,8 @@
 @props(['game'])
 
-<div class="card row align-start align-stretch overlay-container overflow-hidden" style="max-height: 150px;">
-    <div class="card__game-icon" style="background-image: url('{{ Storage::url('games/icons/'.$game->icon) }}')"></div>
-    <div class="stack grow gap-xs p-sm">
+<div class="card rotate-img-on-hover row align-start align-stretch overlay-container" style="max-height: 155px;">
+    <img class="card" src="{{ Storage::url('games/icons/'.$game->icon) }}" alt="{{ $game->title }}" width="155px" style="box-shadow: var(--shadow-md)">
+    <div class="stack grow gap-xs p-md">
         <a href="{{ route('games.show', $game->slug) }}" class="h4 color-accent has-overlay">{{ $game->title }}</a>
         <div class="row wrap gap-xxs">
             @foreach ($game->developers as $developer)

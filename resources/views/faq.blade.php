@@ -1,4 +1,4 @@
-<x-app-layout title="Frequently Asked Questions">
+<x-layout title="Frequently Asked Questions">
 
     <div class="section container measure">
         <div class="dialog" aria-labelledby="dialog-title">
@@ -62,4 +62,4 @@
         </div>
     </div>
 
-</x-app-layout>
+</x-layout>

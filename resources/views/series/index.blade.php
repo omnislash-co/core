@@ -1,4 +1,4 @@
-<x-app-layout title="Series">
+<x-layout title="Series">
 
     <div class="section container">
         <section class="stack gap-gutter">
@@ -80,4 +80,4 @@
         </section>
     </div>
 
-</x-app-layout>
+</x-layout>

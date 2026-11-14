@@ -1,29 +1,6 @@
-/*
-|--------------------------------------------------------------------------
-| App CSS
-|--------------------------------------------------------------------------
-|
-| Put any custom CSS in this file, and it will be loaded on every page,
-| following Waterhole's default CSS. To discover more variables and
-| classes you might like to override, read about Waterhole's design system:
-|
-| https://waterhole.dev/docs/design/overview
-|
-*/
+@import 'slim-select/styles';
 
 /* primary: '#00D1B2' */
-
-@font-face {
-    font-family: Oswald Stencil;
-    font-weight: normal;
-    src: url(/fonts/Oswald-Stencil.ttf);
-}
-
-/* @font-face {
-    font-family: Oswald;
-    font-weight: 400;
-    src: url(/fonts/Oswald-Regular.ttf);
-} */
 
 :root {
     /* Main accent color */
@@ -33,9 +10,6 @@
     
     --palette-success: var(--palette-accent);
     --palette-success-contrast: var(--palette-accent-contrast);
-
-    --font-oswald-stencil: "Oswald Stencil";
-    /* --font-oswald: "Oswald"; */
 
     /* SlimSelectjs */
     /* Colors */
@@ -113,8 +87,13 @@
     margin-top: var(--space-xxs);
 }
 
+/* HEADER & FOOTER */
 .footer {
     background-color: var(--palette-surface);
+}
+
+.rotate-img-on-hover:hover img {
+  transform: rotate(-4deg);
 }
 
 /* GAME PAGE */
@@ -264,10 +243,6 @@
     overflow: hidden;
 }
 
-.slide-in-words {
-    overflow:hidden
-}
-
 @media (max-width: 46rem){
     .slide-in-icons {
         flex-basis: 40ch;
@@ -294,59 +269,19 @@
 
     @keyframes slide-in-icons {
         0% {
-            transform:translateY(-225%)
+            transform:translateY(-400%)
         }
     }
-
-    .slide-in-words > * {
-        animation:slide-in-words 2.5s cubic-bezier(.16, 1, .3, 1) both
-    }
-
-    @keyframes slide-in-words {
-        0% {
-            transform:translateX(-100%)
-        }
-    }
-}
-
-.bg-character1 {
-    background-position: top center;
-    background-repeat: no-repeat;
-    background-image: url(/images/layout/sydney.png);
-    background-size: 50ch;
-    background-position-y: -5ch;
-}
-.bg-character2 {
-    background-position: top center;
-    background-repeat: no-repeat;
-    background-image: url(/images/layout/vivi.png);
-    background-size: 41ch;
-    background-position-y: -8ch;
-}
-.bg-character3 {
-    background-position: top center;
-    background-repeat: no-repeat;
-    background-image: url(/images/layout/rosalinde.png);
-    background-size: 70ch;
-    background-position-y: -15ch;
 }
 
 .hidden {
     display: none;
 }
 
-/* .header {
-    position: initial !important;
-}
-
-.sidebar--sticky {
-    top: 0 !important;
-} */
-
 /* USER PROFILE */
-.user-profile {
+/*.user-profile {
     max-width: 80rem;
-}
+}*/
 
 .tooltip-container {
     position: relative;

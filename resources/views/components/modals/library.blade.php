@@ -1,6 +1,6 @@
 @props(['game'])
 
-<x-app-layout :title="'Library - '.$game->title">
+<x-layout :title="'Library - '.$game->title">
 
     <turbo-frame id="modal">
         <div class="section container measure" style="width: 80vw">
@@ -27,4 +27,4 @@
             </div>
         </div>
     </turbo-frame>
-</x-app-layout>
+</x-layout>

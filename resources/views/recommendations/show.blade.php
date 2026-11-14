@@ -1,4 +1,4 @@
-<x-app-layout title="{{ $recommendation->game->title }} Recommendation">
+<x-layout title="{{ $recommendation->game->title }} Recommendation">
 
     <div class="section container stack gap-gutter">
         <section class="with-sidebar">
@@ -45,4 +45,4 @@
         </section>
     </div>
 
-</x-app-layout>
+</x-layout>

@@ -1,4 +1,4 @@
-<x-app-layout title="Privacy Policy">
+<x-layout title="Privacy Policy">
 
     <div class="section container measure">
         <div class="dialog" aria-labelledby="dialog-title">
@@ -13,4 +13,4 @@
         </div>
     </div>
 
-</x-app-layout>
+</x-layout>

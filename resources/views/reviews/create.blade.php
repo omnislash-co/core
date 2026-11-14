@@ -1,4 +1,4 @@
-<x-app-layout title="Create a Review">
+<x-layout title="Create a Review">
 
     <div class="section container measure">
         <div class="dialog" aria-labelledby="dialog-title">
@@ -95,4 +95,4 @@
         </div>
     </div>
 
-</x-app-layout>
+</x-layout>

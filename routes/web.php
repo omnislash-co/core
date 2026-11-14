@@ -23,8 +23,8 @@ use App\Game;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/faq', function () { return view('faq'); })->name('faq');
-Route::get('/terms', function () { return view('terms'); })->name('terms');
-Route::get('/privacy', function () { return view('privacy'); })->name('privacy');
+// Route::get('/terms', function () { return view('terms'); })->name('terms');
+// Route::get('/privacy', function () { return view('privacy'); })->name('privacy');
 
 // Games
 Route::get('/games', [GameController::class, 'index'])->name('games.index');

@@ -1,0 +1,16 @@
+{
+    "private": true,
+    "type": "module",
+    "scripts": {
+        "build": "vite build",
+        "dev": "vite"
+    },
+    "devDependencies": {
+        "@hotwired/stimulus": "^3.2.2",
+        "laravel-vite-plugin": "^3.1",
+        "vite": "^8.3.4"
+    },
+    "dependencies": {
+        "slim-select": "^4.6.1"
+    }
+}
