@@ -1,7 +1,7 @@
 <footer id="footer" class="footer">
     <div class="bg-fill" style="border-top: 1px solid var(--color-fill); border-bottom: 1px solid var(--color-fill); height: 10px;">
     </div>
-    <div class="section">
+    <div class="section" style="border-bottom: 1px solid var(--color-fill);">
         <nav class="container row grow justify-between wrap">
             <div class="stack gap-sm">
                 <div class="row gap-xs">
