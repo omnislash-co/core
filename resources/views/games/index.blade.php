@@ -23,19 +23,15 @@
                             </span>
                         </div>
 
-                        <button class="btn btn--narrow bg-accent" type="button" data-action="element#toggle">
+                        <button class="btn btn--narrow" type="button" data-action="element#toggle">
                             @icon('tabler-filter')
-                            <span class="hide-md-down">
-                                Filters
-                            </span>
+                            <ui-tooltip>Filters</ui-tooltip>
                         </button>
 
                         <ui-popup placement="bottom-end">
                             <button class="btn btn--narrow">
                                 @icon('tabler-sort-descending')
-                                <span class="hide-md-down">
-                                    Sort
-                                </span>
+                                <ui-tooltip>Sort</ui-tooltip>
                             </button>
                         
                             <ui-menu class="menu" hidden>
@@ -50,6 +46,15 @@
                             <button @class(['menu-item', 'is-active' => request('sort') == '-created' || !request('sort') ]) name="sort" value="-created" type="submit" role="menuitem">
                                 @icon('tabler-clock')
                                 Recently Added
+                            </button>
+                            <hr class="menu-divider" />
+                            <button @class(['menu-item', 'is-active' => request('sort') == 'release' ]) name="sort" value="release" type="submit" role="menuitem">
+                                @icon('tabler-calendar')
+                                Initial Release
+                            </button>
+                            <button @class(['menu-item', 'is-active' => request('sort') == 'title' ]) name="sort" value="title" type="submit" role="menuitem">
+                                @icon('tabler-sort-a-z')
+                                Title
                             </button>
                             </ui-menu>
                         </ui-popup>

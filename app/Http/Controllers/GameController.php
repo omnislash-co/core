@@ -34,6 +34,8 @@ class GameController extends Controller
                 AllowedSort::field('created', 'created_at'),
                 AllowedSort::field('popular', 'popularity_rank'),
                 AllowedSort::field('score', 'score_rank'),
+                AllowedSort::field('title', 'title'),
+                AllowedSort::field('release', 'initial_release_year'),
             )
             ->paginate(8)
             ->appends(request()->query());
