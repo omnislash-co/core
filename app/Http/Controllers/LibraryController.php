@@ -33,7 +33,7 @@ class LibraryController extends Controller
                 ['user_id', '=', auth()->user()->id ]
             ])->get();
 
-        $playStatuses = PlayStatus::orderBy('id')->get(['id', 'name']);
+        $playStatuses = PlayStatus::orderBy('sort')->get(['id', 'name']);
 
         return view('games.library', compact('game', 'libraries', 'playStatuses'));       
     }
@@ -43,7 +43,7 @@ class LibraryController extends Controller
      */
     public function create(Game $game)
     {
-        $playStatuses = PlayStatus::orderBy('id')->get(['id', 'name']);
+        $playStatuses = PlayStatus::orderBy('sort')->get(['id', 'name']);
 
         return view('library.create', compact('game', 'playStatuses'));
     }
@@ -89,7 +89,7 @@ class LibraryController extends Controller
             abort(403);
         }
 
-        $playStatuses = PlayStatus::orderBy('id')->get(['id', 'name']);
+        $playStatuses = PlayStatus::orderBy('sort')->get(['id', 'name']);
 
         return view('library.edit', compact('game', 'library', 'playStatuses'));
     }

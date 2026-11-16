@@ -15,7 +15,7 @@ class PlayStatus extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'name', 'slug', 'css_class'
+        'name', 'slug', 'css_class', 'sort'
     ];
 
     /**

@@ -12,7 +12,7 @@ class RelationType extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'name', 'inverse_name'
+        'name', 'inverse_name', 'sort'
     ];
 
     /**

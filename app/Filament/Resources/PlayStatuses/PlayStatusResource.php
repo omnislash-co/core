@@ -44,6 +44,8 @@ class PlayStatusResource extends Resource
                     ->readOnly(),
                 TextInput::make('css_class')
                     ->required(),
+                TextInput::make('sort')
+                    ->required(),
             ]);
     }
 
@@ -58,6 +60,7 @@ class PlayStatusResource extends Resource
                     ->searchable(),
                 TextColumn::make('css_class')
                     ->searchable(),
+                TextColumn::make('sort'),
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -67,7 +70,7 @@ class PlayStatusResource extends Resource
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
-            ->defaultSort('name', 'asc')
+            ->defaultSort('sort', 'asc')
             ->filters([
                 //
             ])

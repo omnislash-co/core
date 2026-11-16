@@ -37,6 +37,8 @@ class RelationTypeResource extends Resource
                     ->required(),
                 TextInput::make('inverse_name')
                     ->required(),
+                TextInput::make('sort')
+                    ->required(),
             ]);
     }
 
@@ -49,6 +51,7 @@ class RelationTypeResource extends Resource
                     ->searchable(),
                 TextColumn::make('inverse_name')
                     ->searchable(),
+                TextColumn::make('sort'),
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -58,6 +61,7 @@ class RelationTypeResource extends Resource
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
+            ->defaultSort('sort', 'asc')
             ->filters([
                 //
             ])
