@@ -4,10 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Review;
 use App\Game;
+use App\Platform;
 use App\Http\Requests\StoreReviewRequest;
 use App\Http\Requests\UpdateReviewRequest;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use Spatie\QueryBuilder\QueryBuilder;
+use Spatie\QueryBuilder\AllowedFilter;
+use Spatie\QueryBuilder\AllowedSort;
 
 class ReviewController extends Controller
 {
@@ -24,13 +28,24 @@ class ReviewController extends Controller
      */
     public function index(): View
     {
-        $reviews = Review::with([
-            'user',
-            'game',
-            'platform'
-        ])->orderBy('created_at', 'desc')->paginate(8);
+        $reviews = QueryBuilder::for(Review::class)
+            ->with(['user', 'game', 'platform'])
+            ->allowedFilters(
+                AllowedFilter::exact('games', 'game.title'),
+                AllowedFilter::exact('platforms', 'platform.name'),
+            )
+            ->defaultSort('-created_at')
+            ->allowedSorts(
+                AllowedSort::field('created', 'created_at'),
+                AllowedSort::field('score', 'score'),
+            )
+            ->paginate(8)
+            ->appends(request()->query());
 
-        return view('reviews.index', compact('reviews'));
+        $games = Game::orderBy('title')->get(['id', 'title']);
+        $platforms = Platform::orderBy('name')->get(['id', 'name']);
+
+        return view('reviews.index', compact('reviews', 'games', 'platforms'));
     }
 
     /**

@@ -8,6 +8,9 @@ use App\Http\Requests\StoreRecommendationRequest;
 use App\Http\Requests\UpdateRecommendationRequest;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use Spatie\QueryBuilder\QueryBuilder;
+use Spatie\QueryBuilder\AllowedFilter;
+use Spatie\QueryBuilder\AllowedSort;
 
 class RecommendationController extends Controller
 {
@@ -24,13 +27,21 @@ class RecommendationController extends Controller
      */
     public function index(): View
     {
-        $recommendations = Recommendation::with([
-            'user',
-            'game',
-            'playedGame'
-        ])->orderBy('created_at', 'desc')->paginate(8);
+        $recommendations = QueryBuilder::for(Recommendation::class)
+            ->with(['user', 'game', 'playedGame'])
+            ->allowedFilters(
+                AllowedFilter::exact('games', 'playedGame.title'),
+            )
+            ->defaultSort('-created_at')
+            ->allowedSorts(
+                AllowedSort::field('created', 'created_at'),
+            )
+            ->paginate(8)
+            ->appends(request()->query());
 
-        return view('recommendations.index', compact('recommendations'));
+        $games = Game::orderBy('title')->get(['id', 'title']);
+
+        return view('recommendations.index', compact('recommendations', 'games'));
     }
 
     /**
