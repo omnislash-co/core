@@ -9,7 +9,6 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Overtrue\LaravelFavorite\Traits\Favoriteable;
 use Coderflex\Laravisit\Concerns\HasVisits;
 use Coderflex\Laravisit\Concerns\CanVisit;
-use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\DB;
 
@@ -116,7 +115,10 @@ class Game extends Model implements CanVisit
     {
         return $this->belongsToMany(Game::class, 'game_relations', 'parent_game_id', 'child_game_id')
             ->withPivot(['relation_type_id'])
-            ->using(GameRelations::class);
+            ->using(GameRelations::class)
+            ->join('relation_types', 'game_relations.relation_type_id', '=', 'relation_types.id')
+            ->orderBy('relation_types.sort')
+            ->select('games.*'); // prevents column collision
     }
 
     /**
@@ -124,17 +126,13 @@ class Game extends Model implements CanVisit
      */
     public function hasUserPlayed(): bool
     {
-        $hasUserPlayed = false;
-
-        if (auth()->check())
-        {
-            $hasUserPlayed = Library::where([
-                'game_id' => $this->id,
-                'user_id' => auth()->user()->id,
-            ])->count() > 0 ? true : false;
+        if (! auth()->check()) {
+            return false;
         }
 
-        return (bool) $hasUserPlayed;
+        return $this->libraries()
+            ->where('user_id', auth()->id())
+            ->exists();
     }
 
     /**
@@ -143,65 +141,11 @@ class Game extends Model implements CanVisit
      */
     public function hasUserFavorited(): bool
     {
-        $hasUserFavorited = false;
-
-        if (auth()->check())
-        {
-            $hasUserFavorited = User::find(auth()->user()->id)->hasFavorited($this);
+        if (! auth()->check()) {
+            return false;
         }
 
-        return (bool) $hasUserFavorited;
-    }
-
-    public function getReleasesGroupedByPlatform()
-    {
-        return $this->load([
-            'platforms' => fn ($query) => $query->with([
-                'releases' => fn ($q) => $q->with('region')->where('game_id', $this->id)
-            ])->get(),
-        ]);
-    } 
-
-    protected function reviewsCount(): Attribute
-    {
-        return Attribute::make(
-            get: fn() => $this->reviews()->count(),
-        )->shouldCache();
-    }
-    
-    protected function recommendationsCount(): Attribute
-    {
-        return Attribute::make(
-            get: fn() => $this->recommendations()->count(),
-        )->shouldCache();
-    }
-
-    protected function releasesCount(): Attribute
-    {
-        return Attribute::make(
-            get: fn() => $this->releases()->count(),
-        )->shouldCache();
-    }
-
-    protected function seriesCount(): Attribute
-    {
-        return Attribute::make(
-            get: fn() => $this->series()->count(),
-        )->shouldCache();
-    }
-
-    protected function childrenCount(): Attribute
-    {
-        return Attribute::make(
-            get: fn() => $this->children()->count(),
-        )->shouldCache();
-    }
-
-    protected function parentsCount(): Attribute
-    {
-        return Attribute::make(
-            get: fn() => $this->parents()->count(),
-        )->shouldCache();
+        return User::find(auth()->id())?->hasFavorited($this) ?? false;
     }
 
     /**
