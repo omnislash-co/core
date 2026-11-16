@@ -1,8 +1,8 @@
-<x-waterhole::user-profile :user="$user" :title="$user->name.'\'s Favourites'">
+<x-waterhole::user-profile :user="$user" :title="$user->name.'\'s Favorites'">
     
-    @if (count($favourites) > 0)
+    @if (count($favorites) > 0)
         <div class="row gap-sm wrap">
-            @foreach ($favourites as $game)
+            @foreach ($favorites as $game)
                 <div class="rounded overflow-hidden" style="width: 125px; box-shadow: var(--shadow-sm)">
                     <a href="{{ route('games.show', $game->slug) }}">
                         <img src="{{ Storage::url('games/icons/'.$game->icon) }}" class="img-link">
@@ -14,7 +14,7 @@
     @else
         <div class="placeholder">
             @icon('tabler-heart', ['class' => 'placeholder__icon'])
-            <h4>No Favourites</h4>
+            <h4>No Favorites</h4>
         </div>
     @endif
 

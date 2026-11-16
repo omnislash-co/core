@@ -43,7 +43,7 @@
     <div class="row gap-xs align-start">
         <div>@icon('tabler-heart')</div>
         <div class="stack gap-xxs">
-            <div class="weight-medium">Favourites</div>
+            <div class="weight-medium">Favorites</div>
             <div class="color-muted">
                 {{ $game->favoriters()->count() }} {{ Str::plural('user', $game->favoriters()->count()) }}
             </div>

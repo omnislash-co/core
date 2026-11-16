@@ -91,14 +91,10 @@ class GameController extends Controller
      */
     public function toggleFavorite(Game $game)
     {
-        if (auth()->check()) {
-            $user = User::find(auth()->user()->id);
-            $user->toggleFavorite($game);
-            $message = $game->hasBeenFavoritedBy($user) ? "Added to favorites" : "Removed from favorites";
+        $user = User::find(auth()->user()->id);
+        $user->toggleFavorite($game);
+        $message = $game->hasBeenFavoritedBy($user) ? "Added to favorites" : "Removed from favorites";
 
-            return redirect()->back()->with('success', $message);
-        } else {
-            return redirect()->route('waterhole.login');
-        }        
+        return redirect()->back()->with('success', $message);      
     }
 }

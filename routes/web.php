@@ -29,7 +29,9 @@ Route::get('/faq', function () { return view('faq'); })->name('faq');
 // Games
 Route::get('/games', [GameController::class, 'index'])->name('games.index');
 Route::get('/games/{game:slug}', [GameController::class, 'show'])->name('games.show');
-Route::post('/games/{game:slug}/toggle-favorite', [GameController::class, 'toggleFavorite'])->name('games.toggleFavorite');
+Route::post('/games/{game:slug}/toggle-favorite', [GameController::class, 'toggleFavorite'])
+    ->middleware('auth')
+    ->name('games.toggleFavorite');
 
 // Library
 Route::resource('games/{game:slug}/library', LibraryController::class)->only([
@@ -53,7 +55,7 @@ Route::resource('recommendations', RecommendationController::class)->only([
 
 // Users
 Route::get('community/users/{user:id}', [UserController::class, 'libraryIndex'])->name('waterhole.users.show');
-Route::get('community/users/{user:id}/favourites', [UserController::class, 'favourites'])->name('users.favourites');
+Route::get('community/users/{user:id}/favorites', [UserController::class, 'favorites'])->name('users.favorites');
 Route::get('community/users/{user:id}/library', [UserController::class, 'libraryIndex'])->name('users.libraryIndex');
 Route::get('community/users/{user:id}/library/{playStatus:slug}', [UserController::class, 'library'])->withoutScopedBindings()->name('users.library');
 Route::get('community/users/{user:id}/reviews', [UserController::class, 'reviews'])->name('users.reviews');

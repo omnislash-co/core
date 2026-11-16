@@ -49,13 +49,13 @@ class WaterholeServiceProvider extends Extend\ServiceProvider
 
             $userNav->add(
                 fn(User $user) => new NavLink(
-                    label: 'Favourites',
+                    label: 'Favorites',
                     icon: 'tabler-heart',
                     badge: \App\User::withCount('favorites')->find($user->id)->favorites_count,
-                    href: route('users.favourites', compact('user')),
-                    active: request()->routeIs('users.favourites'),
+                    href: route('users.favorites', compact('user')),
+                    active: request()->routeIs('users.favorites'),
                 ),
-                'favourites',
+                'favorites',
                 -1
             );
 

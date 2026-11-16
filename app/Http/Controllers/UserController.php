@@ -13,12 +13,12 @@ use Spatie\QueryBuilder\AllowedSort;
 class UserController extends Controller
 {
     /**
-     * Show user favourites.
+     * Show user favorites.
      */
-    public function favourites(User $user): View
+    public function favorites(User $user): View
     {
-        $favourites = $user->getFavoriteItems(Game::class)->orderBy('title')->get();
-        return view('users.favourites', compact('user', 'favourites'));
+        $favorites = $user->getFavoriteItems(Game::class)->orderBy('title')->get();
+        return view('users.favorites', compact('user', 'favorites'));
     }
 
     /**
