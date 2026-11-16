@@ -53,58 +53,37 @@ class GameController extends Controller
      */
     public function show(Game $game): View
     {
-        $game->with([
+        $game->load([
             'developers',
-            'platforms',
+            'platforms.releases' => fn ($query) => $query
+                ->with('region')
+                ->where('game_id', $game->id),
             'genres',
             'series',
             'children',
             'parents',
-            'reviews' => function ($query) {
-                $query->with('user')->orderBy('created_at', 'desc')->limit(2);
-            },
-            'recommendations' => function ($query) {
-                $query->with([
-                    'user',
-                    'game',
-                    'playedGame'
-                ])->orderBy('created_at', 'desc')->limit(2);
-            }
+            'reviews' => fn ($query) => $query
+                ->with('user')
+                ->latest()
+                ->limit(2),
+            'recommendations' => fn ($query) => $query
+                ->with(['user', 'game', 'playedGame'])
+                ->latest()
+                ->limit(2),
+        ]);
+
+        $game->loadCount([
+            'reviews',
+            'recommendations',
+            'releases',
+            'children',
+            'parents',
+            'libraries as ratings_count' => fn ($query) => $query->whereNotNull('score'),
         ]);
 
         $game->visit();
 
-        return view('games.overview', compact('game'));
-    }
-
-    /**
-     * Display game releases.
-     */
-    public function releases(Game $game)
-    {
-        $game->getReleasesGroupedByPlatform();
-
-        return view('games.releases', compact('game'));        
-    }
-
-    /**
-     * Display game reviews.
-     */
-    public function reviews(Game $game)
-    {
-        $reviews = $game->reviews()->orderBy('created_at', 'desc')->paginate(8);
-
-        return view('games.reviews', compact('game', 'reviews'));        
-    }
-
-    /**
-     * Display game recommendations.
-     */
-    public function recommendations(Game $game)
-    {
-        $recommendations = $game->recommendations()->orderBy('created_at', 'desc')->paginate(8);
-
-        return view('games.recommendations', compact('game', 'recommendations'));        
+        return view('games.show', compact('game'));
     }
 
     /**

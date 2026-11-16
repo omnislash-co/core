@@ -29,9 +29,6 @@ Route::get('/faq', function () { return view('faq'); })->name('faq');
 // Games
 Route::get('/games', [GameController::class, 'index'])->name('games.index');
 Route::get('/games/{game:slug}', [GameController::class, 'show'])->name('games.show');
-Route::get('/games/{game:slug}/reviews', [GameController::class, 'reviews'])->name('games.reviews');
-Route::get('/games/{game:slug}/recommendations', [GameController::class, 'recommendations'])->name('games.recommendations');
-Route::get('/games/{game:slug}/releases', [GameController::class, 'releases'])->name('games.releases');
 Route::post('/games/{game:slug}/toggle-favorite', [GameController::class, 'toggleFavorite'])->name('games.toggleFavorite');
 
 // Library
