@@ -2,23 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Http\Requests\StoreLibraryRequest;
-use App\Http\Requests\UpdateLibraryRequest;
 use App\Game;
 use App\Library;
 use App\PlayStatus;
+use App\Http\Requests\StoreLibraryRequest;
+use App\Http\Requests\UpdateLibraryRequest;
+use Illuminate\Http\Request;
 
 class LibraryController extends Controller
 {
-    /**
-     * Instantiate a new controller instance.
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
     /**
      * Display a listing of the resource.
      */

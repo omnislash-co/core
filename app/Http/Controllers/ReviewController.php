@@ -16,14 +16,6 @@ use Spatie\QueryBuilder\AllowedSort;
 class ReviewController extends Controller
 {
     /**
-     * Instantiate a new controller instance.
-     */
-    public function __construct()
-    {
-        $this->middleware('auth')->except('index', 'show');
-    }
-
-    /**
      * Display a listing of the resource.
      */
     public function index(): View

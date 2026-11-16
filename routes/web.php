@@ -8,7 +8,6 @@ use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\RecommendationController;
 use App\Http\Controllers\ReplayController;
 use App\Http\Controllers\UserController;
-use App\Game;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,24 +33,31 @@ Route::post('/games/{game:slug}/toggle-favorite', [GameController::class, 'toggl
     ->name('games.toggleFavorite');
 
 // Library
-Route::resource('games/{game:slug}/library', LibraryController::class)->only([
-    'index', 'create', 'store', 'edit', 'update', 'destroy'
-]);
+Route::resource('games/{game:slug}/library', LibraryController::class)
+    ->only(['index', 'create', 'store', 'edit', 'update', 'destroy'])
+    ->middlewareFor(['index'], ['auth'])
+    ->middlewareFor(['create', 'store'], ['auth', 'can:create,App\Library'])
+    ->middlewareFor(['edit', 'update'], ['auth', 'can:update,library'])
+    ->middlewareFor(['destroy'], ['auth', 'can:delete,library']);
 
 // Replay
-Route::resource('games/{game:slug}/library/{library:id}/replay', ReplayController::class)->only([
-    'create', 'store', 'edit', 'update', 'destroy'
-]);
+Route::resource('games/{game:slug}/library/{library:id}/replay', ReplayController::class)
+    ->only(['create', 'store', 'edit', 'update', 'destroy'])
+    ->middlewareFor(['create', 'store'], ['auth', 'can:create,App\Replay,library'])
+    ->middlewareFor(['edit', 'update'], ['auth', 'can:update,replay'])
+    ->middlewareFor(['destroy'], ['auth', 'can:delete,replay']);
 
 // Reviews
-Route::resource('reviews', ReviewController::class)->only([
-    'index', 'show', 'create', 'store', 'edit', 'update'
-]);
+Route::resource('reviews', ReviewController::class)
+    ->only(['index', 'show', 'create', 'store', 'edit', 'update'])
+    ->middlewareFor(['create', 'store'], ['auth', 'can:create,App\Review'])
+    ->middlewareFor(['edit', 'update'], ['auth', 'can:update,review']);
 
 // Recommendations
-Route::resource('recommendations', RecommendationController::class)->only([
-    'index', 'show', 'create', 'store', 'edit', 'update'
-]);
+Route::resource('recommendations', RecommendationController::class)
+    ->only(['index', 'show', 'create', 'store', 'edit', 'update'])
+    ->middlewareFor(['create', 'store'], ['auth', 'can:create,App\Recommendation'])
+    ->middlewareFor(['edit', 'update'], ['auth', 'can:update,recommendation']);
 
 // Users
 Route::get('community/users/{user:id}', [UserController::class, 'libraryIndex'])->name('waterhole.users.show');
