@@ -6,11 +6,10 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Facades\DB;
 use Overtrue\LaravelFavorite\Traits\Favoriteable;
 use Coderflex\Laravisit\Concerns\HasVisits;
 use Coderflex\Laravisit\Concerns\CanVisit;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Support\Facades\DB;
 
 class Game extends Model implements CanVisit
 {
@@ -153,41 +152,45 @@ class Game extends Model implements CanVisit
      */
     public static function updateRankings()
     {
-        //Update score for all games
-        Game::chunk(100, function ($games) {
-            foreach ($games as $game) {
-                $filtered = $game->libraries()->whereNotNull('score');
-                $score = ($filtered->count() > 0 ? number_format(($filtered->avg('score') / 10) * 100, 0) : null);
+        // 1. Update score and library_count for all games
+        DB::statement("
+            UPDATE games g
+            LEFT JOIN (
+                SELECT
+                    game_id,
+                    ROUND(AVG(score) * 10) AS avg_score,          -- 0-10 → 0-100
+                    COUNT(DISTINCT user_id) AS lib_count
+                FROM libraries
+                WHERE score IS NOT NULL
+                GROUP BY game_id
+            ) AS stats ON stats.game_id = g.id
+            SET
+                g.score          = stats.avg_score,
+                g.library_count  = COALESCE(stats.lib_count, 0)
+        ");
 
-                $game->update(['score' => $score]);
-            }
-        });
+        // 2. Update score_rank for all games
+        DB::statement("
+            UPDATE games g
+            JOIN (
+                SELECT
+                    id,
+                    ROW_NUMBER() OVER (ORDER BY score DESC, title ASC) AS rnk
+                FROM games
+            ) ranked ON ranked.id = g.id
+            SET g.score_rank = ranked.rnk
+        ");
 
-        //Update library_count for all games
-        Game::withCount(['libraries' => function (Builder $query) {
-                $query->select(DB::raw('count(distinct(user_id))'));
-            }])->chunk(100, function ($games) {
-            foreach ($games as $game) {
-                $game->update(['library_count' => $game->libraries_count]);
-            }
-        });
-
-        //Update score_rank for all games
-        $scoreRank = 0;
-        Game::orderBy('score', 'desc')->chunk(100, function ($games) use (&$scoreRank) {
-            foreach ($games as $game) {
-                $scoreRank++;
-                $game->update(['score_rank' => $scoreRank]);
-            }
-        });
-
-        //Update popularity_rank for all games
-        $popularityRank = 0;
-        Game::orderBy('library_count', 'desc')->chunk(100, function ($games) use (&$popularityRank) {
-            foreach ($games as $game) {
-                $popularityRank++;
-                $game->update(['popularity_rank' => $popularityRank]);
-            }
-        });
+        // 3. Update popularity_rank for all games
+        DB::statement("
+            UPDATE games g
+            JOIN (
+                SELECT
+                    id,
+                    ROW_NUMBER() OVER (ORDER BY library_count DESC, title ASC) AS rnk
+                FROM games
+            ) ranked ON ranked.id = g.id
+            SET g.popularity_rank = ranked.rnk
+        ");
     }
 }

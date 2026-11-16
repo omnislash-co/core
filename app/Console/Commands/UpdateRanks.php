@@ -26,6 +26,9 @@ class UpdateRanks extends Command
      */
     public function handle()
     {
+        $this->info('Updating game rankings...');
         Game::updateRankings();
+        $this->info('Done.');
+        return self::SUCCESS;
     }
 }
