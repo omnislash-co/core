@@ -1,6 +1,6 @@
 import { Controller } from "@hotwired/stimulus"
 
-// Connects to data-controller="game-filters"
+// Connects to data-controller="filters"
 export default class extends Controller {
     static targets = [ "button"]
 
@@ -15,7 +15,8 @@ export default class extends Controller {
         if (params.has('filter[developers][]') || params.has('filter[developers][0]') || 
             params.has('filter[genres][]') || params.has('filter[genres][0]') ||
             params.has('filter[platforms][]') || params.has('filter[platforms][0]') ||
-            params.has('filter[series][]') || params.has('filter[series][0]')
+            params.has('filter[series][]') || params.has('filter[series][0]') || 
+            params.has('filter[games][]') || params.has('filter[games][0]')
         ) {
             this.dispatch("has-filters")
         }

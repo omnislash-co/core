@@ -1,11 +1,11 @@
 <x-layout title="Games">
     
     <div class="section container" 
-        data-controller="element game-filters" 
+        data-controller="element filters" 
         data-element-hidden-class="hidden" 
-        data-action="slim-select:after-change->game-filters#submit 
-            turbo:frame-render->game-filters#checkParams 
-            game-filters:has-filters->element#show"
+        data-action="slim-select:after-change->filters#submit 
+            turbo:frame-render->filters#checkParams 
+            filters:has-filters->element#show"
         >
         <div class="stack gap-gutter">
             <h2>Games</h2>
@@ -71,7 +71,7 @@
                         </blockquote>
                     </div>
 
-                    <button hidden id="apply-filters" type="submit" data-game-filters-target="button">Apply Filters</button>
+                    <button hidden id="apply-filters" type="submit" data-filters-target="button">Apply Filters</button>
                 </div>
             </form>
 
