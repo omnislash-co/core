@@ -33,7 +33,7 @@
                                 </ui-menu>
                             </ui-popup> --}}
 
-                            <a class="btn bg-accent" href="{{ route('recommendations.create') }}">Write a Recommendation</a>
+                            <a class="btn bg-accent" href="{{ route('recommendations.create') }}">Create</a>
                         </div>
                     </div>
 

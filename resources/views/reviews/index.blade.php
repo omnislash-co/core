@@ -37,7 +37,7 @@
                                 </ui-menu>
                             </ui-popup>
 
-                            <a class="btn bg-accent" href="{{ route('reviews.create') }}">Write a Review</a>
+                            <a class="btn bg-accent" href="{{ route('reviews.create') }}">Create</a>
                         </div>
                     </div>
 
