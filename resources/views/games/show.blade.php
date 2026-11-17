@@ -151,7 +151,17 @@
                     </div>
 
                     <div class="stack gap-md">
-                        <h3>Reviews</h3>
+                        <div class="row justify-between">
+                            <h3>Reviews</h3>
+                            @if ($game->reviews_count > 0)
+                                <div class="row gap-sm">
+                                    <a class="btn btn--sm" href="{{ route('reviews.create', ['game' => $game->id]) }}">Create</a>
+                                    @if ($game->reviews_count > 2)
+                                        <a href="{{ route('reviews.index', ['filter[games][]' => $game->title]) }}" class="btn btn--sm">View More</a>
+                                    @endif
+                                </div>
+                            @endif
+                        </div>
 
                         @if ($game->reviews_count > 0)
                             <div class="grid gap-sm" style="--grid-min: 35ch;">
@@ -159,22 +169,27 @@
                                     <x-cards.review-mini :$review showUserAvatar="true" hideTitle="true" />
                                 @endforeach
                             </div>
-                            @if ($game->reviews_count > 2)
-                                <div class="row justify-center">
-                                    <a href="{{ route('reviews.index', ['filter[games][]' => $game->title]) }}" class="btn btn--outline btn--narrow">View More</a>
-                                </div>
-                            @endif
                         @else
                             <div class="placeholder">
                                 @icon('tabler-note', ['class' => 'placeholder__icon'])
                                 <p>Be the first to review <i>{{ $game->title }}</i>!</p>
-                                <a class="btn" href="{{ route('reviews.create', ['game' => $game->id]) }}">Write a Review</a>
+                                <a class="btn" href="{{ route('reviews.create', ['game' => $game->id]) }}">Create</a>
                             </div>
                         @endif
                     </div>
 
                     <div class="stack gap-md">
-                        <h3>Recommendations</h3>
+                        <div class="row justify-between">
+                            <h3>Recommendations</h3>
+                            @if ($game->recommendations_count > 0)
+                                <div class="row gap-sm">
+                                    <a class="btn btn--sm href="{{ route('recommendations.create', ['played' => $game->id]) }}">Create</a>
+                                    @if ($game->recommendations_count > 2)
+                                        <a href="{{ route('recommendations.index', ['filter[games][]' => $game->title]) }}" class="btn btn--sm">View More</a>
+                                    @endif
+                                </div>
+                            @endif
+                        </div>
 
                         @if ($game->recommendations_count > 0)
                             <div class="grid gap-sm" style="--grid-min: 35ch;">
@@ -182,16 +197,11 @@
                                     <x-cards.recommendation-mini :$recommendation />
                                 @endforeach
                             </div>
-                            @if ($game->recommendations_count > 2)
-                                <div class="row justify-center">
-                                    <a href="{{ route('recommendations.index', ['filter[games][]' => $game->title]) }}" class="btn btn--outline btn--narrow">View More</a>
-                                </div>
-                            @endif
                         @else
                             <div class="placeholder">
                                 @icon('tabler-thumb-up', ['class' => 'placeholder__icon'])
                                 <p>Be the first to make a recommendation!</p>
-                                <a class="btn" href="{{ route('recommendations.create', ['played' => $game->id]) }}">Write a Recommendation</a>
+                                <a class="btn" href="{{ route('recommendations.create', ['played' => $game->id]) }}">Create</a>
                             </div>
                         @endif
                     </div>
