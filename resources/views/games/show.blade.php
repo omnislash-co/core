@@ -183,7 +183,7 @@
                             <h3>Recommendations</h3>
                             @if ($game->recommendations_count > 0)
                                 <div class="row gap-sm">
-                                    <a class="btn btn--sm href="{{ route('recommendations.create', ['played' => $game->id]) }}">Create</a>
+                                    <a class="btn btn--sm" href="{{ route('recommendations.create', ['played' => $game->id]) }}">Create</a>
                                     @if ($game->recommendations_count > 2)
                                         <a href="{{ route('recommendations.index', ['filter[games][]' => $game->title]) }}" class="btn btn--sm">View More</a>
                                     @endif
