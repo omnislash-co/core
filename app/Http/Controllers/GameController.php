@@ -63,11 +63,11 @@ class GameController extends Controller
             'children',
             'parents',
             'reviews' => fn ($query) => $query
-                ->with('user')
+                ->with(['user', 'platform'])
                 ->latest()
                 ->limit(2),
             'recommendations' => fn ($query) => $query
-                ->with(['user', 'game', 'playedGame'])
+                ->with(['user', 'game', 'platform', 'playedGame'])
                 ->latest()
                 ->limit(2),
         ]);

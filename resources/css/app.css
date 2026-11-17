@@ -117,15 +117,13 @@
 .card__game-icon-a {
     background-size: cover!important;
     background-position: center;
-    min-height: 150px;
-    min-width: 150px;
-    max-width: 150px;
+    min-height: 155px;
+    min-width: 155px;
+    max-width: 155px;
     transition: ease-in-out 250ms;
-    clip-path: polygon(0 0, 90% 0, 100% 100%, 0 100%);
 }
 
 .card:hover .card__game-icon-a {
-    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
     min-width: 50px;
     max-width: 50px;
 }
@@ -133,17 +131,15 @@
 .card__game-icon-b {
     background-size: cover!important;
     background-position: center;
-    min-height: 150px;
+    min-height: 155px;
     min-width: 50px;
     max-width: 50px;
     transition: ease-in-out 250ms;
-    clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
 }
 
 .card:hover .card__game-icon-b {
-    clip-path: polygon(0 0, 100% 0, 100% 100%, 10% 100%);
-    min-width: 150px;
-    max-width: 150px;
+    min-width: 155px;
+    max-width: 155px;
 }
 
 .card__relation-icon {

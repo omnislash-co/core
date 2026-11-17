@@ -3,7 +3,7 @@
     @if (count($reviews) > 0)
         <div class="grid gap-sm" style="--grid-min: 35ch;">
             @foreach ($reviews as $review)
-                <x-cards.review-game-img-simple :$review />
+                <x-cards.review-mini :$review />
             @endforeach
         </div>
         {{ $reviews->links() }}

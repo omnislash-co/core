@@ -154,10 +154,11 @@
                         <h3>Reviews</h3>
 
                         @if ($game->reviews_count > 0)
-                            @foreach ($game->reviews as $review)
-                                {{-- <x-cards.review :$review showUserAvatar='true' /> --}}
-                                <x-cards.review-user-img :$review />
-                            @endforeach
+                            <div class="grid gap-sm" style="--grid-min: 35ch;">
+                                @foreach ($game->reviews as $review)
+                                    <x-cards.review-mini :$review showUserAvatar="true" hideTitle="true" />
+                                @endforeach
+                            </div>
                             @if ($game->reviews_count > 2)
                                 <div class="row justify-center">
                                     <a href="{{ route('reviews.index', ['filter[games][]' => $game->title]) }}" class="btn btn--outline btn--narrow">View More</a>
@@ -176,9 +177,11 @@
                         <h3>Recommendations</h3>
 
                         @if ($game->recommendations_count > 0)
-                            @foreach ($game->recommendations as $review)
-                                <x-cards.recommendation-simple :$recommendation />
-                            @endforeach
+                            <div class="grid gap-sm" style="--grid-min: 35ch;">
+                                @foreach ($game->recommendations as $recommendation)
+                                    <x-cards.recommendation-mini :$recommendation />
+                                @endforeach
+                            </div>
                             @if ($game->recommendations_count > 2)
                                 <div class="row justify-center">
                                     <a href="{{ route('recommendations.index', ['filter[games][]' => $game->title]) }}" class="btn btn--outline btn--narrow">View More</a>

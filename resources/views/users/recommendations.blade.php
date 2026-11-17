@@ -3,7 +3,7 @@
     @if (count($recommendations) > 0)
         <div class="grid gap-sm" style="--grid-min: 35ch;">
             @foreach ($recommendations as $recommendation)
-                <x-cards.recommendation-simple :$recommendation />
+                <x-cards.recommendation-mini :$recommendation />
             @endforeach
         </div>
         {{ $recommendations->links() }}
