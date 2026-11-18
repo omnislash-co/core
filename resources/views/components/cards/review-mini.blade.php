@@ -48,7 +48,7 @@
             </span>
         </div>
         <div class="row wrap gap-xxs">
-            <span class="badge">
+            <span class="badge bg-warning-soft">
                 {{ $review->platform->acronym }}
             </span>
             <span class="badge bg-warning-soft">
