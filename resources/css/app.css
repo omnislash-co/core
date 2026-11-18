@@ -142,6 +142,34 @@
     max-width: 155px;
 }
 
+.card__game-icon-a-mini {
+    background-size: cover!important;
+    background-position: center;
+    min-height: 100px;
+    min-width: 100px;
+    max-width: 100px;
+    transition: ease-in-out 250ms;
+}
+
+.card:hover .card__game-icon-a-mini {
+    min-width: 30px;
+    max-width: 30px;
+}
+
+.card__game-icon-b-mini {
+    background-size: cover!important;
+    background-position: center;
+    min-height: 100px;
+    min-width: 30px;
+    max-width: 30px;
+    transition: ease-in-out 250ms;
+}
+
+.card:hover .card__game-icon-b-mini {
+    min-width: 100px;
+    max-width: 100px;
+}
+
 .card__relation-icon {
     background-size: cover!important;
     min-height: 100px;

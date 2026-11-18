@@ -1,11 +1,24 @@
 @props(['review', 'showUserAvatar' => false, 'hideTitle' => false])
 
+@php
+    $color = (new \Waterhole\View\Components\Avatar($review->user))->color();
+@endphp
+
 <div class="card stack overlay-container overflow-hidden" style="max-height: 150px;">
     <div class="row align-stretch overflow-hidden">
         @if ($showUserAvatar == true)
-            <div class="card__relation-icon" 
-                style="background-image: url('{{ Storage::url('avatars/'.$review->user->avatar) }}')">
-            </div>
+            @if ($review->user->avatar)
+                <div class="card__relation-icon" 
+                    style="background-image: url('{{ Storage::url('avatars/'.$review->user->avatar) }}')">
+                </div>
+            @else
+                <svg class="card__relation-icon avatar" viewBox="0 0 100 100" style="border-radius: 0%;">
+                    <rect width="100%" height="100%" fill="{{ $color }}" />
+                    <text x="50%" y="50%" dominant-baseline="central" text-anchor="middle">
+                        {{ $review->user?->name ? mb_strtoupper(mb_substr($review->user->name, 0, 1)) : '?' }}
+                    </text>
+                </svg>
+            @endif
         @else
             <div class="card__relation-icon" 
                 style="background-image: url('{{ Storage::url('games/icons/'.$review->game->icon) }}')">
