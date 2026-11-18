@@ -12,6 +12,7 @@
                 <div class="stack gap-gutter">
                     <div class="stack gap-md hide-lg-up" @style(['margin-top: -150px' => $game->cover])>
                         <img class="game-icon" src="{{ Storage::url('games/icons/'.$game->icon) }}" alt="{{ $game->title }}">
+                        <h2>{{ $game->title }}</h2>
                         <div class="row gap-md">
                             @auth
                                 <a href="{{ route('library.index', $game->slug) }}" data-turbo-frame="modal" class="btn bg-accent btn--narrow">
@@ -30,21 +31,23 @@
                         </div>
                     </div>
 
-                    <h2>{{ $game->title }}</h2>
+                    <h2 class="hide-md-down">{{ $game->title }}</h2>
 
                     {{-- MOBILE ONLY --}}
-                    <details class="card hide-lg-up">
-                        <summary class="card__header">Information</summary>
-                        <div class="card__body p-lg">
-                            <x-games.info :$game />
-                        </div>
-                    </details>
-                    <details class="card hide-lg-up">
-                        <summary class="card__header">Statistics</summary>
-                        <div class="card__body p-lg">
-                            <x-games.stats :$game />
-                        </div>
-                    </details>
+                    <div class="stack gap-xs hide-lg-up">
+                        <details class="card">
+                            <summary class="card__header">Information</summary>
+                            <div class="card__body p-lg">
+                                <x-games.info :$game />
+                            </div>
+                        </details>
+                        <details class="card">
+                            <summary class="card__header">Statistics</summary>
+                            <div class="card__body p-lg">
+                                <x-games.stats :$game />
+                            </div>
+                        </details>
+                    </div>
                     {{-- END MOBILE ONLY --}}
 
                     <div class="stack gap-md">
