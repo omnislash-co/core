@@ -78,6 +78,7 @@ class GameController extends Controller
             'releases',
             'children',
             'parents',
+            'series',
             'libraries as ratings_count' => fn ($query) => $query->whereNotNull('score'),
         ]);
 
